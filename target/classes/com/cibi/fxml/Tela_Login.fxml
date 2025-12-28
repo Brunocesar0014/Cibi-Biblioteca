@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.Tela_Login">
+   <children>
+      <Pane fx:id="painel_lado" prefHeight="500.0" prefWidth="450.0" stylesheets="@../css/style.css" />
+   </children>
+</AnchorPane>
