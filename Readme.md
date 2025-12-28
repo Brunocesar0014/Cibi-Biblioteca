@@ -1,4 +1,4 @@
-![Logo](https://raw.githubusercontent.com/Brunocesar0014/CIBI-Biblioteca/src/main/javacom/cibi/resources/logo.png)
+![Logo](src/main/java/com/cibi/resources/logo.png)
 
 # CIBI (Controle Interno de Biblioteca)
 
@@ -10,6 +10,7 @@
 
  - [1. Proposito](#1-proposito)
  - [2. Tecnologias Utilizadas](#2-Tecnologias-Utilizadas)
+ - [3. Tecnologias Utilizadas](#2-Funcionalidades)
 
 ---
 
@@ -23,8 +24,8 @@ teste
 
 teste
 
+---
+
 ## 3. Funcionalidaes
 
 teste
-
-## 4. 
