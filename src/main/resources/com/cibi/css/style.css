@@ -1,3 +1,39 @@
-#painel_lado {
+#painel_esquerda {
     -fx-background-color: #1e272e;
+}
+
+#painel_login{
+    -fx-background-color: #F8F5FB;
+}
+
+.botao_login{
+    -fx-background-color: #1e272e;
+}
+
+.botao_cancelar{
+    -fx-background-color: #1e272e;
+}
+
+.custom-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #8D8D8D;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-min-height: 30px;
+    -fx-font-size: 13px;
+}
+
+.custom-field:focused {
+    -fx-border-color: #1e272e;
+    -fx-border-width: 2px;
+}
+
+.floating-label {
+    -fx-text-fill: #666666;
+    -fx-background-color: #F8F5FB; /* MESMA COR DO FUNDO PARA CORTAR A BORDA */
+    -fx-padding: 0 5 0 5;
+    -fx-font-size: 13px;
+    
+    -fx-border-color: #F8F5FB; 
+    -fx-border-width: 1px;
 }

@@ -1,10 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.Tela_Login">
-   <children>
-      <Pane fx:id="painel_lado" prefHeight="500.0" prefWidth="450.0" stylesheets="@../css/style.css" />
-   </children>
-</AnchorPane>
+<BorderPane fx:id="containerPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#cliqueFora" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.Tela_Login">
+   <left>
+      <AnchorPane fx:id="painel_esquerda" onMousePressed="#cliqueFora" prefHeight="400.0" prefWidth="228.0" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="34.0" layoutY="229.0" text="Controle Interno de Biblioteca" textFill="WHITE">
+               <font>
+                  <Font name="Book Antiqua" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <Line endX="100.0" layoutX="114.0" layoutY="224.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
+            <ImageView fitHeight="129.0" fitWidth="132.0" layoutX="50.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagen/logo.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="82.0" layoutY="381.0" text="© 2025 CIBI" textFill="#999999">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane fx:id="painel_login" onMousePressed="#cliqueFora" prefHeight="400.0" prefWidth="332.0" styleClass="painel_login" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="108.0" layoutY="63.0" text="Login">
+               <font>
+                  <Font name="Verdana" size="28.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Label>
+            <Button layoutX="31.0" layoutY="255.0" mnemonicParsing="false" onAction="#RealizarLogin" prefHeight="26.0" prefWidth="230.0" styleClass="botao_login" stylesheets="@../css/style.css" text="Login" textFill="WHITE" />
+            <Button layoutX="31.0" layoutY="302.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="230.0" styleClass="botao_cancelar" stylesheets="@../css/style.css" text="Cancelar" textFill="WHITE" />
+            <StackPane alignment="CENTER_LEFT" layoutX="31.0" layoutY="142.0" prefHeight="30.0" prefWidth="230.0">
+               <children>
+                  <TextField fx:id="txtInput" prefHeight="24.0" prefWidth="227.0" styleClass="custom-field" stylesheets="@../css/style.css" />
+                  <Label fx:id="lblFloating" mouseTransparent="true" styleClass="floating-label" stylesheets="@../css/style.css" text="Usuario">
+                     <StackPane.margin>
+                        <Insets left="10.0" />
+                     </StackPane.margin></Label>
+               </children>
+            </StackPane>
+            <StackPane alignment="CENTER_LEFT" layoutX="31.0" layoutY="185.0" prefHeight="30.0" prefWidth="230.0">
+               <children>
+                  <PasswordField fx:id="txtPassword" styleClass="custom-field" stylesheets="@../css/style.css" />
+                  <Label fx:id="lblPassword" mouseTransparent="true" styleClass="floating-label" stylesheets="@../css/style.css" text="Senha">
+                     <StackPane.margin>
+                        <Insets left="10.0" />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
