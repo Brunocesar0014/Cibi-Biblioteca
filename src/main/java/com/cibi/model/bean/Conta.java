@@ -3,9 +3,9 @@ package com.cibi.model.bean;
 public class Conta {
     
     private int id;
-    private String usuario;
-    private String senha;
-    private String perfil;
+    public String usuario;
+    public String senha;
+    public String perfil;
 
     // Construtor vazio (obrigatório para funcionar bem com JDBC e frameworks)
     public Conta() {}

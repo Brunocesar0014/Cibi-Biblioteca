@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConexaoMySQL {
     
-    private static final String URL = "jdbc:mysql://localhost:3306/tcc";
+    private static final String URL = "jdbc:mysql://localhost:3306/cibi";
     private static final String USUARIO = "root";
     private static final String SENHA = "bc487180";
 
@@ -19,6 +19,7 @@ public class ConexaoMySQL {
         }
     }
 
+    /*
     // Teste opcional
     public static void main(String[] args) {
         try (Connection conexao = getConnection()) {
@@ -27,6 +28,6 @@ public class ConexaoMySQL {
             System.out.println("Erro ao testar conexão: " + e.getMessage());
         }
     }
-
+    */
 
 }

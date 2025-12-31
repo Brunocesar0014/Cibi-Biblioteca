@@ -1,3 +1,5 @@
+/* Tela Login */
+
 #painel_esquerda {
     -fx-background-color: #1e272e;
 }
@@ -12,6 +14,11 @@
 
 .botao_cancelar{
     -fx-background-color: #1e272e;
+}
+
+.label_depuracao{
+    -fx-bacground-color: transparent;
+    -fx-text-fill: transparent;
 }
 
 .custom-field {

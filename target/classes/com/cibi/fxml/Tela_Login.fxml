@@ -73,6 +73,11 @@
                   </Label>
                </children>
             </StackPane>
+            <Label fx:id="label_depuracao" alignment="CENTER" layoutX="18.0" layoutY="110.0" prefHeight="18.0" prefWidth="246.0" styleClass="label_depuracao" stylesheets="@../css/style.css" text="Preencha todos os capos corretamente" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </right>

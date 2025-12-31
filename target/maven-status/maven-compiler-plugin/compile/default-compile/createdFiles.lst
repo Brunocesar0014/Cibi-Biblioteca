@@ -6,5 +6,7 @@ com\cibi\model\dao\ContaDAO.class
 com\cibi\model\bean\Conta.class
 com\cibi\connection\ConexaoMySQL.class
 com\cibi\main\Tela_Login.class
+com\cibi\main\Tela_Principal.class
 com\cibi\methods\ImageSquare.class
+com\cibi\controller\Tela_Principal.class
 com\cibi\model\bean\Livro.class
