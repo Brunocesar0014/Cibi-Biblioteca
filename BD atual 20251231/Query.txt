@@ -1,0 +1,15 @@
+use cibi;
+
+create table livros(
+	id serial primary key,
+	titulo varchar(50) not null,
+    autor varchar(50),
+    sinopse text
+);
+
+create table usuarios(
+	id serial not null primary key,
+    usuario varchar(20) not null unique,
+    senha varchar(20) not null,
+    perfil varchar(20)
+)
