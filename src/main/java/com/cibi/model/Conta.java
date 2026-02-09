@@ -1,14 +1,20 @@
-package com.cibi.model.bean;
+package com.cibi.model;
 
 public class Conta {
     
     private int id;
-    public String usuario;
-    public String senha;
-    public String perfil;
+    private String usuario;
+    private String senha;
+    private String perfil;
 
     // Construtor vazio (obrigatório para funcionar bem com JDBC e frameworks)
     public Conta() {}
+    
+    // Construtor com apenas usuario e senha (Para realizar login)
+    public Conta(String usuario, String senha){
+        this.usuario = usuario;
+        this.senha = senha;
+    }
     
     // Construtor completo (útil para criar objetos rapidamente)
     public Conta(int id, String usuario, String senha, String perfil) {

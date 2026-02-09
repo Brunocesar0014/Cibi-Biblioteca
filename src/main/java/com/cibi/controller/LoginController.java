@@ -1,10 +1,12 @@
 package com.cibi.controller;
 
+import com.cibi.Service.ContaService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-
-//animação textField
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -14,19 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-//objetos
-import com.cibi.model.bean.Conta;
-import com.cibi.model.dao.ContaDAO;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-public class Tela_Login {
+public class LoginController {
 
-    @FXML
-    private Pane containerPrincipal; // Use o tipo do seu container pai
+    @FXML private Pane containerPrincipal; // Use o tipo do seu container pai
 
     @FXML
     private void cliqueFora() {
@@ -36,57 +29,42 @@ public class Tela_Login {
     }
 
     //animação textField
-    @FXML
-    private TextField txtInput;
-    @FXML
-    private Label lblFloating;
-    @FXML
-    private PasswordField txtPassword;
-    @FXML
-    private Label lblPassword;
+    @FXML private TextField txtInput;
+    @FXML private Label lblFloating;
+    @FXML private PasswordField txtPassword;
+    @FXML private Label lblPassword;
 
     @FXML
-    private Button butao_login;
-
-    @FXML
-    private Label label_depuracao;
-
-    @FXML
-    private void RealizarLogin(ActionEvent event) {
-        Conta c = new Conta();
+    private void onLogarConta(ActionEvent event) {
         String usuario = txtInput.getText();
         String senha = txtPassword.getText();
 
-        if (senha.equals("") || usuario.equals("")) {
-            label_depuracao.setText("Preencha todos os capos corretamente");
-            label_depuracao.setStyle("-fx-text-fill: #ED2100;");
-        } else {
-            label_depuracao.setStyle("-fx-text-fill: transparent;");
+        try {
+            boolean ok = ContaService.RealizarLogin(usuario, senha);
 
-            ContaDAO dao = new ContaDAO();
-            c = dao.buscarPorLogin(usuario, senha);
-
-            if (c != null) {
-                try{
-                    // 1. Carrega o arquivo FXML da nova janela
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cibi/fxml/Tela_Principal.fxml"));
-                    Parent root = loader.load();
-
-                    // 2. Cria o novo Stage (Janela)
-                    Stage novaStage = new Stage();
-                    novaStage.setScene(new Scene(root));
-                    novaStage.setTitle("Nova Janela");
-                    novaStage.show();
-                    
-                    Stage stageAtual = (Stage) lblFloating.getScene().getWindow();
-                    stageAtual.close();
-                }catch(IOException e){
-                    System.out.println("erro ao mudar janela");
-                }
-            } else {
-                label_depuracao.setText("Usuario ou senha inválidos");
-                label_depuracao.setStyle("-fx-text-fill: #ED2100;");
+            if (ok) {
+                abrirTelaPrincipalEFecharLogin();
             }
+
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    private void abrirTelaPrincipalEFecharLogin() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/cibi/fxml/Tela_Principal.fxml"));
+
+            Stage principal = new Stage();
+            principal.setScene(new Scene(root));
+            principal.setTitle("Tela Principal");
+            principal.show();
+
+            Stage loginStage = (Stage) txtInput.getScene().getWindow();
+            loginStage.close();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao abrir a tela principal", e);
         }
     }
 

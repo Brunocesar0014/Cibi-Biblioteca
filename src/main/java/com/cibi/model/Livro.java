@@ -1,10 +1,10 @@
-package com.cibi.model.bean;
+package com.cibi.model;
 public class Livro {
     
+    private int id;
     private String titulo;
     private String autor;
     private String sinopse;
-    private int id;
     
     //construtor vazio
     public Livro(){}

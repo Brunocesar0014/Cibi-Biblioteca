@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
-        <exec.mainClass>com.cibi.main.Cibi.Tela_Login</exec.mainClass>
+        <exec.mainClass>com.cibi.application.MainApp</exec.mainClass>
         
         <java.version>22</java.version>
         <javafx.version>22.0.2</javafx.version>
@@ -58,7 +58,7 @@
                 <version>0.0.8</version>
                 <configuration>
                     <!-- MUITO IMPORTANTE: classe principal -->
-                    <mainClass>com.cibi.main.Tela_Login</mainClass>
+                    <mainClass>com.cibi.application.MainApp</mainClass>
                 </configuration>
             </plugin>
 
