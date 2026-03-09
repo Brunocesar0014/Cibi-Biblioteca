@@ -50,7 +50,7 @@ public class LivroRepository {
         }
     }
 
-    public Livro buscarPorId(int id) {
+    public static Livro buscarPorId(int id) {
         String sql = "SELECT id, titulo, autor, sinopse FROM livros WHERE id = ?";
 
         try (Connection con = ConnectionFactory.getConnection();

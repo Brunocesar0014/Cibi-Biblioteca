@@ -53,7 +53,7 @@
                </effect>
             </Label>
             <Button layoutX="31.0" layoutY="255.0" mnemonicParsing="false" onAction="#onLogarConta" prefHeight="26.0" prefWidth="230.0" styleClass="botao_login" stylesheets="@../css/login/style.css" text="Login" textFill="WHITE" />
-            <Button layoutX="31.0" layoutY="302.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="230.0" styleClass="botao_cancelar" stylesheets="@../css/login/style.css" text="Cancelar" textFill="WHITE" />
+            <Button fx:id="bta_pularLogin" layoutX="31.0" layoutY="302.0" mnemonicParsing="false" onAction="#onPularLogin" prefHeight="26.0" prefWidth="230.0" styleClass="botao_cancelar" stylesheets="@../css/login/style.css" text="Pular Login" textFill="WHITE" />
             <StackPane alignment="CENTER_LEFT" layoutX="31.0" layoutY="142.0" prefHeight="30.0" prefWidth="230.0" stylesheets="@../css/login/style.css">
                <children>
                   <TextField fx:id="txtInput" prefHeight="24.0" prefWidth="227.0" styleClass="custom-field" stylesheets="@../css/login/style.css" />

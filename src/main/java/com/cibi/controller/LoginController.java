@@ -51,6 +51,15 @@ public class LoginController {
         }
 
     }
+    
+    @FXML
+    private void onPularLogin(ActionEvent event) {
+        try{
+                abrirTelaPrincipalEFecharLogin();
+        }catch(RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     private void abrirTelaPrincipalEFecharLogin() {
         try {
@@ -59,6 +68,8 @@ public class LoginController {
             Stage principal = new Stage();
             principal.setScene(new Scene(root));
             principal.setTitle("Tela Principal");
+            principal.setMinWidth(800);
+            principal.setMinHeight(600);
             principal.show();
 
             Stage loginStage = (Stage) txtInput.getScene().getWindow();

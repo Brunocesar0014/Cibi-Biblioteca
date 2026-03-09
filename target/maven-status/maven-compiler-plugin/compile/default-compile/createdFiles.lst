@@ -6,5 +6,6 @@ com\cibi\Service\ContaService.class
 com\cibi\database\DatabaseConfig.class
 com\cibi\controller\PrincipalController.class
 com\cibi\model\Conta.class
+com\cibi\Service\LivroService.class
 com\cibi\controller\LoginController.class
 com\cibi\model\Livro.class

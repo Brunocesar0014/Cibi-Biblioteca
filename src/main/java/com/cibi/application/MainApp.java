@@ -15,6 +15,7 @@ public class MainApp extends Application {
         Image icon = new Image(getClass().getResourceAsStream("/com/cibi/imagen/icone.png"));
         primaryStage.getIcons().add(icon);
         
+        primaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("/com/cibi/fxml/Tela_Login.fxml"));
         Scene scene = new Scene(root, 520, 400);
         primaryStage.setTitle("Login");
