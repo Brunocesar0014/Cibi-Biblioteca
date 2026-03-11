@@ -1,5 +1,7 @@
 com\cibi\database\ConnectionFactory.class
+com\cibi\repository\AlunoRepository.class
 com\cibi\repository\LivroRepository.class
+com\cibi\model\Aluno.class
 com\cibi\application\MainApp.class
 com\cibi\repository\ContaRepository.class
 com\cibi\Service\ContaService.class
@@ -9,3 +11,4 @@ com\cibi\model\Conta.class
 com\cibi\Service\LivroService.class
 com\cibi\controller\LoginController.class
 com\cibi\model\Livro.class
+com\cibi\Service\AlunoService.class

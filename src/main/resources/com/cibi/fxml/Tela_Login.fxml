@@ -52,8 +52,8 @@
                   <InnerShadow />
                </effect>
             </Label>
-            <Button layoutX="31.0" layoutY="255.0" mnemonicParsing="false" onAction="#onLogarConta" prefHeight="26.0" prefWidth="230.0" styleClass="botao_login" stylesheets="@../css/login/style.css" text="Login" textFill="WHITE" />
-            <Button fx:id="bta_pularLogin" layoutX="31.0" layoutY="302.0" mnemonicParsing="false" onAction="#onPularLogin" prefHeight="26.0" prefWidth="230.0" styleClass="botao_cancelar" stylesheets="@../css/login/style.css" text="Pular Login" textFill="WHITE" />
+            <Button layoutX="31.0" layoutY="277.0" mnemonicParsing="false" onAction="#onLogarConta" prefHeight="26.0" prefWidth="230.0" styleClass="botao_login" stylesheets="@../css/login/style.css" text="Login" textFill="WHITE" />
+            <Button fx:id="bta_pularLogin" layoutX="31.0" layoutY="324.0" mnemonicParsing="false" onAction="#onPularLogin" prefHeight="26.0" prefWidth="230.0" styleClass="botao_cancelar" stylesheets="@../css/login/style.css" text="Pular Login" textFill="WHITE" />
             <StackPane alignment="CENTER_LEFT" layoutX="31.0" layoutY="142.0" prefHeight="30.0" prefWidth="230.0" stylesheets="@../css/login/style.css">
                <children>
                   <TextField fx:id="txtInput" prefHeight="24.0" prefWidth="227.0" styleClass="custom-field" stylesheets="@../css/login/style.css" />
@@ -73,6 +73,11 @@
                   </Label>
                </children>
             </StackPane>
+            <Label fx:id="label_depuracao" alignment="CENTER" contentDisplay="CENTER" layoutX="73.0" layoutY="232.0" text="Usuario ou senha invalido" textAlignment="JUSTIFY" textFill="#f8f5fb">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </right>

@@ -1,4 +1,7 @@
 use cibi;
+select * from usuarios;
+select * from livros;
+select * from alunos;
 
 create table livros(
 	id serial primary key,
@@ -12,4 +15,10 @@ create table usuarios(
     usuario varchar(20) not null unique,
     senha varchar(20) not null,
     perfil varchar(20)
-)
+); 
+
+create table alunos(
+	matricula bigint primary key not null unique,
+    nome varchar(100) not null,
+    turma varchar(12) not null
+);

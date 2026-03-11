@@ -6,11 +6,11 @@ import com.cibi.repository.ContaRepository;
 public class ContaService {
 
     public static boolean RealizarLogin(String usuario, String senha) {
-        if (usuario == null) {
+        if (usuario == null || usuario.equals("")) {
             throw new IllegalArgumentException("Usuário obrigatório");
         }
 
-        if (senha == null) {
+        if (senha == null || senha.equals("")) {
             throw new IllegalArgumentException("senha obrigatória");
         }
 

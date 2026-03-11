@@ -21,6 +21,8 @@ public class LoginController {
 
     @FXML private Pane containerPrincipal; // Use o tipo do seu container pai
 
+    @FXML public Label label_depuracao;
+    
     @FXML
     private void cliqueFora() {
         // Quando clicar no fundo, o container solicita o foco, 
@@ -48,6 +50,8 @@ public class LoginController {
 
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
+            label_depuracao.setText("Usuário ou senha inválidos");
+            label_depuracao.setStyle("-fx-text-fill: #e71c1c");
         }
 
     }
@@ -55,7 +59,7 @@ public class LoginController {
     @FXML
     private void onPularLogin(ActionEvent event) {
         try{
-                abrirTelaPrincipalEFecharLogin();
+            abrirTelaPrincipalEFecharLogin();
         }catch(RuntimeException e){
             System.out.println(e.getMessage());
         }
