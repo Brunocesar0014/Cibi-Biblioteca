@@ -1,7 +1,64 @@
+.root{
+
+    -fx-font-family: "Segoe UI";
+
+}
+
 #BorderPane_fundo {
     -fx-background-color: #F8F5FB;
 }
 
-#vbox_menu {
+#sidebar {
     -fx-background-color: #1e272e;
+    -fx-padding: 10;
+    -fx-spacing: 5;
+}
+
+.sidebar .button{
+
+    -fx-background-color: transparent;
+
+    -fx-text-fill: white;
+
+    -fx-font-size: 14px;
+
+    -fx-alignment: CENTER_LEFT;
+
+    -fx-padding: 10 15;
+
+    -fx-cursor: hand;
+}
+
+.sidebar .button:hover{
+
+    -fx-background-color: #2a2a40;
+
+}
+
+.menu-item-active{
+
+    -fx-background-color: #3a3a5c;
+
+}
+
+.content-area{
+
+    -fx-background-color: #f5f6fa;
+
+}
+
+.menu-toggle{
+
+    -fx-background-color: transparent;
+
+    -fx-text-fill: white;
+
+    -fx-font-size: 18px;
+
+}
+
+.button{
+
+    -fx-background-radius: 5;
+
 }

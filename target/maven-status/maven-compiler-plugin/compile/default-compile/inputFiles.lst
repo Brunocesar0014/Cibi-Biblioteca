@@ -1,3 +1,4 @@
+C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\MainController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\model\Conta.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\repository\LivroRepository.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\database\ConnectionFactory.java
@@ -5,6 +6,7 @@ C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\applicatio
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\ContaService.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\LivroService.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\model\Aluno.java
+C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\util\NavigationManager.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\repository\ContaRepository.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\LoginController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\repository\AlunoRepository.java
