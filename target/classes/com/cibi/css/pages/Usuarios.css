@@ -1,0 +1,187 @@
+.VboxMain{
+    -fx-background-color: #f5f6fa;
+}
+
+.vbox_Form{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4);
+}
+
+.lbl_titulo{
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.lbl_subTitulo{
+    -fx-text-fill: #6c757d;
+    -fx-font-size: 13px;
+}
+
+.input {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #ced4da;
+    -fx-border-width: 1;
+    -fx-padding: 8;
+}
+
+.input:focused {
+    -fx-border-color: #007bff;
+}
+
+/* ComboBox no mesmo estilo dos inputs */
+.combo-box-custom {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+    -fx-padding: 0;
+}
+
+.combo-box-custom:focused {
+    -fx-border-color: #007bff;
+}
+
+.combo-box-custom .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #212529;
+    -fx-padding: 8;
+}
+
+.combo-box-custom .arrow-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0 6 6 0;
+    -fx-padding: 0 8 0 8;
+}
+
+.combo-box-custom .arrow {
+    -fx-background-color: #6c757d;
+}
+
+.combo-box-custom:hover {
+    -fx-border-color: #adb5bd;
+}
+
+/* Lista suspensa do ComboBox */
+.combo-box-popup .list-view {
+    -fx-background-color: white;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #212529;
+    -fx-padding: 8;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #e9ecef;
+}
+
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+}
+
+.btn_NovoUsuario{
+    -fx-background-color: #28a745;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+}
+
+.btn_ListarUsuarios{
+    -fx-background-color: #e9ecef;
+    -fx-text-fill: #333;
+    -fx-background-radius: 6;
+}
+
+.lbl_TipoDeUsuario{
+    -fx-font-weight: bold;
+}
+
+.btn_BuscarMatricula{
+    -fx-background-color: #e9ecef;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 6 10;
+}
+
+.btn_BuscarMatricula:hover {
+    -fx-background-color: #dee2e6;
+}
+
+.btn_Limpar{
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-padding: 8 14;
+    -fx-cursor: hand;
+    -fx-background-color: #6c757d;
+}
+
+.btn_Limpar:hover {
+    -fx-background-color: #5a6268;
+}
+
+.btn_Cancelar{
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-padding: 8 14;
+    -fx-cursor: hand;
+    -fx-background-color: #dc3545;
+}
+
+.btn_Cancelar:hover {
+    -fx-background-color: #c82333;
+}
+
+.btn_Salvar{
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-padding: 8 14;
+    -fx-cursor: hand;
+    -fx-background-color: #28a745;
+    -fx-font-weight: bold;
+}
+
+.btn_Salvar:hover {
+    -fx-background-color: #218838;
+}
+
+.radio-custom {
+    -fx-text-fill: #212529;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-label-padding: 0 0 0 6;
+}
+
+.radio-custom .radio {
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-background-color: white;
+    -fx-border-color: #ced4da;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-padding: 3px;
+}
+
+.radio-custom:selected .radio {
+    -fx-border-color: #007bff;
+}
+
+.radio-custom .dot {
+    -fx-background-insets: 0;
+    -fx-background-radius: 100;
+    -fx-padding: 3px;
+    -fx-background-color: transparent;
+}
+
+.radio-custom:selected .dot {
+    -fx-background-color: #007bff;
+}

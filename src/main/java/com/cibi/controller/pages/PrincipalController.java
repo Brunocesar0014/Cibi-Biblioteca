@@ -1,4 +1,4 @@
-package com.cibi.controller;
+package com.cibi.controller.pages;
 
 import com.cibi.model.Aluno;
 import com.cibi.model.Livro;
@@ -12,46 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class PrincipalController {
-
-    private boolean executado = false;
-
     @FXML
     private TextField txt_id_livro;
-
-    @FXML
-    private TextField input_matricula;
-
-    @FXML
-    private void BuscarAluno() {
-        long matricula = 0;
-
-        try {
-            matricula = Long.parseLong(input_matricula.getText());
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Digite um valor válido");
-        }
-
-        try {
-            Aluno aluno = new Aluno();
-
-            aluno = AlunoService.BuscarAlunoPorMaticula(matricula);
-
-            if (aluno.getNome() != null) {
-                ExibirAluno(aluno);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @FXML
-    public void ExibirAluno(Aluno aluno) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Aluno encontrado!");
-        alert.setHeaderText(null);
-        alert.setContentText("Nome: " + aluno.getNome() + "\nMatricula: " + aluno.getMatricula() + "\nTurma: " + aluno.getTurma());
-        alert.showAndWait();
-    }
 
     @FXML
     private void onBuscarLivro(ActionEvent event) {

@@ -10,11 +10,9 @@ public class AlunoService {
             throw new IllegalArgumentException("matricula não pode ser 0");
         }
         
-        AlunoRepository dao = new AlunoRepository();
+        Aluno aluno = AlunoRepository.buscarPorMatricula(matricula);
         
-        Aluno aluno = dao.buscarPorMatricula(matricula);
-        
-        if (aluno.getNome() == null) {
+        if (aluno == null) {
             throw new IllegalStateException("Aluno não encontrado");
         }
         

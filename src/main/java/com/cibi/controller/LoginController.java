@@ -72,8 +72,8 @@ public class LoginController {
             Stage principal = new Stage();
             principal.setScene(new Scene(root));
             principal.setTitle("Tela Principal");
-            principal.setMinWidth(800);
-            principal.setMinHeight(600);
+            principal.setMinWidth(1280);
+            principal.setMinHeight(720);
             principal.show();
 
             Stage loginStage = (Stage) txtInput.getScene().getWindow();

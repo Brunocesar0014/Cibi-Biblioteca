@@ -7,10 +7,14 @@ com\cibi\application\MainApp.class
 com\cibi\repository\ContaRepository.class
 com\cibi\Service\ContaService.class
 com\cibi\database\DatabaseConfig.class
-com\cibi\controller\PrincipalController.class
+com\cibi\controller\pages\PrincipalController.class
+com\cibi\controller\pages\DashboardController.class
 com\cibi\model\Conta.class
+com\cibi\controller\pages\LivrosController.class
 com\cibi\Service\LivroService.class
 com\cibi\util\NavigationManager.class
+com\cibi\controller\pages\UsuariosController.class
+com\cibi\controller\pages\EmprestimosController.class
 com\cibi\controller\LoginController.class
 com\cibi\model\Livro.class
 com\cibi\Service\AlunoService.class
