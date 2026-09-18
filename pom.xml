@@ -13,7 +13,6 @@
         
         <java.version>22</java.version>
         <javafx.version>22.0.2</javafx.version>
-    
     </properties>
 
     <dependencies>    

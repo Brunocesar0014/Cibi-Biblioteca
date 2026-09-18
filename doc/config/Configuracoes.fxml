@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" styleClass="config-root" stylesheets="@Configuracoes.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.pages.ConfiguracoesController">
+
+    <!-- ===================== CABEÇALHO + ABAS ===================== -->
+    <VBox styleClass="config-header" stylesheets="@Configuracoes.css">
+        <padding>
+            <Insets bottom="0.0" left="40.0" right="40.0" top="32.0" />
+        </padding>
+
+        <Label styleClass="page-title" text="Configurações" />
+
+        <HBox fx:id="barraAbas" spacing="8.0" styleClass="tab-bar">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+
+            <fx:define>
+                <ToggleGroup fx:id="grupoAbas" />
+            </fx:define>
+
+            <ToggleButton fx:id="abaAparencia" selected="true" styleClass="tab-button" text="Aparência" userData="aparencia">
+            <toggleGroup>
+               <ToggleGroup fx:id="grupoAbas" />
+            </toggleGroup></ToggleButton>
+            <ToggleButton fx:id="abaEmprestimos" styleClass="tab-button" text="Empréstimos" toggleGroup="$grupoAbas" userData="emprestimos" />
+            <ToggleButton fx:id="abaNotificacoes" styleClass="tab-button" text="Notificações" toggleGroup="$grupoAbas" userData="notificacoes" />
+            <ToggleButton fx:id="abaSistema" styleClass="tab-button" text="Sistema" toggleGroup="$grupoAbas" userData="sistema" />
+        </HBox>
+
+        <Separator styleClass="tab-divider" />
+    </VBox>
+
+    <!-- ===================== CONTEÚDO ROLÁVEL ===================== -->
+    <ScrollPane fx:id="scroll" fitToWidth="true" styleClass="config-scroll" VBox.vgrow="ALWAYS">
+        <StackPane styleClass="config-stack">
+            <padding>
+                <Insets bottom="32.0" left="40.0" right="40.0" top="28.0" />
+            </padding>
+
+            <!-- ======================= APARÊNCIA ======================= -->
+            <VBox fx:id="painelAparencia" spacing="0.0" styleClass="section-pane" StackPane.alignment="TOP_LEFT">
+
+                <Label styleClass="section-title" text="Aparência" />
+                <Separator styleClass="section-divider" />
+
+                <!-- Tema -->
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Tema" />
+                    <Label styleClass="field-hint" text="Selecione o tema padrão do sistema" />
+
+                    <HBox spacing="28.0" styleClass="theme-row">
+                        <fx:define>
+                            <ToggleGroup fx:id="grupoTema" />
+                        </fx:define>
+
+                        <VBox alignment="CENTER" spacing="10.0">
+                            <ToggleButton fx:id="temaEscuro" selected="true" styleClass="theme-card" userData="ESCURO">
+                                <graphic>
+                                    <VBox spacing="6.0" styleClass="preview, preview-dark">
+                                        <HBox spacing="5.0">
+                                            <Region styleClass="preview-chip" />
+                                            <Region styleClass="preview-chip" />
+                                            <Region styleClass="preview-chip" />
+                                        </HBox>
+                                        <HBox spacing="6.0" VBox.vgrow="ALWAYS">
+                                            <Region styleClass="preview-body" HBox.hgrow="ALWAYS" />
+                                            <Region styleClass="preview-aside" />
+                                        </HBox>
+                                    </VBox>
+                                </graphic>
+                        <toggleGroup>
+                           <ToggleGroup fx:id="grupoTema" />
+                        </toggleGroup>
+                            </ToggleButton>
+                            <Label fx:id="lblTemaEscuro" styleClass="theme-caption" text="Escuro" />
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="10.0">
+                            <ToggleButton fx:id="temaSistema" styleClass="theme-card" toggleGroup="$grupoTema" userData="SISTEMA">
+                                <graphic>
+                                    <VBox spacing="6.0" styleClass="preview, preview-system">
+                                        <HBox spacing="5.0">
+                                            <Region styleClass="preview-chip" />
+                                            <Region styleClass="preview-chip" />
+                                            <Region styleClass="preview-chip" />
+                                        </HBox>
+                                        <HBox spacing="6.0" VBox.vgrow="ALWAYS">
+                                            <Region styleClass="preview-body" HBox.hgrow="ALWAYS" />
+                                            <Region styleClass="preview-aside" />
+                                        </HBox>
+                                    </VBox>
+                                </graphic>
+                            </ToggleButton>
+                            <Label fx:id="lblTemaSistema" styleClass="theme-caption" text="Padrão do sistema" />
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="10.0">
+                            <ToggleButton fx:id="temaClaro" styleClass="theme-card" toggleGroup="$grupoTema" userData="CLARO">
+                                <graphic>
+                                    <VBox spacing="6.0" styleClass="preview, preview-light">
+                                        <HBox spacing="5.0">
+                                            <Region styleClass="preview-chip" />
+                                            <Region styleClass="preview-chip" />
+                                            <Region styleClass="preview-chip" />
+                                        </HBox>
+                                        <HBox spacing="6.0" VBox.vgrow="ALWAYS">
+                                            <Region styleClass="preview-body" HBox.hgrow="ALWAYS" />
+                                            <Region styleClass="preview-aside" />
+                                        </HBox>
+                                    </VBox>
+                                </graphic>
+                            </ToggleButton>
+                            <Label fx:id="lblTemaClaro" styleClass="theme-caption" text="Claro" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <!-- Cor de destaque -->
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Cor de destaque" />
+                    <Label styleClass="field-hint" text="Cor usada em botões, seleções e indicadores" />
+
+                    <HBox spacing="16.0" styleClass="swatch-row">
+                        <fx:define>
+                            <ToggleGroup fx:id="grupoCor" />
+                        </fx:define>
+
+                        <ToggleButton fx:id="corAzul" selected="true" styleClass="swatch, swatch-azul" text="✓" userData="#2563EB">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="grupoCor" />
+                     </toggleGroup></ToggleButton>
+                        <ToggleButton fx:id="corCiano" styleClass="swatch, swatch-ciano" text="✓" toggleGroup="$grupoCor" userData="#38BDF8" />
+                        <ToggleButton fx:id="corVerde" styleClass="swatch, swatch-verde" text="✓" toggleGroup="$grupoCor" userData="#22C55E" />
+                        <ToggleButton fx:id="corRoxo" styleClass="swatch, swatch-roxo" text="✓" toggleGroup="$grupoCor" userData="#A78BFA" />
+                        <ToggleButton fx:id="corAmbar" styleClass="swatch, swatch-ambar" text="✓" toggleGroup="$grupoCor" userData="#F5B33C" />
+                    </HBox>
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <!-- Sidebar compacta -->
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Menu lateral compacto" />
+                    <Label styleClass="field-hint" text="Reduz a largura do menu e exibe apenas os ícones" />
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="switch-row">
+                        <CheckBox fx:id="swSidebarCompacta" styleClass="switch" />
+                        <Label styleClass="switch-label" text="Exibir o menu lateral em modo compacto" />
+                    </HBox>
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <!-- Tamanho do texto -->
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Tamanho do texto" />
+                    <Label styleClass="field-hint" text="Escala aplicada a textos e títulos do sistema" />
+
+                    <HBox spacing="12.0" styleClass="font-row">
+                        <fx:define>
+                            <ToggleGroup fx:id="grupoFonte" />
+                        </fx:define>
+
+                        <ToggleButton fx:id="fonteP" styleClass="font-card, font-p" text="Aa" userData="PEQUENO">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="grupoFonte" />
+                     </toggleGroup></ToggleButton>
+                        <ToggleButton fx:id="fonteM" selected="true" styleClass="font-card, font-m" text="Aa" toggleGroup="$grupoFonte" userData="MEDIO" />
+                        <ToggleButton fx:id="fonteG" styleClass="font-card, font-g" text="Aa" toggleGroup="$grupoFonte" userData="GRANDE" />
+                        <ToggleButton fx:id="fonteXG" styleClass="font-card, font-xg" text="Aa" toggleGroup="$grupoFonte" userData="EXTRA_GRANDE" />
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- ======================= EMPRÉSTIMOS ======================= -->
+            <VBox fx:id="painelEmprestimos" managed="false" styleClass="section-pane" visible="false" StackPane.alignment="TOP_LEFT">
+
+                <Label styleClass="section-title" text="Empréstimos" />
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Prazo padrão de empréstimo" />
+                    <Label styleClass="field-hint" text="Número de dias corridos até a data de devolução" />
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="input-row">
+                        <Spinner fx:id="spPrazoDias" prefWidth="120.0" styleClass="spinner-campo" />
+                        <Label styleClass="input-suffix" text="dias" />
+                    </HBox>
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Limite de livros por usuário" />
+                    <Label styleClass="field-hint" text="Quantidade máxima de exemplares simultâneos" />
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="input-row">
+                        <Spinner fx:id="spLimiteLivros" prefWidth="120.0" styleClass="spinner-campo" />
+                        <Label styleClass="input-suffix" text="livros" />
+                    </HBox>
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Renovações permitidas" />
+                    <Label styleClass="field-hint" text="Quantas vezes o mesmo empréstimo pode ser renovado" />
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="input-row">
+                        <Spinner fx:id="spRenovacoes" prefWidth="120.0" styleClass="spinner-campo" />
+                        <Label styleClass="input-suffix" text="renovações" />
+                    </HBox>
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Multa por atraso" />
+                    <Label styleClass="field-hint" text="Valor cobrado por dia de atraso na devolução" />
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="input-row">
+                        <Label styleClass="input-prefix" text="R$" />
+                        <TextField fx:id="txtMultaDia" prefWidth="120.0" promptText="0,00" styleClass="text-campo" />
+                        <Label styleClass="input-suffix" text="por dia" />
+                    </HBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="switch-row">
+                        <CheckBox fx:id="swCobrarMulta" styleClass="switch" />
+                        <Label styleClass="switch-label" text="Aplicar multa automaticamente na devolução" />
+                    </HBox>
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Bloqueio por pendência" />
+                    <Label styleClass="field-hint" text="Impede novos empréstimos para usuários em atraso" />
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="switch-row">
+                        <CheckBox fx:id="swBloquearAtraso" styleClass="switch" />
+                        <Label styleClass="switch-label" text="Bloquear usuários com devolução em atraso" />
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- ======================= NOTIFICAÇÕES ======================= -->
+            <VBox fx:id="painelNotificacoes" managed="false" styleClass="section-pane" visible="false" StackPane.alignment="TOP_LEFT">
+
+                <Label styleClass="section-title" text="Notificações" />
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Alertas do sistema" />
+                    <Label styleClass="field-hint" text="Avisos exibidos no dashboard ao abrir o CIBI" />
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="switch-row">
+                        <CheckBox fx:id="swAlertaDevolucao" styleClass="switch" />
+                        <Label styleClass="switch-label" text="Avisar sobre devoluções previstas para hoje" />
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="switch-row">
+                        <CheckBox fx:id="swAlertaAtraso" styleClass="switch" />
+                        <Label styleClass="switch-label" text="Avisar sobre empréstimos em atraso" />
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="switch-row">
+                        <CheckBox fx:id="swAlertaEstoque" styleClass="switch" />
+                        <Label styleClass="switch-label" text="Avisar quando um título ficar sem exemplares" />
+                    </HBox>
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Antecedência do aviso" />
+                    <Label styleClass="field-hint" text="Dias antes do vencimento para destacar o empréstimo" />
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="input-row">
+                        <Spinner fx:id="spAntecedencia" prefWidth="120.0" styleClass="spinner-campo" />
+                        <Label styleClass="input-suffix" text="dias antes" />
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- ======================= SISTEMA ======================= -->
+            <VBox fx:id="painelSistema" managed="false" styleClass="section-pane" visible="false" StackPane.alignment="TOP_LEFT">
+
+                <Label styleClass="section-title" text="Sistema" />
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Identificação da biblioteca" />
+                    <Label styleClass="field-hint" text="Nome exibido no cabeçalho e nos relatórios impressos" />
+                    <TextField fx:id="txtNomeBiblioteca" prefWidth="360.0" promptText="Ex.: Biblioteca Popular de Campo Grande" styleClass="text-campo" />
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Itens por página" />
+                    <Label styleClass="field-hint" text="Quantidade de registros carregados nas tabelas" />
+                    <ComboBox fx:id="cbItensPagina" prefWidth="160.0" styleClass="combo-campo" />
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Backup do banco de dados" />
+                    <Label styleClass="field-hint" text="Pasta onde os arquivos de backup serão gravados" />
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="input-row">
+                        <TextField fx:id="txtPastaBackup" prefWidth="360.0" promptText="C:\CIBI\backup" styleClass="text-campo" />
+                        <Button fx:id="btnEscolherPasta" onAction="#onEscolherPasta" styleClass="btn-secundario" text="Escolher pasta" />
+                    </HBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="switch-row">
+                        <CheckBox fx:id="swBackupAutomatico" styleClass="switch" />
+                        <Label styleClass="switch-label" text="Gerar backup automático ao fechar o sistema" />
+                    </HBox>
+                </VBox>
+
+                <Separator styleClass="section-divider" />
+
+                <VBox styleClass="field-block">
+                    <Label styleClass="field-label" text="Restaurar padrões" />
+                    <Label styleClass="field-hint" text="Retorna todas as configurações aos valores originais do CIBI" />
+                    <Button fx:id="btnRestaurar" onAction="#onRestaurarPadroes" styleClass="btn-perigo" text="Restaurar configurações padrão" />
+                </VBox>
+            </VBox>
+        </StackPane>
+    </ScrollPane>
+
+    <!-- ===================== RODAPÉ DE AÇÕES ===================== -->
+    <HBox fx:id="rodape" alignment="CENTER_RIGHT" spacing="12.0" styleClass="config-footer">
+        <padding>
+            <Insets bottom="16.0" left="40.0" right="40.0" top="16.0" />
+        </padding>
+
+        <Label fx:id="lblStatus" maxWidth="Infinity" styleClass="status-label" HBox.hgrow="ALWAYS" />
+        <Button fx:id="btnCancelar" onAction="#onDescartar" styleClass="btn-secundario" text="Descartar" />
+        <Button fx:id="btnSalvar" defaultButton="true" onAction="#onSalvar" styleClass="btn-primario" text="Salvar alterações" />
+    </HBox>
+</VBox>

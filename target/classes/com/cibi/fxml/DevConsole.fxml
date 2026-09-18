@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" spacing="10.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.pages.DevConsoleController">
+   <children>
+      <Label prefWidth="313.0" text="CIBI — Development Console" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="50.0" />
+         </padding>
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button mnemonicParsing="false" text="Configuracoes de inicializacao" />
+      <CheckBox fx:id="checkIgnorarLogin" mnemonicParsing="false" text="Ignorar Login" />
+      <HBox alignment="CENTER" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox alignment="CENTER" prefWidth="300.0">
+               <children>
+                  <TextArea fx:id="txtLog" editable="false" prefHeight="250.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextArea>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="7.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#iniciarCIBI" text="Iniciar CIBI" textAlignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#encerrar" text="Encerrar" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

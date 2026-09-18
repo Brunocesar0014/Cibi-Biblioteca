@@ -16,8 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="20.0" styleClass="VboxMain" stylesheets="@../../css/pages/Usuarios.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.pages.UsuariosController">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="20.0" styleClass="VboxMain" stylesheets="@../../css/pages/Usuarios.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.pages.UsuariosController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
@@ -33,8 +32,10 @@
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" styleClass="btn_NovoUsuario" text="Novo Usuario" />
-                  <Button mnemonicParsing="false" styleClass="btn_ListarUsuarios" text="Listar Usuarios" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="btn_voltar" text="&lt; Voltar">
+                     <HBox.margin>
+                        <Insets bottom="50.0" />
+                     </HBox.margin></Button>
                </children>
             </HBox>
          </children>
@@ -47,7 +48,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Label styleClass="lbl_TipoDeUsuario" text="Tipo de Usuário:" />
-                  <RadioButton mnemonicParsing="false" selected="true" styleClass="radio-custom" text="Aluno">
+                  <RadioButton mnemonicParsing="false" selected="true" styleClass="radio-custom" text="Colaborador">
                      <toggleGroup>
                         <ToggleGroup fx:id="AlunoFuncionario" />
                      </toggleGroup>
@@ -70,7 +71,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                      <children>
                         <Label text="Nome:" />
-                        <TextField maxWidth="1.7976931348623157E308" styleClass="input" />
+                        <TextField fx:id="input_nome" maxWidth="1.7976931348623157E308" styleClass="input" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1">
@@ -78,7 +79,7 @@
                         <Label text="Matricula:" />
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="5.0">
                            <children>
-                              <TextField maxWidth="1.7976931348623157E308" styleClass="input" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="input_matricula" maxWidth="1.7976931348623157E308" styleClass="input" HBox.hgrow="ALWAYS" />
                               <Button mnemonicParsing="false" styleClass="btn_BuscarMatricula" text="🔍" />
                            </children>
                         </HBox>
@@ -87,25 +88,25 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.rowIndex="1">
                      <children>
                         <Label text="Telefone:" />
-                        <TextField maxWidth="1.7976931348623157E308" styleClass="input" />
+                        <TextField fx:id="input_telefone" maxWidth="1.7976931348623157E308" styleClass="input" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label text="Turma:" />
-                        <ComboBox maxWidth="1.7976931348623157E308" prefWidth="150.0" styleClass="combo-box-custom" />
+                        <ComboBox fx:id="input_turma" maxWidth="1.7976931348623157E308" prefWidth="150.0" styleClass="combo-box-custom" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.rowIndex="2">
                      <children>
                         <Label text="Senha:" />
-                        <PasswordField maxWidth="1.7976931348623157E308" styleClass="input" />
+                        <PasswordField fx:id="input_senha" maxWidth="1.7976931348623157E308" styleClass="input" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <Label text="Confirmar senha:" />
-                        <PasswordField maxWidth="1.7976931348623157E308" styleClass="input" />
+                        <PasswordField fx:id="input_confirmarSenha" maxWidth="1.7976931348623157E308" styleClass="input" />
                      </children>
                   </VBox>
                </children>
@@ -113,9 +114,9 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" styleClass="btn_Salvar" text="Salvar" />
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" styleClass="btn_Cancelar" text="Cancelar" />
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" styleClass="btn_Limpar" text="Limpar" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cadastrarColaborador" styleClass="btn_Salvar" text="Salvar" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="btn_Cancelar" text="Cancelar" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#limparCampos" styleClass="btn_Limpar" text="Limpar" />
                </children>
                <VBox.margin>
                   <Insets top="15.0" />

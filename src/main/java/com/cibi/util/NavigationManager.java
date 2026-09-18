@@ -4,17 +4,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class NavigationManager {
     
-    private StackPane container;
+    private final StackPane container;
 
-    private Map<String, Parent> screenCache = new HashMap<>();
+    private final Map<String, Parent> screenCache = new HashMap<>();
 
     public NavigationManager(StackPane container) {
-        this.container = container;
+        this.container = Objects.requireNonNull(container, "container obrigatório");
     }
     
     public void loadScreen(String name, String fxmlPath) {
@@ -29,7 +32,11 @@ public class NavigationManager {
 
             } else {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                URL resource = getClass().getResource(fxmlPath);
+                if (resource == null) {
+                    throw new IllegalArgumentException("FXML não encontrado: " + fxmlPath);
+                }
+                FXMLLoader loader = new FXMLLoader(resource);
                 root = loader.load();
 
                 screenCache.put(name, root);
@@ -38,8 +45,8 @@ public class NavigationManager {
 
             container.getChildren().setAll(root);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new IllegalStateException("Erro ao carregar tela: " + fxmlPath, e);
         }
     }
     

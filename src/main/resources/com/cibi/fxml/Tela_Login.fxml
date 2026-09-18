@@ -17,7 +17,7 @@
 
 <BorderPane fx:id="containerPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#cliqueFora" prefHeight="400.0" prefWidth="520.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.LoginController">
    <left>
-      <AnchorPane fx:id="painel_esquerda" onMousePressed="#cliqueFora" prefHeight="400.0" prefWidth="228.0" stylesheets="@../css/login/style.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="painel_esquerda" onMousePressed="#cliqueFora" prefHeight="400.0" prefWidth="228.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="34.0" layoutY="229.0" text="Controle Interno de Biblioteca" textFill="WHITE">
                <font>
@@ -42,7 +42,7 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane fx:id="painel_login" onMousePressed="#cliqueFora" prefHeight="400.0" prefWidth="332.0" styleClass="painel_login" stylesheets="@../css/login/style.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="painel_login" onMousePressed="#cliqueFora" prefHeight="400.0" prefWidth="332.0" styleClass="painel_login" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="108.0" layoutY="63.0" text="Login">
                <font>
@@ -52,12 +52,12 @@
                   <InnerShadow />
                </effect>
             </Label>
-            <Button layoutX="31.0" layoutY="277.0" mnemonicParsing="false" onAction="#onLogarConta" prefHeight="26.0" prefWidth="230.0" styleClass="botao_login" stylesheets="@../css/login/style.css" text="Login" textFill="WHITE" />
-            <Button fx:id="bta_pularLogin" layoutX="31.0" layoutY="324.0" mnemonicParsing="false" onAction="#onPularLogin" prefHeight="26.0" prefWidth="230.0" styleClass="botao_cancelar" stylesheets="@../css/login/style.css" text="Pular Login" textFill="WHITE" />
-            <StackPane alignment="CENTER_LEFT" layoutX="31.0" layoutY="142.0" prefHeight="30.0" prefWidth="230.0" stylesheets="@../css/login/style.css">
+            <Button layoutX="31.0" layoutY="277.0" mnemonicParsing="false" onAction="#onLogarConta" prefHeight="26.0" prefWidth="230.0" styleClass="botao_login" text="Login" textFill="WHITE" />
+            <Button fx:id="bta_pularLogin" layoutX="31.0" layoutY="324.0" mnemonicParsing="false" onAction="#onPularLogin" prefHeight="26.0" prefWidth="230.0" styleClass="botao_cancelar" text="Criar Conta" textFill="WHITE" />
+            <StackPane alignment="CENTER_LEFT" layoutX="31.0" layoutY="142.0" prefHeight="30.0" prefWidth="230.0">
                <children>
-                  <TextField fx:id="txtInput" prefHeight="24.0" prefWidth="227.0" styleClass="custom-field" stylesheets="@../css/login/style.css" />
-                  <Label fx:id="lblFloating" mouseTransparent="true" styleClass="floating-label" stylesheets="@../css/login/style.css" text="Usuario">
+                  <TextField fx:id="txtInput" onAction="#verificarNextInput" prefHeight="24.0" prefWidth="227.0" styleClass="custom-field" />
+                  <Label fx:id="lblFloating" mouseTransparent="true" styleClass="floating-label" text="Usuario">
                      <StackPane.margin>
                         <Insets left="10.0" />
                      </StackPane.margin></Label>
@@ -65,8 +65,8 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT" layoutX="31.0" layoutY="185.0" prefHeight="30.0" prefWidth="230.0">
                <children>
-                  <PasswordField fx:id="txtPassword" styleClass="custom-field" stylesheets="@../css/login/style.css" />
-                  <Label fx:id="lblPassword" mouseTransparent="true" styleClass="floating-label" stylesheets="@../css/login/style.css" text="Senha">
+                  <PasswordField fx:id="txtPassword" onAction="#verificarNextInput" styleClass="custom-field" />
+                  <Label fx:id="lblPassword" mouseTransparent="true" styleClass="floating-label" text="Senha">
                      <StackPane.margin>
                         <Insets left="10.0" />
                      </StackPane.margin>

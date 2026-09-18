@@ -6,8 +6,8 @@ import com.cibi.repository.AlunoRepository;
 public class AlunoService {
     
     public static Aluno BuscarAlunoPorMaticula(long matricula){
-        if (matricula == 0 ){
-            throw new IllegalArgumentException("matricula não pode ser 0");
+        if (matricula <= 0 ){
+            throw new IllegalArgumentException("matrícula deve ser positiva");
         }
         
         Aluno aluno = AlunoRepository.buscarPorMatricula(matricula);

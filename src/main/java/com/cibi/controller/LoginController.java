@@ -1,6 +1,6 @@
 package com.cibi.controller;
 
-import com.cibi.Service.ContaService;
+import com.cibi.Service.ColaboradorService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +13,8 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
@@ -22,12 +24,24 @@ public class LoginController {
     @FXML private Pane containerPrincipal; // Use o tipo do seu container pai
 
     @FXML public Label label_depuracao;
+    @FXML private Button bta_pularLogin;
     
     @FXML
     private void cliqueFora() {
         // Quando clicar no fundo, o container solicita o foco, 
         // tirando o foco do TextField e disparando o Listener de volta ao normal.
         containerPrincipal.requestFocus();
+    }
+    
+    @FXML
+    private void verificarNextInput(ActionEvent event) {
+        Object source = event.getSource();
+        
+        if (source == txtInput){
+            txtPassword.requestFocus();
+        } else if (source == txtPassword){
+            onLogarConta(event);
+        }
     }
 
     //animação textField
@@ -37,47 +51,59 @@ public class LoginController {
     @FXML private Label lblPassword;
 
     @FXML
-    private void onLogarConta(ActionEvent event) {
+    private void processarLogin(){
         String usuario = txtInput.getText();
         String senha = txtPassword.getText();
 
         try {
-            boolean ok = ContaService.RealizarLogin(usuario, senha);
+            boolean ok = ColaboradorService.RealizarLogin(usuario, senha);
 
             if (ok) {
                 abrirTelaPrincipalEFecharLogin();
             }
 
         } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-            label_depuracao.setText("Usuário ou senha inválidos");
-            label_depuracao.setStyle("-fx-text-fill: #e71c1c");
+            mostrarErroLogin();
         }
-
+    }
+    
+    @FXML
+    private void onLogarConta(ActionEvent event) {
+        processarLogin();
+    }
+    
+    private void mostrarErroLogin(){
+        label_depuracao.setText("Usuário ou senha inválidos");
+        label_depuracao.setStyle("-fx-text-fill: #e71c1c");
     }
     
     @FXML
     private void onPularLogin(ActionEvent event) {
+
         try{
             abrirTelaPrincipalEFecharLogin();
         }catch(RuntimeException e){
-            System.out.println(e.getMessage());
+            mostrarErroLogin();
         }
     }
 
     private void abrirTelaPrincipalEFecharLogin() {
         try {
+            
             Parent root = FXMLLoader.load(getClass().getResource("/com/cibi/fxml/Tela_Principal.fxml"));
 
             Stage principal = new Stage();
+            Image icon = new Image(getClass().getResourceAsStream("/com/cibi/imagens/icone.png"));
+            principal.getIcons().add(icon);
             principal.setScene(new Scene(root));
             principal.setTitle("Tela Principal");
             principal.setMinWidth(1280);
             principal.setMinHeight(720);
-            principal.show();
 
             Stage loginStage = (Stage) txtInput.getScene().getWindow();
             loginStage.close();
+            
+            principal.show();
         } catch (Exception e) {
             throw new RuntimeException("Erro ao abrir a tela principal", e);
         }
@@ -85,6 +111,7 @@ public class LoginController {
 
     @FXML
     private void initialize() {
+
         // Monitorar o foco do campo de texto
         txtInput.focusedProperty().addListener((obs, oldVal, newVal) -> {
             updateLabel(newVal);

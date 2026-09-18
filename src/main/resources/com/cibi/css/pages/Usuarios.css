@@ -1,3 +1,7 @@
+.root {
+    -fx-font-family: "Segoe UI";
+}
+
 .VboxMain{
     -fx-background-color: #f5f6fa;
 }
@@ -89,16 +93,15 @@
     -fx-text-fill: white;
 }
 
-.btn_NovoUsuario{
-    -fx-background-color: #28a745;
-    -fx-text-fill: white;
+.btn_voltar{
+    -fx-background-color: #e9ecef;
+    -fx-text-fill: #333;
+    -fx-cursor: hand;
     -fx-background-radius: 6;
 }
 
-.btn_ListarUsuarios{
-    -fx-background-color: #e9ecef;
-    -fx-text-fill: #333;
-    -fx-background-radius: 6;
+.btn_ListarUsuarios:hover {
+    -fx-background-color: #d1d1d1;
 }
 
 .lbl_TipoDeUsuario{
@@ -146,7 +149,6 @@
     -fx-padding: 8 14;
     -fx-cursor: hand;
     -fx-background-color: #28a745;
-    -fx-font-weight: bold;
 }
 
 .btn_Salvar:hover {

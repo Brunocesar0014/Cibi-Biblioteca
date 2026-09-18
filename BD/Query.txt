@@ -1,0 +1,38 @@
+use cibi;
+select * from colaboradores;
+select * from livros;
+select * from alunos;
+
+create table livros(
+	id serial primary key,
+	titulo varchar(50) not null,
+    autor varchar(50),
+    sinopse text
+);
+
+create table colaboradores(
+	matricula bigint not null primary key,
+    nome varchar(50) not null unique,
+    senha varchar(20) not null,
+    telefone varchar(20),
+    turma varchar(9)
+);
+
+create table funcionarios(
+    nome varchar(20),
+    telefone varchar(20),
+    email varchar(40),
+    usuario varchar(20)
+);
+
+create table alunos(
+	matricula bigint primary key not null unique,
+    nome varchar(100) not null,
+    turma varchar(12) not null
+);
+
+
+
+create table configuracoes(
+	salvarLogin boolean
+);

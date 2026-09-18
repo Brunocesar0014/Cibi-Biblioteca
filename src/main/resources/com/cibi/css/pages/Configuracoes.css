@@ -1,0 +1,565 @@
+/* ============================================================
+   CIBI — Configuracoes.css
+   Paleta baseada na tela principal atual do sistema:
+   sidebar escura (#141C2B), conteudo claro (#F4F6FA), azul #2563EB.
+   ============================================================ */
+
+.config-root {
+
+    /* ---------- Cores base (looked-up colors) ---------- */
+    -cibi-fundo:            #F4F6FA;
+    -cibi-superficie:       #FFFFFF;
+    -cibi-superficie-alt:   #EDF0F6;
+    -cibi-borda:            #DFE4EC;
+    -cibi-borda-forte:      #C7CEDA;
+
+    -cibi-texto:            #1B2432;
+    -cibi-texto-suave:      #6B7688;
+    -cibi-texto-fraco:      #97A0B0;
+
+    -cibi-escuro:           #141C2B;
+    -cibi-escuro-alt:       #1E2938;
+
+    -cibi-destaque:         #2563EB;
+    -cibi-destaque-hover:   #1D4FD8;
+    -cibi-destaque-suave:   #E3EBFD;
+
+    -cibi-sucesso:          #22C55E;
+    -cibi-perigo:           #DC2626;
+    -cibi-perigo-suave:     #FDE8E8;
+
+    -fx-background-color: -cibi-fundo;
+    -fx-font-family: "Segoe UI", "Inter", sans-serif;
+}
+
+/* ============================================================
+   CABECALHO E ABAS
+   ============================================================ */
+
+.config-header {
+    -fx-background-color: -cibi-fundo;
+}
+
+.page-title {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -cibi-texto;
+}
+
+.tab-bar {
+    -fx-padding: 0 0 0 0;
+}
+
+.tab-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6px;
+    -fx-text-fill: -cibi-texto-suave;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 14px 12px 14px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.tab-button:hover {
+    -fx-text-fill: -cibi-texto;
+    -fx-background-color: -cibi-superficie-alt;
+}
+
+.tab-button:selected {
+    -fx-background-color: transparent;
+    -fx-text-fill: -cibi-texto;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent transparent -cibi-destaque transparent;
+}
+
+.tab-button:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab-divider {
+    -fx-padding: 0;
+}
+
+.tab-divider .line {
+    -fx-border-color: -cibi-borda;
+    -fx-border-width: 1px 0 0 0;
+}
+
+/* ============================================================
+   AREA DE CONTEUDO
+   ============================================================ */
+
+.config-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-padding: 0;
+}
+
+.config-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.config-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 10px;
+}
+
+.config-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: -cibi-borda-forte;
+    -fx-background-radius: 6px;
+}
+
+.config-scroll .scroll-bar .increment-button,
+.config-scroll .scroll-bar .decrement-button,
+.config-scroll .scroll-bar .increment-arrow,
+.config-scroll .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: null;
+}
+
+.config-stack {
+    -fx-background-color: transparent;
+}
+
+.section-pane {
+    -fx-max-width: 880px;
+}
+
+.section-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -cibi-texto;
+    -fx-padding: 0 0 4px 0;
+}
+
+.section-divider {
+    -fx-padding: 18px 0 18px 0;
+}
+
+.section-divider .line {
+    -fx-border-color: -cibi-borda;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.field-block {
+    -fx-spacing: 6px;
+}
+
+.field-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -cibi-texto;
+}
+
+.field-hint {
+    -fx-font-size: 13px;
+    -fx-text-fill: -cibi-texto-suave;
+    -fx-padding: 0 0 6px 0;
+}
+
+.input-row,
+.switch-row {
+    -fx-padding: 6px 0 0 0;
+}
+
+.input-prefix,
+.input-suffix {
+    -fx-font-size: 13px;
+    -fx-text-fill: -cibi-texto-suave;
+}
+
+/* ============================================================
+   CARTOES DE TEMA
+   ============================================================ */
+
+.theme-row {
+    -fx-padding: 10px 0 2px 0;
+}
+
+.theme-card {
+    -fx-background-color: -cibi-superficie;
+    -fx-background-radius: 10px;
+    -fx-border-color: -cibi-borda;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 6px;
+    -fx-cursor: hand;
+}
+
+.theme-card:hover {
+    -fx-border-color: -cibi-borda-forte;
+}
+
+.theme-card:selected {
+    -fx-border-color: -cibi-destaque;
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.22), 10, 0, 0, 2);
+}
+
+.theme-card:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.preview {
+    -fx-pref-width: 176px;
+    -fx-pref-height: 110px;
+    -fx-padding: 10px;
+    -fx-background-radius: 6px;
+}
+
+.preview-chip {
+    -fx-pref-width: 26px;
+    -fx-pref-height: 6px;
+    -fx-background-radius: 3px;
+}
+
+.preview-body {
+    -fx-pref-height: 60px;
+    -fx-background-radius: 4px;
+}
+
+.preview-aside {
+    -fx-pref-width: 26px;
+    -fx-pref-height: 40px;
+    -fx-background-radius: 4px;
+}
+
+/* Miniatura escura */
+.preview-dark {
+    -fx-background-color: -cibi-escuro;
+}
+.preview-dark .preview-chip  { -fx-background-color: #33415A; }
+.preview-dark .preview-body  { -fx-background-color: #2B3A50; }
+.preview-dark .preview-aside { -fx-background-color: #33415A; }
+
+/* Miniatura clara */
+.preview-light {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: -cibi-borda;
+    -fx-border-radius: 6px;
+    -fx-border-width: 1px;
+}
+.preview-light .preview-chip  { -fx-background-color: #D6DBE5; }
+.preview-light .preview-body  { -fx-background-color: #E9EDF4; }
+.preview-light .preview-aside { -fx-background-color: #D6DBE5; }
+
+/* Miniatura padrao do sistema (meio a meio) */
+.preview-system {
+    -fx-background-color: linear-gradient(to right, #FFFFFF 0%, #FFFFFF 50%, -cibi-escuro 50%, -cibi-escuro 100%);
+    -fx-border-color: -cibi-borda;
+    -fx-border-radius: 6px;
+    -fx-border-width: 1px;
+}
+.preview-system .preview-chip  { -fx-background-color: #9AA5B5; }
+.preview-system .preview-body  { -fx-background-color: #B8C1CF; }
+.preview-system .preview-aside { -fx-background-color: #3A4A63; }
+
+.theme-caption {
+    -fx-font-size: 14px;
+    -fx-text-fill: -cibi-texto-suave;
+}
+
+.theme-caption.selecionado {
+    -fx-text-fill: -cibi-destaque;
+    -fx-font-weight: bold;
+}
+
+/* ============================================================
+   AMOSTRAS DE COR
+   ============================================================ */
+
+.swatch-row {
+    -fx-padding: 10px 0 2px 0;
+}
+
+.swatch {
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-pref-width: 40px;
+    -fx-pref-height: 40px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-width: 2px;
+    -fx-border-color: transparent;
+    -fx-text-fill: transparent;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.swatch:selected {
+    -fx-text-fill: white;
+}
+
+.swatch:hover {
+    -fx-effect: dropshadow(gaussian, rgba(27, 36, 50, 0.25), 8, 0, 0, 2);
+}
+
+.swatch:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.swatch-azul  { -fx-background-color: #2563EB; }
+.swatch-ciano { -fx-background-color: #38BDF8; }
+.swatch-verde { -fx-background-color: #22C55E; }
+.swatch-roxo  { -fx-background-color: #A78BFA; }
+.swatch-ambar { -fx-background-color: #F5B33C; }
+
+/* ============================================================
+   CARTOES DE TAMANHO DE FONTE
+   ============================================================ */
+
+.font-row {
+    -fx-padding: 10px 0 2px 0;
+}
+
+.font-card {
+    -fx-min-width: 58px;
+    -fx-min-height: 58px;
+    -fx-pref-width: 58px;
+    -fx-pref-height: 58px;
+    -fx-background-color: -cibi-superficie;
+    -fx-background-radius: 10px;
+    -fx-border-color: -cibi-borda;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-text-fill: -cibi-texto;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+
+.font-card:hover   { -fx-border-color: -cibi-borda-forte; }
+
+.font-card:selected {
+    -fx-border-color: -cibi-destaque;
+    -fx-text-fill: -cibi-destaque;
+}
+
+.font-card:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.font-p  { -fx-font-size: 13px; }
+.font-m  { -fx-font-size: 16px; }
+.font-g  { -fx-font-size: 19px; }
+.font-xg { -fx-font-size: 22px; }
+
+/* ============================================================
+   SWITCH (CheckBox estilizado)
+   ============================================================ */
+
+.switch {
+    -fx-cursor: hand;
+}
+
+.switch > .box {
+    -fx-background-color: -cibi-borda-forte;
+    -fx-background-radius: 999px;
+    -fx-border-color: transparent;
+    -fx-pref-width: 46px;
+    -fx-min-width: 46px;
+    -fx-max-width: 46px;
+    -fx-pref-height: 26px;
+    -fx-min-height: 26px;
+    -fx-max-height: 26px;
+    -fx-padding: 0;
+    -fx-alignment: center-left;
+}
+
+.switch > .box > .mark {
+    -fx-background-color: white;
+    -fx-shape: "M 50 0 A 50 50 0 1 1 49.9 0 Z";
+    -fx-min-width: 20px;
+    -fx-max-width: 20px;
+    -fx-min-height: 20px;
+    -fx-max-height: 20px;
+    -fx-padding: 0;
+    -fx-translate-x: 3;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 3, 0, 0, 1);
+}
+
+.switch:selected > .box {
+    -fx-background-color: -cibi-sucesso;
+}
+
+.switch:selected > .box > .mark {
+    -fx-background-color: white;
+    -fx-translate-x: 23;
+}
+
+.switch:focused > .box {
+    -fx-border-color: transparent;
+}
+
+.switch-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -cibi-texto;
+}
+
+/* ============================================================
+   CAMPOS DE ENTRADA
+   ============================================================ */
+
+.text-campo {
+    -fx-background-color: -cibi-superficie;
+    -fx-background-radius: 8px;
+    -fx-border-color: -cibi-borda;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-text-fill: -cibi-texto;
+    -fx-prompt-text-fill: -cibi-texto-fraco;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 12px;
+}
+
+.text-campo:focused {
+    -fx-border-color: -cibi-destaque;
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.18), 8, 0, 0, 0);
+}
+
+.text-campo.campo-invalido {
+    -fx-border-color: -cibi-perigo;
+}
+
+.spinner-campo {
+    -fx-background-color: -cibi-superficie;
+    -fx-background-radius: 8px;
+    -fx-border-color: -cibi-borda;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+}
+
+.spinner-campo .text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: -cibi-texto;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 10px;
+}
+
+.spinner-campo:focused {
+    -fx-border-color: -cibi-destaque;
+}
+
+.spinner-campo .increment-arrow-button,
+.spinner-campo .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.spinner-campo .increment-arrow,
+.spinner-campo .decrement-arrow {
+    -fx-background-color: -cibi-texto-suave;
+}
+
+.combo-campo {
+    -fx-background-color: -cibi-superficie;
+    -fx-background-radius: 8px;
+    -fx-border-color: -cibi-borda;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 4px 6px;
+}
+
+.combo-campo .list-cell {
+    -fx-text-fill: -cibi-texto;
+    -fx-padding: 6px 8px;
+}
+
+.combo-campo .arrow {
+    -fx-background-color: -cibi-texto-suave;
+}
+
+.combo-campo:focused {
+    -fx-border-color: -cibi-destaque;
+}
+
+.combo-campo .list-view {
+    -fx-background-color: -cibi-superficie;
+    -fx-border-color: -cibi-borda;
+}
+
+.combo-campo .list-view .list-cell:filled:hover {
+    -fx-background-color: -cibi-destaque-suave;
+}
+
+/* ============================================================
+   BOTOES E RODAPE
+   ============================================================ */
+
+.config-footer {
+    -fx-background-color: -cibi-superficie;
+    -fx-border-color: -cibi-borda transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.status-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: -cibi-texto-suave;
+}
+
+.status-label.status-ok      { -fx-text-fill: #15803D; }
+.status-label.status-erro    { -fx-text-fill: -cibi-perigo; }
+.status-label.status-alterado{ -fx-text-fill: #B45309; }
+
+.btn-primario {
+    -fx-background-color: -cibi-destaque;
+    -fx-background-radius: 8px;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 20px;
+    -fx-cursor: hand;
+}
+
+.btn-primario:hover    { -fx-background-color: -cibi-destaque-hover; }
+.btn-primario:disabled { -fx-opacity: 0.45; }
+
+.btn-secundario {
+    -fx-background-color: -cibi-superficie;
+    -fx-background-radius: 8px;
+    -fx-border-color: -cibi-borda-forte;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-text-fill: -cibi-texto;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 18px;
+    -fx-cursor: hand;
+}
+
+.btn-secundario:hover { -fx-background-color: -cibi-superficie-alt; }
+
+.btn-perigo {
+    -fx-background-color: -cibi-perigo-suave;
+    -fx-background-radius: 8px;
+    -fx-border-color: #F3B4B4;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-text-fill: -cibi-perigo;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 18px;
+    -fx-cursor: hand;
+}
+
+.btn-perigo:hover {
+    -fx-background-color: #FBD5D5;
+}
+
+/* ============================================================
+   DIALOGOS (Alert) — mesma identidade visual
+   ============================================================ */
+
+.dialog-cibi .header-panel {
+    -fx-background-color: -cibi-superficie-alt;
+}
+
+.dialog-cibi > *.button-bar > *.container {
+    -fx-background-color: -cibi-superficie;
+}

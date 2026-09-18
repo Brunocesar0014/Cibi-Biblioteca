@@ -1,0 +1,128 @@
+/* =========================================================
+   ALERTA DE CONFIRMAÇÃO
+   ========================================================= */
+
+.alert-confirmacao {
+    -fx-background-color: #F8F5FB;
+    -fx-border-color: #DCD8E0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+
+/* =========================================================
+   PAINEL PRINCIPAL
+   ========================================================= */
+
+.alert-confirmacao .dialog-pane {
+    -fx-background-color: #F8F5FB;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-padding: 0;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.alert-confirmacao .header-panel {
+    -fx-background-color: #1e272e;
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-padding: 20px 24px 18px 24px;
+}
+
+.alert-confirmacao .header-panel .label {
+    -fx-text-fill: white;
+    -fx-font-family: "System";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+
+/* =========================================================
+   CONTEÚDO
+   ========================================================= */
+
+.alert-confirmacao .content {
+    -fx-padding: 24px;
+}
+
+.alert-confirmacao .content.label {
+    -fx-text-fill: #4A4A4A;
+    -fx-font-family: "System";
+    -fx-font-size: 14px;
+}
+
+
+/* =========================================================
+   ÁREA DOS BOTÕES
+   ========================================================= */
+
+.alert-confirmacao .button-bar {
+    -fx-background-color: #F8F5FB;
+    -fx-padding: 12px 20px 20px 20px;
+}
+
+.alert-confirmacao .button-bar .container {
+    -fx-background-color: transparent;
+}
+
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.alert-confirmacao .button {
+    -fx-font-family: "System";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 9px 20px;
+
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+
+    -fx-cursor: hand;
+}
+
+
+/* =========================================================
+   BOTÃO CONFIRMAR
+   ========================================================= */
+
+.alert-confirmacao .botao-confirmar {
+    -fx-background-color: #1e272e;
+    -fx-text-fill: white;
+}
+
+.alert-confirmacao .botao-confirmar:hover {
+    -fx-background-color: #34444d;
+}
+
+.alert-confirmacao .botao-confirmar:pressed {
+    -fx-background-color: #151c20;
+}
+
+
+/* =========================================================
+   BOTÃO CANCELAR
+   ========================================================= */
+
+.alert-confirmacao .botao-cancelar {
+    -fx-background-color: transparent;
+    -fx-text-fill: #4A4A4A;
+
+    -fx-border-color: #D0CDD4;
+    -fx-border-width: 1px;
+}
+
+.alert-confirmacao .botao-cancelar:hover {
+    -fx-background-color: #EDEAF0;
+    -fx-border-color: #BDB9C2;
+}
+
+.alert-confirmacao .botao-cancelar:pressed {
+    -fx-background-color: #E2DFE5;
+}
