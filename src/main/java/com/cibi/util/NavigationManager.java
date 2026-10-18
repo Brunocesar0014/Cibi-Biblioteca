@@ -15,12 +15,13 @@ public class NavigationManager {
     private final StackPane container;
 
     private final Map<String, Parent> screenCache = new HashMap<>();
+    private final Map<String, Object> controllerCache = new HashMap<>();
 
     public NavigationManager(StackPane container) {
         this.container = Objects.requireNonNull(container, "container obrigatório");
     }
     
-    public void loadScreen(String name, String fxmlPath) {
+    public Object loadScreen(String name, String fxmlPath) {
 
         try {
 
@@ -40,10 +41,12 @@ public class NavigationManager {
                 root = loader.load();
 
                 screenCache.put(name, root);
+                controllerCache.put(name, loader.getController());
 
             }
 
             container.getChildren().setAll(root);
+            return controllerCache.get(name);
 
         } catch (IOException e) {
             throw new IllegalStateException("Erro ao carregar tela: " + fxmlPath, e);

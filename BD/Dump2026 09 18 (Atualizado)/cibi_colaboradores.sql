@@ -16,30 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `livros`
+-- Table structure for table `colaboradores`
 --
 
-DROP TABLE IF EXISTS `livros`;
+DROP TABLE IF EXISTS `colaboradores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `livros` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(100) NOT NULL,
-  `sinopse` text,
-  `autor` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `colaboradores` (
+  `matricula` bigint NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `senha` varchar(20) NOT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `turma` varchar(9) DEFAULT NULL,
+  PRIMARY KEY (`matricula`),
+  UNIQUE KEY `nome` (`nome`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `livros`
+-- Dumping data for table `colaboradores`
 --
 
-LOCK TABLES `livros` WRITE;
-/*!40000 ALTER TABLE `livros` DISABLE KEYS */;
-INSERT INTO `livros` VALUES (1,'teste','teste','teste'),(2,'Noites Brancas','Uma história triste','Dostoiévski');
-/*!40000 ALTER TABLE `livros` ENABLE KEYS */;
+LOCK TABLES `colaboradores` WRITE;
+/*!40000 ALTER TABLE `colaboradores` DISABLE KEYS */;
+INSERT INTO `colaboradores` VALUES (123,'teste','123','123','EDI 1001');
+/*!40000 ALTER TABLE `colaboradores` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-11 16:28:42
+-- Dump completed on 2026-09-18 14:14:08

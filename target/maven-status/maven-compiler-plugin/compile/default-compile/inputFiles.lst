@@ -3,13 +3,15 @@ C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\applicatio
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\model\Aluno.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\pages\DashboardController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\AlunoService.java
+C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\DashboardService.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\pages\DevConsoleController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\util\DevTools.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\repository\ConfiguracoesRepository.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\MainController.java
-C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\util\windowUtils.java
+C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\util\WindowUtils.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\repository\LivroRepository.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\pages\UsuariosController.java
+C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\model\DashboardResumo.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\pages\LivrosController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\ColaboradorService.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\model\Colaborador.java
@@ -19,6 +21,7 @@ C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\ConfiguracoesService.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\pages\EmprestimosController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\util\NavigationManager.java
+C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\repository\DashboardRepository.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\LoginController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\repository\AlunoRepository.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\database\DatabaseConfig.java

@@ -16,29 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `alunos`
+-- Table structure for table `livros`
 --
 
-DROP TABLE IF EXISTS `alunos`;
+DROP TABLE IF EXISTS `livros`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `alunos` (
-  `matricula` bigint NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `turma` varchar(12) NOT NULL,
-  PRIMARY KEY (`matricula`),
-  UNIQUE KEY `matricula` (`matricula`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `livros` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(100) NOT NULL,
+  `sinopse` text,
+  `autor` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `alunos`
+-- Dumping data for table `livros`
 --
 
-LOCK TABLES `alunos` WRITE;
-/*!40000 ALTER TABLE `alunos` DISABLE KEYS */;
-INSERT INTO `alunos` VALUES (202414061471589,'JULIO CESAR REIS PEREIRA JUNIOR','INFO 3001'),(202414070598642,'GABRIEL MAIA CARVALHO','INFO 3001'),(202414070610014,'BRUNO CESAR FERREIRA DA SILVA','INFO 3001');
-/*!40000 ALTER TABLE `alunos` ENABLE KEYS */;
+LOCK TABLES `livros` WRITE;
+/*!40000 ALTER TABLE `livros` DISABLE KEYS */;
+INSERT INTO `livros` VALUES (1,'teste','teste','teste'),(2,'Noites Brancas','Uma história triste','Dostoiévski');
+/*!40000 ALTER TABLE `livros` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-11 16:28:42
+-- Dump completed on 2026-09-18 14:14:09

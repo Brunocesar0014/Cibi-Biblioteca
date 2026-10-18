@@ -12,7 +12,7 @@
 
 <BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="system-name" stylesheets="@../css/principal.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.MainController">
    <left>
-      <VBox fx:id="sidebar" maxWidth="220.0" minHeight="72.0" minWidth="64.0" prefWidth="220.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+      <VBox fx:id="sidebar" maxWidth="260.0" minHeight="72.0" minWidth="64.0" prefWidth="260.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <children>
             <VBox fx:id="sidebarHeader" maxHeight="66.0" minHeight="66.0" prefHeight="66.0" prefWidth="100.0" styleClass="sidebar-header">
                <children>
@@ -33,56 +33,79 @@
                <children>
                   <VBox fx:id="menuContainer" prefHeight="200.0" prefWidth="100.0" spacing="4.0" styleClass="menu-container" VBox.vgrow="NEVER">
                      <children>
-                        <Button fx:id="btnDashboard" mnemonicParsing="false" onAction="#abrirDashboard" prefHeight="34.0" text="Dashboard">
+                        <Button fx:id="btnDashboard" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirDashboard" prefHeight="40.0" text="Dashboard">
+                           <graphic>
+                              <Label styleClass="menu-icon" text="▦" />
+                           </graphic>
                            <styleClass>
                               <String fx:value="sidebar-menu-item" />
                               <String fx:value="button-custom" />
-                           </styleClass></Button>
-                        <Button fx:id="btnLivros" mnemonicParsing="false" onAction="#abrirLivros" prefHeight="34.0" text="Livros">
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btnLivros" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirLivros" prefHeight="40.0" text="Livros">
+                           <graphic>
+                              <Label styleClass="menu-icon" text="▤" />
+                           </graphic>
                            <styleClass>
                               <String fx:value="sidebar-menu-item" />
                               <String fx:value="button-custom" />
-                           </styleClass></Button>
-                        <Button fx:id="btnEmprestimos" mnemonicParsing="false" onAction="#abrirEmprestimos" prefHeight="34.0" text="Emprestimos">
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btnEmprestimos" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirEmprestimos" prefHeight="40.0" text="Emprestimos">
+                           <graphic>
+                              <Label styleClass="menu-icon" text="⇄" />
+                           </graphic>
                            <styleClass>
                               <String fx:value="sidebar-menu-item" />
                               <String fx:value="button-custom" />
-                           </styleClass></Button>
-                        <Button fx:id="btnUsuarios" mnemonicParsing="false" onAction="#abrirUsuarios" prefHeight="34.0" text="Usuários">
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btnUsuarios" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirUsuarios" prefHeight="40.0" text="Usuários">
+                           <graphic>
+                              <Label styleClass="menu-icon" text="☺" />
+                           </graphic>
                            <styleClass>
                               <String fx:value="sidebar-menu-item" />
                               <String fx:value="button-custom" />
-                           </styleClass></Button>
+                           </styleClass>
+                        </Button>
                      </children>
                   </VBox>
                   <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                  <Button fx:id="btnSobre" mnemonicParsing="false" onAction="#abrirSobre" prefHeight="34.0" text="Configurações">
+                  <Button fx:id="btnSobre" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirSobre" prefHeight="40.0" text="Configurações">
+                     <graphic>
+                        <Label styleClass="menu-icon" text="⚙" />
+                     </graphic>
                      <styleClass>
                         <String fx:value="sidebar-menu-item" />
                         <String fx:value="button-custom" />
                      </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
                   </Button>
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" top="22.0" />
                </padding>
             </VBox>
-            <VBox fx:id="sidebarBottom" maxHeight="54.0" minHeight="54.0" prefHeight="54.0" prefWidth="100.0">
+            <Region prefHeight="1.0" prefWidth="200.0" styleClass="divider" />
+            <VBox fx:id="sidebarBottom" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="100.0" styleClass="sidebar-bottom">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="200.0" spacing="10.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="200.0" spacing="10.0" styleClass="profile">
                      <children>
-                        <StackPane maxHeight="34.0" maxWidth="34.0" minHeight="34.0" minWidth="34.0" prefHeight="34.0" prefWidth="34.0">
+                        <StackPane styleClass="avatar">
                            <children>
-                              <Label text="AT" />
+                              <Label styleClass="avatar-text" text="AT" />
                            </children>
                         </StackPane>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label text="Nome Usuario" />
-                              <Label text="email@gmail.com" />
+                              <Label styleClass="profile-name" text="Nome Usuario" />
+                              <Label styleClass="profile-email" text="email@gmail.com" />
                            </children>
                         </VBox>
-                        <Label text="↗" />
+                        <Label styleClass="logout-icon" text="↗" />
                      </children>
                   </HBox>
                </children>

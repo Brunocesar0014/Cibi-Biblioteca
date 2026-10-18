@@ -2,16 +2,17 @@ use cibi;
 select * from colaboradores;
 select * from livros;
 select * from alunos;
+select * from configuracoes;
 
 create table livros(
-	id serial primary key,
-	titulo varchar(50) not null,
+    id serial primary key,
+    titulo varchar(50) not null,
     autor varchar(50),
     sinopse text
 );
 
 create table colaboradores(
-	matricula bigint not null primary key,
+    matricula bigint not null primary key,
     nome varchar(50) not null unique,
     senha varchar(20) not null,
     telefone varchar(20),
@@ -26,13 +27,17 @@ create table funcionarios(
 );
 
 create table alunos(
-	matricula bigint primary key not null unique,
+    matricula bigint primary key not null unique,
     nome varchar(100) not null,
-    turma varchar(12) not null
+    turma varchar(12) not null,
+    foto varchar(255)
 );
 
 
 
-create table configuracoes(
-	salvarLogin boolean
-);
+CREATE TABLE configuracoes (
+    chave VARCHAR(80) NOT NULL,
+    valor VARCHAR(255) NOT NULL,
+    atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (chave)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

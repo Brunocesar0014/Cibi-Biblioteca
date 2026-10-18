@@ -1,6 +1,7 @@
 package com.cibi.controller;
 
 import com.cibi.util.NavigationManager;
+import com.cibi.controller.pages.DashboardController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -21,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-    private static final double SIDEBAR_WIDTH_EXPANDED = 260.0;
+    private static final double SIDEBAR_WIDTH_EXPANDED = 200.0;
     private static final double SIDEBAR_WIDTH_COLLAPSED = 72.0;
     private static final Duration MENU_ANIMATION_DURATION = Duration.millis(250);
 
@@ -73,6 +74,11 @@ public class MainController implements Initializable {
         abrirTelaInicial();
     }
 
+    /*
+     * IMPORTANTE: esta lista/mapa é o único lugar do controller que
+     * precisa ser atualizado quando uma nova aba é adicionada.
+     * Veja docs/como-adicionar-uma-nova-aba.md para o passo a passo completo.
+     */
     private void configurarMenuButtons() {
         menuButtons = List.of(
                 btnDashboard,
@@ -160,11 +166,11 @@ public class MainController implements Initializable {
             if (menuExpandido) {
                 button.setContentDisplay(ContentDisplay.LEFT);
                 button.setGraphicTextGap(12);
-                button.setPrefHeight(44);
+                button.setPrefHeight(40);
             } else {
                 button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                 button.setGraphicTextGap(0);
-                button.setPrefHeight(44);
+                button.setPrefHeight(40);
             }
         }
     }
@@ -174,7 +180,10 @@ public class MainController implements Initializable {
     }
 
     private void abrirTela(String screenKey, String fxmlPath, Button activeButton) {
-        navigation.loadScreen(screenKey, fxmlPath);
+        Object controller = navigation.loadScreen(screenKey, fxmlPath);
+        if (controller instanceof DashboardController dashboard) {
+            dashboard.configurarNavegacao(this::abrirLivros, this::abrirUsuarios, this::abrirEmprestimos);
+        }
         definirItemAtivo(activeButton);
     }
 

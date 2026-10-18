@@ -1,0 +1,579 @@
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #F5F6FA;
+}
+
+
+/* =========================================================
+   ROOT / ÁREA PRINCIPAL
+   ========================================================= */
+
+#rootPane {
+    -fx-background-color: #F5F6FA;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+#sidebar {
+    -fx-background-color: #151C24;
+
+    /*
+     * O controller controla a largura através de
+     * sidebar.setPrefWidth().
+     */
+    -fx-padding: 18 10 12 10;
+
+    -fx-spacing: 0;
+
+    -fx-border-color: #303945;
+    -fx-border-width: 0 1 0 0;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.sidebar-header {
+    -fx-spacing: 14;
+    -fx-padding: 0;
+}
+
+
+/* =========================================================
+   TOPO / BRAND
+   ========================================================= */
+
+.brand {
+    -fx-padding: 0 10 0 10;
+
+    -fx-min-height: 42;
+    -fx-pref-height: 42;
+    -fx-max-height: 42;
+
+    -fx-alignment: center-left;
+
+    -fx-background-color: transparent;
+}
+
+
+/* =========================================================
+   ÍCONE DA MARCA
+   ========================================================= */
+
+.brand-icon {
+
+    -fx-min-width: 34;
+    -fx-pref-width: 34;
+    -fx-max-width: 34;
+
+    -fx-min-height: 34;
+    -fx-pref-height: 34;
+    -fx-max-height: 34;
+
+    -fx-background-color: #1677FF;
+
+    -fx-background-radius: 9;
+
+    -fx-alignment: center;
+}
+
+
+/* Texto dentro do ícone */
+
+.logo-icon {
+    -fx-text-fill: white;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+
+/*
+ * Caso queira continuar usando a classe do CSS
+ * que você colocou no novo design.
+ */
+.brand-icon-text {
+    -fx-text-fill: white;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+
+/* =========================================================
+   NOME DO SISTEMA
+   ========================================================= */
+
+.brand-name {
+
+    -fx-text-fill: #FFFFFF;
+
+    -fx-font-size: 20px;
+
+    -fx-font-weight: bold;
+
+    -fx-alignment: center-left;
+}
+
+
+/*
+ * Compatibilidade com o Label antigo
+ * caso ele continue recebendo system-name.
+ */
+
+.system-name {
+
+    -fx-text-fill: #FFFFFF;
+
+    -fx-font-size: 20px;
+
+    -fx-font-weight: bold;
+}
+
+
+/* =========================================================
+   DIVISOR
+   ========================================================= */
+
+.divider {
+
+    -fx-background-color: #303945;
+
+    -fx-min-height: 1;
+    -fx-pref-height: 1;
+    -fx-max-height: 1;
+
+    -fx-opacity: 0.85;
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO
+   ========================================================= */
+
+.navigation {
+
+    -fx-padding: 22 0 0 0;
+
+    -fx-spacing: 0;
+
+    -fx-background-color: transparent;
+}
+
+
+/* Compatibilidade com o nome usado no FXML */
+
+.navigation-wrapper {
+
+    -fx-background-color: transparent;
+
+    -fx-spacing: 0;
+}
+
+
+/* =========================================================
+   CONTAINER DOS MENUS
+   ========================================================= */
+
+.menu-container {
+
+    -fx-spacing: 4;
+
+    -fx-background-color: transparent;
+}
+
+
+/* =========================================================
+   BOTÕES DO MENU
+   ========================================================= */
+
+.sidebar-menu-item {
+
+    /* Fundo */
+    -fx-background-color: transparent;
+
+    /* Texto */
+    -fx-text-fill: #E1E5EA;
+
+    -fx-font-size: 14px;
+
+    -fx-font-weight: normal;
+
+    /* Alinhamento */
+    -fx-alignment: CENTER_LEFT;
+
+    -fx-content-display: LEFT;
+
+    -fx-graphic-text-gap: 12;
+
+    /* Espaçamento interno */
+    -fx-padding: 9 12 9 12;
+
+    /* Altura */
+    -fx-min-height: 40;
+    -fx-pref-height: 40;
+    -fx-max-height: 40;
+
+    /* Bordas */
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+
+    -fx-border-width: 0;
+
+    /* Cursor */
+    -fx-cursor: hand;
+
+    /* Sem sombra */
+    -fx-effect: none;
+}
+
+
+/*
+ * Remove o visual padrão do botão JavaFX
+ */
+
+.sidebar-menu-item:focused {
+
+    -fx-background-color: transparent;
+
+    -fx-border-color: transparent;
+
+    -fx-effect: none;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.sidebar-menu-item:hover {
+
+    -fx-background-color: #202832;
+
+    -fx-text-fill: #FFFFFF;
+}
+
+
+.sidebar-menu-item:pressed {
+
+    -fx-background-color: #252E39;
+
+    -fx-text-fill: #FFFFFF;
+}
+
+
+/* =========================================================
+   ITEM ATIVO
+   ========================================================= */
+
+.sidebar-menu-item-active {
+
+    -fx-background-color: #D7DBE3;
+
+    -fx-text-fill: #151C24;
+
+    -fx-font-size: 14px;
+
+    -fx-font-weight: bold;
+
+    -fx-padding: 9 12 9 12;
+
+    -fx-background-radius: 8;
+
+    -fx-border-radius: 8;
+
+    -fx-border-width: 0;
+
+    -fx-effect: none;
+}
+
+
+/*
+ * Quando o item ativo receber foco,
+ * continua cinza.
+ */
+
+.sidebar-menu-item-active:focused {
+
+    -fx-background-color: #D7DBE3;
+
+    -fx-text-fill: #151C24;
+
+    -fx-border-color: transparent;
+
+    -fx-effect: none;
+}
+
+
+/*
+ * Hover do item ativo
+ */
+
+.sidebar-menu-item-active:hover {
+
+    -fx-background-color: #D7DBE3;
+
+    -fx-text-fill: #151C24;
+}
+
+
+/* =========================================================
+   ÍCONES DOS ITENS DE MENU
+   ========================================================= */
+
+/*
+ * Ícones simples (glifos Unicode) usados como "graphic"
+ * dos botões da sidebar. Não depende de nenhuma
+ * biblioteca de ícones (Ikonli, FontAwesome, etc).
+ */
+
+.menu-icon {
+
+    -fx-font-size: 15px;
+
+    -fx-text-fill: #9AA5B1;
+
+    -fx-min-width: 20;
+    -fx-pref-width: 20;
+    -fx-max-width: 20;
+
+    -fx-alignment: center;
+}
+
+.sidebar-menu-item:hover .menu-icon {
+
+    -fx-text-fill: #FFFFFF;
+}
+
+.sidebar-menu-item-active .menu-icon {
+
+    -fx-text-fill: #151C24;
+}
+
+
+/* =========================================================
+   ÍCONES DOS MENUS (Ikonli, se algum dia for adotado)
+   ========================================================= */
+
+.sidebar-menu-item .ikonli-font-icon {
+
+    -fx-icon-color: #E1E5EA;
+}
+
+.sidebar-menu-item:hover .ikonli-font-icon {
+
+    -fx-icon-color: #FFFFFF;
+}
+
+.sidebar-menu-item-active .ikonli-font-icon {
+
+    -fx-icon-color: #151C24;
+}
+
+
+/* =========================================================
+   SEÇÃO / TÍTULO MENU
+   ========================================================= */
+
+.section-title {
+
+    -fx-text-fill: #7F8995;
+
+    -fx-font-size: 10px;
+
+    -fx-font-weight: bold;
+
+    -fx-padding: 0 0 8 12;
+}
+
+
+/* =========================================================
+   PARTE INFERIOR
+   ========================================================= */
+
+.sidebar-bottom {
+
+    -fx-spacing: 12;
+
+    -fx-padding: 8 0 0 0;
+
+    -fx-background-color: transparent;
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.profile {
+
+    -fx-padding: 8 10 4 10;
+
+    -fx-background-color: transparent;
+}
+
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.avatar {
+
+    -fx-min-width: 34;
+    -fx-pref-width: 34;
+    -fx-max-width: 34;
+
+    -fx-min-height: 34;
+    -fx-pref-height: 34;
+    -fx-max-height: 34;
+
+    -fx-background-color: #E8D5C4;
+
+    -fx-background-radius: 50%;
+
+    -fx-alignment: center;
+}
+
+
+.avatar-text {
+
+    -fx-text-fill: #44352D;
+
+    -fx-font-size: 11px;
+
+    -fx-font-weight: bold;
+}
+
+
+/* =========================================================
+   NOME DO USUÁRIO
+   ========================================================= */
+
+.profile-name {
+
+    -fx-text-fill: #FFFFFF;
+
+    -fx-font-size: 13px;
+
+    -fx-font-weight: bold;
+}
+
+
+/* =========================================================
+   EMAIL
+   ========================================================= */
+
+.profile-email {
+
+    -fx-text-fill: #7F8995;
+
+    -fx-font-size: 10px;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.logout-icon {
+
+    -fx-text-fill: #DCE1E7;
+
+    -fx-font-size: 17px;
+}
+
+
+/* =========================================================
+   BOTÃO TOGGLE
+   ========================================================= */
+
+
+/*
+ * Seu FXML atual não possui mais o btnToggleMenu.
+ *
+ * Estas regras ficam preparadas caso você coloque
+ * novamente o botão hamburger.
+ */
+
+.menu-toggle {
+
+    -fx-background-color: transparent;
+
+    -fx-text-fill: #E1E5EA;
+
+    -fx-font-size: 18px;
+
+    -fx-font-weight: bold;
+
+    -fx-padding: 8 10 8 10;
+
+    -fx-background-radius: 6;
+
+    -fx-border-color: transparent;
+
+    -fx-cursor: hand;
+}
+
+
+.menu-toggle:hover {
+
+    -fx-background-color: #202832;
+}
+
+
+.menu-toggle:pressed {
+
+    -fx-background-color: #252E39;
+}
+
+
+/* =========================================================
+   ÁREA DE CONTEÚDO
+   ========================================================= */
+
+.content-area {
+
+    -fx-background-color: #F5F6FA;
+
+    -fx-background-radius: 0;
+}
+
+
+/* =========================================================
+   BOTÕES GENÉRICOS
+   ========================================================= */
+
+.button-custom {
+
+    -fx-background-insets: 0;
+
+    -fx-border-insets: 0;
+
+    -fx-effect: none;
+}
+
+
+/* =========================================================
+   CORREÇÃO DO ESTADO FOCADO DOS BOTÕES
+   ========================================================= */
+
+.button-custom:focused {
+
+    -fx-border-color: transparent;
+
+    -fx-effect: none;
+}
+
+
+/* =========================================================
+   REGION
+   ========================================================= */
+
+.region {
+
+    -fx-background-color: transparent;
+}

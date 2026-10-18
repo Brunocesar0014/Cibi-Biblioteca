@@ -1,6 +1,6 @@
 package com.cibi.application;
 
-import com.cibi.util.windowUtils;
+import com.cibi.util.WindowUtils;
 import com.cibi.util.DevTools;
 import com.cibi.controller.pages.DevConsoleController;
 import javafx.application.Application;
@@ -36,7 +36,7 @@ public class MainApp extends Application {
         scene.getStylesheets().add(getClass().getResource("/com/cibi/css/principal.css").toExternalForm());
         stage.setScene(scene);
         
-        windowUtils.configurarConfirmacaoFechamento(stage);
+        WindowUtils.configurarConfirmacaoFechamento(stage);
         
         stage.show();
 
@@ -102,7 +102,7 @@ public class MainApp extends Application {
         principal.setMinWidth(1280);
         principal.setMinHeight(720);
         
-        windowUtils.configurarConfirmacaoFechamento(principal);
+        WindowUtils.configurarConfirmacaoFechamento(principal);
 
         principal.show();
     }
