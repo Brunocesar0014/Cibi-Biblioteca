@@ -2,6 +2,7 @@ package com.cibi.controller;
 
 import com.cibi.util.NavigationManager;
 import com.cibi.controller.pages.DashboardController;
+import com.cibi.controller.pages.LivrosController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -183,6 +184,9 @@ public class MainController implements Initializable {
         Object controller = navigation.loadScreen(screenKey, fxmlPath);
         if (controller instanceof DashboardController dashboard) {
             dashboard.configurarNavegacao(this::abrirLivros, this::abrirUsuarios, this::abrirEmprestimos);
+        }
+        if (controller instanceof LivrosController livros) {
+            livros.atualizar();
         }
         definirItemAtivo(activeButton);
     }

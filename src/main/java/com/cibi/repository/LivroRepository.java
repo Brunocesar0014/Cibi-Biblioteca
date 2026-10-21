@@ -50,6 +50,22 @@ public class LivroRepository {
         }
     }
 
+    public void atualizar(Livro livro) {
+        String sql = "UPDATE livros SET titulo = ?, autor = ?, sinopse = ? WHERE id = ?";
+        try (Connection con = ConnectionFactory.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, livro.getTitulo());
+            stmt.setString(2, livro.getAutor());
+            stmt.setString(3, livro.getSinopse());
+            stmt.setInt(4, livro.getId());
+            if (stmt.executeUpdate() == 0) {
+                throw new IllegalStateException("Livro não encontrado");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar livro", e);
+        }
+    }
+
     public static Livro buscarPorId(int id) {
         String sql = "SELECT id, titulo, autor, sinopse FROM livros WHERE id = ?";
 
