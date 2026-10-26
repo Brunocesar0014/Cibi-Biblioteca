@@ -20,7 +20,7 @@
                      <children>
                         <StackPane fx:id="logoContainer" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" styleClass="brand-icon">
                            <children>
-                              <Label fx:id="lblLogoIcon" styleClass="logo-icon" text="*" />
+                              <Region styleClass="bi-icon,brand-mark,bi-book" />
                            </children>
                         </StackPane>
                         <Label fx:id="lblSystemName" styleClass="brand-name" text="CIBI" />
@@ -35,7 +35,7 @@
                      <children>
                         <Button fx:id="btnDashboard" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirDashboard" prefHeight="40.0" text="Dashboard">
                            <graphic>
-                              <Label styleClass="menu-icon" text="▦" />
+                              <Region styleClass="bi-icon,sidebar-icon,bi-columns-gap" />
                            </graphic>
                            <styleClass>
                               <String fx:value="sidebar-menu-item" />
@@ -44,7 +44,7 @@
                         </Button>
                         <Button fx:id="btnLivros" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirLivros" prefHeight="40.0" text="Livros">
                            <graphic>
-                              <Label styleClass="menu-icon" text="▤" />
+                              <Region styleClass="bi-icon,sidebar-icon,bi-book" />
                            </graphic>
                            <styleClass>
                               <String fx:value="sidebar-menu-item" />
@@ -53,7 +53,7 @@
                         </Button>
                         <Button fx:id="btnEmprestimos" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirEmprestimos" prefHeight="40.0" text="Emprestimos">
                            <graphic>
-                              <Label styleClass="menu-icon" text="⇄" />
+                              <Region styleClass="bi-icon,sidebar-icon,bi-arrow-left-right" />
                            </graphic>
                            <styleClass>
                               <String fx:value="sidebar-menu-item" />
@@ -62,7 +62,7 @@
                         </Button>
                         <Button fx:id="btnUsuarios" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirUsuarios" prefHeight="40.0" text="Usuários">
                            <graphic>
-                              <Label styleClass="menu-icon" text="☺" />
+                              <Region styleClass="bi-icon,sidebar-icon,bi-people" />
                            </graphic>
                            <styleClass>
                               <String fx:value="sidebar-menu-item" />
@@ -74,7 +74,7 @@
                   <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                   <Button fx:id="btnSobre" contentDisplay="LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#abrirSobre" prefHeight="40.0" text="Configurações">
                      <graphic>
-                        <Label styleClass="menu-icon" text="⚙" />
+                        <Region styleClass="bi-icon,sidebar-icon,bi-gear" />
                      </graphic>
                      <styleClass>
                         <String fx:value="sidebar-menu-item" />
@@ -105,7 +105,7 @@
                               <Label styleClass="profile-email" text="email@gmail.com" />
                            </children>
                         </VBox>
-                        <Label styleClass="logout-icon" text="↗" />
+                        <Region styleClass="bi-icon,profile-arrow,bi-box-arrow-up-right" />
                      </children>
                   </HBox>
                </children>
