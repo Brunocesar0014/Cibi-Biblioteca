@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox fx:id="modalRoot" prefWidth="820" prefHeight="480" minWidth="0" minHeight="0" spacing="20" styleClass="book-category-modal" stylesheets="@../../css/pages/Livros.css" xmlns="http://javafx.com/javafx/22.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.pages.GerenciarCategoriasController">
+    <HBox alignment="CENTER_LEFT">
+        <Label text="Gerenciar categorias" styleClass="category-modal-title" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="btnFechar" text="×" accessibleText="Fechar gerenciamento de categorias" onAction="#cancelar" styleClass="category-modal-close" />
+    </HBox>
+    <HBox minHeight="0" styleClass="category-modal-body" VBox.vgrow="ALWAYS">
+        <VBox prefWidth="250" minWidth="190" spacing="14" styleClass="category-list-panel">
+            <ListView fx:id="listaCategorias" minHeight="0" styleClass="category-list" VBox.vgrow="ALWAYS">
+                <placeholder>
+                    <Label text="Nenhuma categoria" styleClass="category-modal-hint" />
+                </placeholder>
+            </ListView>
+            <Button fx:id="btnNovaCategoria" text="Nova categoria" onAction="#novaCategoria" maxWidth="1.7976931348623157E308" styleClass="category-outline-button">
+                <graphic>
+                    <Region styleClass="category-modal-icon,category-plus-icon" />
+                </graphic>
+            </Button>
+        </VBox>
+        <VBox minWidth="0" spacing="14" styleClass="category-editor-panel" HBox.hgrow="ALWAYS">
+            <Label text="Nome da categoria" labelFor="$nomeCategoria" styleClass="category-modal-label" />
+            <TextField fx:id="nomeCategoria" promptText="Nome da categoria" onAction="#renomear" styleClass="category-name-input" />
+            <Label fx:id="lblAjuda" wrapText="true" maxWidth="1.7976931348623157E308" styleClass="category-modal-hint" />
+            <Separator styleClass="category-modal-divider" />
+            <HBox spacing="12">
+                <Button fx:id="btnRenomear" text="Renomear" onAction="#renomear" styleClass="category-outline-button">
+                    <graphic>
+                        <Region styleClass="category-modal-icon,bi-pencil-fill" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnExcluir" text="Excluir" onAction="#excluir" styleClass="category-delete-button">
+                    <graphic>
+                        <Region styleClass="category-modal-icon,bi-trash-fill" />
+                    </graphic>
+                </Button>
+            </HBox>
+            <Label fx:id="lblMensagem" visible="false" managed="false" wrapText="true" maxWidth="1.7976931348623157E308" styleClass="category-modal-message" />
+        </VBox>
+    </HBox>
+    <HBox alignment="CENTER_RIGHT" spacing="12">
+        <Button fx:id="btnCancelarModal" text="Cancelar" onAction="#cancelar" styleClass="category-outline-button" />
+        <Button fx:id="btnSalvarModal" text="Salvar" onAction="#salvar" styleClass="category-primary-button" />
+    </HBox>
+</VBox>

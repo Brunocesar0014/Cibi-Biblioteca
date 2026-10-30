@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox fx:id="formRoot" minHeight="0" spacing="14" styleClass="books-root,book-form-root" stylesheets="@../../css/pages/Livros.css" xmlns="http://javafx.com/javafx/22.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.pages.LivroFormularioController">
+    <padding>
+        <Insets top="24" right="28" bottom="0" left="28" />
+    </padding>
+    <VBox spacing="3">
+        <Label fx:id="lblTituloFormulario" text="Cadastrar Livro" styleClass="books-title" />
+        <Label text="Adicione um novo item ao acervo" fx:id="lblSubtituloFormulario" styleClass="books-subtitle" />
+    </VBox>
+    <HBox alignment="CENTER_LEFT" spacing="8" styleClass="book-breadcrumb">
+        <Button text="Livros" onAction="#cancelar" styleClass="book-breadcrumb-link" />
+        <Label text="›" styleClass="book-breadcrumb-separator" />
+        <Label fx:id="lblEtapa" text="Cadastrar" styleClass="book-breadcrumb-current" />
+    </HBox>
+    <Label text="Cadastro provisório · livros e rascunhos ficam disponíveis somente até encerrar o aplicativo." wrapText="true" maxWidth="1.7976931348623157E308" styleClass="book-session-notice" />
+    <ScrollPane fx:id="rolagem" fitToWidth="true" hbarPolicy="NEVER" minHeight="0" styleClass="book-form-scroll" VBox.vgrow="ALWAYS">
+        <content>
+            <VBox spacing="0" styleClass="book-form-card">
+                <VBox styleClass="book-form-section" spacing="0">
+                    <ToggleButton fx:id="alternarPrincipal" selected="true" maxWidth="1.7976931348623157E308" contentDisplay="GRAPHIC_ONLY" styleClass="book-section-toggle">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="book-section-heading">
+                                <Label text="01" styleClass="book-section-number" />
+                                <Label text="Informações principais" styleClass="book-section-title" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Region styleClass="book-section-chevron" />
+                            </HBox>
+                        </graphic>
+                    </ToggleButton>
+                    <VBox fx:id="corpoPrincipal" spacing="14" styleClass="book-section-body">
+                        <GridPane fx:id="gradePrincipal" hgap="20" vgap="14">
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="6" minWidth="0">
+                                <HBox alignment="CENTER_LEFT" spacing="4">
+                                    <Label text="Título do livro" labelFor="$titulo" styleClass="book-field-label" />
+                                    <Label text="*" styleClass="book-required-mark" />
+                                </HBox>
+                                <TextField fx:id="titulo" maxWidth="1.7976931348623157E308" promptText="Ex.: Noites Brancas" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" spacing="6" minWidth="0">
+                                <Label text="Subtítulo" labelFor="$subtitulo" styleClass="book-field-label" />
+                                <TextField fx:id="subtitulo" maxWidth="1.7976931348623157E308" promptText="Complemento do título, se houver" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="6" minWidth="0">
+                                <Label text="Autor(es)" labelFor="$autor" styleClass="book-field-label" />
+                                <TextField fx:id="autor" maxWidth="1.7976931348623157E308" promptText="Separe os autores com ponto e vírgula" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="6" minWidth="0">
+                                <Label text="Editora" labelFor="$editora" styleClass="book-field-label" />
+                                <TextField fx:id="editora" maxWidth="1.7976931348623157E308" promptText="Nome da editora" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" spacing="6" minWidth="0">
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <Label text="Categoria" labelFor="$categoria" styleClass="book-field-label" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="btnGerenciarCategorias" text="Gerenciar categorias" onAction="#gerenciarCategorias" styleClass="book-category-action" />
+                                </HBox>
+                                <ComboBox fx:id="categoria" maxWidth="1.7976931348623157E308" promptText="Selecione ou digite uma categoria" editable="true" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="2" spacing="6" minWidth="0">
+                                <Label text="ISBN" labelFor="$isbn" styleClass="book-field-label" />
+                                <TextField fx:id="isbn" maxWidth="1.7976931348623157E308" promptText="ISBN-10 ou ISBN-13 (opcional)" styleClass="book-input" />
+                            </VBox>
+                        </GridPane>
+                        <VBox spacing="6" minWidth="0">
+                            <Label text="Sinopse" labelFor="$sinopse" styleClass="book-field-label" />
+                            <TextArea fx:id="sinopse" maxWidth="1.7976931348623157E308" prefRowCount="2" wrapText="true" promptText="Apresentação ou resumo da obra" styleClass="book-input" />
+                        </VBox>
+                    </VBox>
+                </VBox>
+                <VBox styleClass="book-form-section" spacing="0">
+                    <ToggleButton fx:id="alternarBibliografica" selected="true" maxWidth="1.7976931348623157E308" contentDisplay="GRAPHIC_ONLY" styleClass="book-section-toggle">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="book-section-heading">
+                                <Label text="02" styleClass="book-section-number" />
+                                <Label text="Dados bibliográficos" styleClass="book-section-title" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Region styleClass="book-section-chevron" />
+                            </HBox>
+                        </graphic>
+                    </ToggleButton>
+                    <VBox fx:id="corpoBibliografica" spacing="14" styleClass="book-section-body">
+                        <GridPane fx:id="gradeBibliografica" hgap="20" vgap="14">
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="6" minWidth="0">
+                                <Label text="Ano de publicação" labelFor="$ano" styleClass="book-field-label" />
+                                <TextField fx:id="ano" maxWidth="1.7976931348623157E308" promptText="Ex.: 2024" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" spacing="6" minWidth="0">
+                                <Label text="Edição" labelFor="$edicao" styleClass="book-field-label" />
+                                <TextField fx:id="edicao" maxWidth="1.7976931348623157E308" promptText="Ex.: 2ª edição" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="6" minWidth="0">
+                                <Label text="Volume" labelFor="$volume" styleClass="book-field-label" />
+                                <TextField fx:id="volume" maxWidth="1.7976931348623157E308" promptText="Ex.: 1 ou volume único" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="6" minWidth="0">
+                                <Label text="Número de páginas" labelFor="$paginas" styleClass="book-field-label" />
+                                <TextField fx:id="paginas" maxWidth="1.7976931348623157E308" promptText="Ex.: 192" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" spacing="6" minWidth="0">
+                                <Label text="Idioma" labelFor="$idioma" styleClass="book-field-label" />
+                                <ComboBox fx:id="idioma" maxWidth="1.7976931348623157E308" promptText="Selecione ou digite" editable="true" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="2" spacing="6" minWidth="0">
+                                <Label text="Local de publicação" labelFor="$localPublicacao" styleClass="book-field-label" />
+                                <TextField fx:id="localPublicacao" maxWidth="1.7976931348623157E308" promptText="Ex.: São Paulo" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="3" spacing="6" minWidth="0">
+                                <Label text="Assuntos / palavras-chave" labelFor="$assuntos" styleClass="book-field-label" />
+                                <TextField fx:id="assuntos" maxWidth="1.7976931348623157E308" promptText="Separe os assuntos com ponto e vírgula" styleClass="book-input" />
+                            </VBox>
+                        </GridPane>
+                    </VBox>
+                </VBox>
+                <VBox styleClass="book-form-section" spacing="0">
+                    <ToggleButton fx:id="alternarAcervo" selected="true" maxWidth="1.7976931348623157E308" contentDisplay="GRAPHIC_ONLY" styleClass="book-section-toggle">
+                        <graphic>
+                            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="book-section-heading">
+                                <Label text="03" styleClass="book-section-number" />
+                                <Label text="Controle de acervo" styleClass="book-section-title" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Region styleClass="book-section-chevron" />
+                            </HBox>
+                        </graphic>
+                    </ToggleButton>
+                    <VBox fx:id="corpoAcervo" spacing="14" styleClass="book-section-body">
+                        <GridPane fx:id="gradeAcervo" hgap="20" vgap="14">
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="6" minWidth="0">
+                                <HBox alignment="CENTER_LEFT" spacing="4">
+                                    <Label text="Quantidade total" labelFor="$quantidadeTotal" styleClass="book-field-label" />
+                                    <Label text="*" styleClass="book-required-mark" />
+                                </HBox>
+                                <TextField fx:id="quantidadeTotal" maxWidth="1.7976931348623157E308" promptText="Ex.: 1" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" spacing="6" minWidth="0">
+                                <HBox alignment="CENTER_LEFT" spacing="4">
+                                    <Label text="Quantidade disponível" labelFor="$quantidadeDisponivel" styleClass="book-field-label" />
+                                    <Label text="*" styleClass="book-required-mark" />
+                                </HBox>
+                                <TextField fx:id="quantidadeDisponivel" maxWidth="1.7976931348623157E308" promptText="Ex.: 1" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="6" minWidth="0">
+                                <Label text="Localização na estante" labelFor="$localizacao" styleClass="book-field-label" />
+                                <TextField fx:id="localizacao" maxWidth="1.7976931348623157E308" promptText="Ex.: Estante A · Prateleira 2" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="6" minWidth="0">
+                                <HBox alignment="CENTER_LEFT" spacing="4">
+                                    <Label text="Status do livro" labelFor="$status" styleClass="book-field-label" />
+                                    <Label text="*" styleClass="book-required-mark" />
+                                </HBox>
+                                <ComboBox fx:id="status" maxWidth="1.7976931348623157E308" promptText="Selecione" styleClass="book-input" />
+                            </VBox>
+                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" spacing="6" minWidth="0">
+                                <Label text="Número de chamada" labelFor="$numeroChamada" styleClass="book-field-label" />
+                                <TextField fx:id="numeroChamada" maxWidth="1.7976931348623157E308" promptText="Ex.: 891.73 D724n" styleClass="book-input" />
+                            </VBox>
+                        </GridPane>
+                        <Label text="O número de chamada identifica a obra na estante (classificação e notação do autor)." wrapText="true" styleClass="book-field-hint" />
+                    </VBox>
+                </VBox>
+            </VBox>
+        </content>
+    </ScrollPane>
+    <VBox spacing="9" styleClass="book-form-footer">
+        <Label fx:id="lblFeedback" visible="false" managed="false" wrapText="true" maxWidth="1.7976931348623157E308" styleClass="book-form-feedback" />
+        <HBox alignment="CENTER_LEFT" spacing="16">
+            <Label text="* Campos obrigatórios" styleClass="book-required-hint" HBox.hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+            <FlowPane alignment="CENTER_RIGHT" hgap="10" vgap="8" prefWrapLength="600">
+                <Button fx:id="btnCancelar" text="Cancelar" onAction="#cancelar" styleClass="secondary-button" />
+                <Button fx:id="btnLimpar" text="Limpar" onAction="#limpar" styleClass="secondary-button" />
+                <Button fx:id="btnRascunho" text="Salvar Rascunho" onAction="#salvarRascunho" styleClass="book-draft-button" />
+                <Button fx:id="btnSalvar" text="Salvar Livro" onAction="#salvar" styleClass="primary-button" />
+            </FlowPane>
+        </HBox>
+    </VBox>
+</VBox>

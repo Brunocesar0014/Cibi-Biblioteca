@@ -2,28 +2,29 @@ package com.cibi.controller.pages;
 
 import com.cibi.Service.LivroService;
 import com.cibi.model.Livro;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import java.io.IOException;
+import java.util.Map;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
@@ -42,7 +43,12 @@ public class LivrosController {
     private static final int TAMANHO_PAGINA = 5;
     private static final String INDISPONIVEL = "—";
 
+    @FXML private StackPane livrosRoot;
+    @FXML private VBox painelListagem;
     @FXML private Label lblTotal;
+    @FXML private Label lblDisponiveis;
+    @FXML private Label lblExemplares;
+    @FXML private Label lblCategorias;
     @FXML private HBox paginasNumeradas;
     @FXML private Label lblResultados;
     @FXML private Label lblMensagem;
@@ -69,6 +75,8 @@ public class LivrosController {
     private List<Livro> livros = List.of();
     private List<Livro> filtrados = List.of();
     private int pagina = 0;
+    private boolean atualizandoFiltros;
+    private Map<String, String> rascunho;
 
     @FXML
     private void initialize() {
@@ -78,9 +86,25 @@ public class LivrosController {
         colTitulo.setCellValueFactory(c -> new ReadOnlyStringWrapper(texto(c.getValue().getTitulo())));
         colAutor.setCellValueFactory(c -> new ReadOnlyStringWrapper(texto(c.getValue().getAutor())));
         colTitulo.setStyle("-fx-font-weight: bold;");
-        for (TableColumn<Livro, String> coluna : List.of(colCategoria, colIsbn, colAno, colQuantidade, colDisponiveis, colStatus)) {
-            coluna.setCellValueFactory(c -> new ReadOnlyStringWrapper(INDISPONIVEL));
-        }
+        colCategoria.setCellValueFactory(c -> new ReadOnlyStringWrapper(opcional(c.getValue().getCategoria())));
+        colIsbn.setCellValueFactory(c -> new ReadOnlyStringWrapper(opcional(c.getValue().getIsbn())));
+        colAno.setCellValueFactory(c -> new ReadOnlyStringWrapper(
+                c.getValue().getAnoPublicacao() == null ? INDISPONIVEL : c.getValue().getAnoPublicacao().toString()));
+        colQuantidade.setCellValueFactory(c -> new ReadOnlyStringWrapper(Integer.toString(c.getValue().getQuantidadeTotal())));
+        colDisponiveis.setCellValueFactory(c -> new ReadOnlyStringWrapper(Integer.toString(c.getValue().getQuantidadeDisponivel())));
+        colStatus.setCellValueFactory(c -> new ReadOnlyStringWrapper(texto(c.getValue().getStatus())));
+        colStatus.setCellFactory(c -> new TableCell<>() {
+            private final Label etiqueta = new Label();
+            @Override protected void updateItem(String status, boolean vazio) {
+                super.updateItem(status, vazio);
+                setText(null);
+                if (vazio || status == null) { setGraphic(null); return; }
+                etiqueta.setText(status);
+                etiqueta.getStyleClass().setAll("book-status-pill",
+                        "Disponível".equals(status) ? "book-status-available" : "book-status-unavailable");
+                setGraphic(etiqueta);
+            }
+        });
         colAcoes.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue()));
         colAcoes.setCellFactory(c -> new TableCell<>() {
             private final Button editar = acao("bi-pencil-fill", "Editar", "edit-button");
@@ -98,10 +122,14 @@ public class LivrosController {
                 setGraphic(vazio ? null : botoes);
             }
         });
-        String semDados = "O cadastro atual não contém este campo.";
-        filtroCategoria.setTooltip(new Tooltip(semDados));
-        filtroStatus.setTooltip(new Tooltip(semDados));
-        filtroAno.setTooltip(new Tooltip(semDados));
+        filtroCategoria.setValue("Todas as categorias");
+        filtroStatus.getItems().setAll("Todos os status");
+        filtroStatus.getItems().addAll(LivroService.STATUS);
+        filtroStatus.setValue("Todos os status");
+        filtroAno.setValue("Todos os anos");
+        filtroCategoria.valueProperty().addListener((o, a, n) -> aplicarFiltros());
+        filtroStatus.valueProperty().addListener((o, a, n) -> aplicarFiltros());
+        filtroAno.valueProperty().addListener((o, a, n) -> aplicarFiltros());
         comboOrdenar.setButtonCell(new ListCell<>() {
             @Override protected void updateItem(String valor, boolean vazio) {
                 super.updateItem(valor, vazio);
@@ -114,30 +142,72 @@ public class LivrosController {
         btnProximo.managedProperty().bind(btnProximo.visibleProperty());
         comboOrdenar.valueProperty().addListener((obs, antigo, novo) -> aplicarFiltros());
         txtBusca.textProperty().addListener((obs, antigo, novo) -> aplicarFiltros());
+        lblMensagem.managedProperty().bind(lblMensagem.textProperty().isNotEmpty());
+        lblMensagem.visibleProperty().bind(lblMensagem.managedProperty());
+        configurarBotaoFiltro(filtroCategoria, "Todas as categorias", "Categoria");
+        configurarBotaoFiltro(filtroStatus, "Todos os status", "Status");
+        configurarBotaoFiltro(filtroAno, "Todos os anos", "Ano");
         atualizarPaginacao();
     }
 
+    private void configurarBotaoFiltro(ComboBox<String> filtro, String todos, String rotulo) {
+        filtro.setButtonCell(new ListCell<>() {
+            @Override protected void updateItem(String valor, boolean vazio) {
+                super.updateItem(valor, vazio);
+                setText(vazio || valor == null || todos.equals(valor) ? rotulo : valor);
+                setTooltip(valor == null ? null : new Tooltip(valor));
+            }
+        });
+    }
+
     public void atualizar() {
-        lblResultados.setText("Carregando livros...");
-        lblMensagem.setText("");
-        Task<List<Livro>> tarefa = new Task<>() {
-            @Override protected List<Livro> call() { return service.listarLivros(); }
-        };
-        executar(tarefa, resultado -> {
-            livros = resultado;
-            lblTotal.setText(NumberFormat.getIntegerInstance(Locale.forLanguageTag("pt-BR")).format(livros.size()));
-            aplicarFiltros();
-        }, "Não foi possível carregar os livros.");
+        livros = service.listarLivros();
+        lblTotal.setText(formatar(livros.size()));
+        lblExemplares.setText(formatar(livros.stream().mapToLong(Livro::getQuantidadeTotal).sum()));
+        lblDisponiveis.setText(formatar(livros.stream().filter(l -> "Disponível".equals(l.getStatus()))
+                .mapToLong(Livro::getQuantidadeDisponivel).sum()));
+        lblCategorias.setText(formatar(livros.stream().map(l -> texto(l.getCategoria()).strip())
+                .filter(c -> !c.isBlank()).map(c -> c.toLowerCase(Locale.ROOT)).distinct().count()));
+        atualizandoFiltros = true;
+        try {
+            preencherFiltro(filtroCategoria, "Todas as categorias", livros.stream().map(Livro::getCategoria)
+                    .filter(c -> c != null && !c.isBlank()).distinct().sorted(String.CASE_INSENSITIVE_ORDER).toList());
+            preencherFiltro(filtroAno, "Todos os anos", livros.stream().map(Livro::getAnoPublicacao)
+                    .filter(java.util.Objects::nonNull).distinct().sorted(Comparator.reverseOrder()).map(Object::toString).toList());
+        } finally {
+            atualizandoFiltros = false;
+        }
+        aplicarFiltros();
+    }
+
+    private static String formatar(long valor) {
+        return NumberFormat.getIntegerInstance(Locale.forLanguageTag("pt-BR")).format(valor);
+    }
+
+    private static void preencherFiltro(ComboBox<String> filtro, String todos, List<String> valores) {
+        String selecionado = filtro.getValue();
+        filtro.getItems().setAll(todos);
+        filtro.getItems().addAll(valores);
+        filtro.setValue(filtro.getItems().contains(selecionado) ? selecionado : todos);
     }
 
     private void aplicarFiltros() {
+        if (atualizandoFiltros) return;
         String busca = txtBusca.getText() == null ? "" : txtBusca.getText().strip().toLowerCase(Locale.ROOT);
         List<Livro> resultado = new ArrayList<>();
         for (Livro livro : livros) {
-            if (busca.isEmpty() || texto(livro.getTitulo()).toLowerCase(Locale.ROOT).contains(busca)
-                    || texto(livro.getAutor()).toLowerCase(Locale.ROOT).contains(busca)) {
-                resultado.add(livro);
-            }
+            boolean correspondeBusca = busca.isEmpty()
+                    || texto(livro.getTitulo()).toLowerCase(Locale.ROOT).contains(busca)
+                    || texto(livro.getAutor()).toLowerCase(Locale.ROOT).contains(busca)
+                    || texto(livro.getIsbn()).toLowerCase(Locale.ROOT).contains(busca)
+                    || texto(livro.getAssuntos()).toLowerCase(Locale.ROOT).contains(busca);
+            boolean correspondeCategoria = "Todas as categorias".equals(filtroCategoria.getValue())
+                    || java.util.Objects.equals(filtroCategoria.getValue(), livro.getCategoria());
+            boolean correspondeStatus = "Todos os status".equals(filtroStatus.getValue())
+                    || java.util.Objects.equals(filtroStatus.getValue(), livro.getStatus());
+            boolean correspondeAno = "Todos os anos".equals(filtroAno.getValue())
+                    || java.util.Objects.equals(filtroAno.getValue(), String.valueOf(livro.getAnoPublicacao()));
+            if (correspondeBusca && correspondeCategoria && correspondeStatus && correspondeAno) resultado.add(livro);
         }
         Comparator<Livro> ordem = switch (comboOrdenar.getValue()) {
             case "Título" -> Comparator.comparing(l -> texto(l.getTitulo()), String.CASE_INSENSITIVE_ORDER);
@@ -200,44 +270,46 @@ public class LivrosController {
     private void editarLivro(Livro livro) { if (livro != null) abrirFormulario(livro); }
 
     private void abrirFormulario(Livro existente) {
-        Dialog<Livro> dialogo = new Dialog<>();
-        dialogo.setTitle(existente == null ? "Novo Livro" : "Editar Livro");
-        dialogo.setHeaderText(existente == null ? "Cadastrar livro" : "Editar livro cadastrado");
-        ButtonType salvar = new ButtonType("Salvar", javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
-        dialogo.getDialogPane().getButtonTypes().addAll(salvar, ButtonType.CANCEL);
-        TextField titulo = new TextField(existente == null ? "" : texto(existente.getTitulo()));
-        TextField autor = new TextField(existente == null ? "" : texto(existente.getAutor()));
-        TextArea sinopse = new TextArea(existente == null ? "" : texto(existente.getSinopse()));
-        sinopse.setPrefRowCount(4);
-        GridPane campos = new GridPane();
-        campos.setHgap(10);
-        campos.setVgap(10);
-        campos.setPadding(new Insets(12));
-        campos.addRow(0, new Label("Título *"), titulo);
-        campos.addRow(1, new Label("Autor"), autor);
-        campos.addRow(2, new Label("Sinopse"), sinopse);
-        dialogo.getDialogPane().setContent(campos);
-        Button botaoSalvar = (Button) dialogo.getDialogPane().lookupButton(salvar);
-        botaoSalvar.disableProperty().bind(Bindings.createBooleanBinding(
-                () -> titulo.getText().isBlank() || titulo.getText().length() > 100
-                        || autor.getText().length() > 100,
-                titulo.textProperty(), autor.textProperty()));
-        dialogo.setResultConverter(botao -> {
-            if (botao != salvar) return null;
-            Livro livro = new Livro(titulo.getText().strip(), autor.getText().strip(), sinopse.getText().strip());
-            if (existente != null) livro.setId(existente.getId());
-            return livro;
-        });
-        dialogo.showAndWait().ifPresent(livro -> {
-            Task<Void> tarefa = new Task<>() {
-                @Override protected Void call() {
-                    if (existente == null) service.inserirLivro(livro);
-                    else service.atualizarLivro(livro);
-                    return null;
+        lblMensagem.setText("");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cibi/fxml/pages/LivroFormulario.fxml"));
+            Parent formulario = loader.load();
+            LivroFormularioController controller = loader.getController();
+            controller.configurarAtualizacaoCategorias(resultado -> {
+                if (rascunho == null) return;
+                Map<String, String> atualizado = new java.util.LinkedHashMap<>(rascunho);
+                atualizado.put("categoria", resultado.atualizarNome(rascunho.get("categoria")));
+                rascunho = Map.copyOf(atualizado);
+            });
+            controller.configurar(existente, existente == null ? rascunho : null, livro -> {
+                if (existente == null) {
+                    service.inserirLivro(livro);
+                    rascunho = null;
+                } else {
+                    service.atualizarLivro(livro);
                 }
-            };
-            executar(tarefa, ignorado -> atualizar(), "Não foi possível salvar o livro.");
-        });
+                // Mostra o registro salvo, mesmo se a lista anterior tinha filtros.
+                txtBusca.clear();
+                filtroCategoria.setValue("Todas as categorias");
+                filtroStatus.setValue("Todos os status");
+                filtroAno.setValue("Todos os anos");
+                voltarParaLista();
+                Livro salvo = livros.stream().filter(l -> l.getId() == livro.getId()).findFirst().orElseThrow();
+                pagina = filtrados.indexOf(salvo) / TAMANHO_PAGINA;
+                atualizarPaginacao();
+                tabelaLivros.getSelectionModel().select(salvo);
+                mostrarMensagem(existente == null
+                        ? "Livro cadastrado nesta sessão." : "Livro atualizado nesta sessão.", false);
+            }, dados -> rascunho = dados, this::voltarParaLista);
+            livrosRoot.getChildren().setAll(formulario);
+        } catch (IOException erro) {
+            mostrarMensagem("Não foi possível abrir o formulário de livros.", true);
+        }
+    }
+
+    private void voltarParaLista() {
+        livrosRoot.getChildren().setAll(painelListagem);
+        atualizar();
     }
 
     private void excluirLivro(Livro livro) {
@@ -245,11 +317,11 @@ public class LivrosController {
         Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION,
                 "Excluir “" + texto(livro.getTitulo()) + "” do acervo?", ButtonType.CANCEL, ButtonType.OK);
         confirmacao.setHeaderText("Confirmar exclusão");
+        confirmacao.initOwner(livrosRoot.getScene().getWindow());
         if (confirmacao.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return;
-        Task<Void> tarefa = new Task<>() {
-            @Override protected Void call() { service.excluirLivro(livro.getId()); return null; }
-        };
-        executar(tarefa, ignorado -> atualizar(), "Não foi possível excluir o livro.");
+        service.excluirLivro(livro.getId());
+        atualizar();
+        mostrarMensagem("Livro excluído desta sessão.", false);
     }
 
     @FXML
@@ -263,22 +335,41 @@ public class LivrosController {
         List<Livro> paraExportar = List.copyOf(filtrados);
         Task<Void> tarefa = new Task<>() {
             @Override protected Void call() throws Exception {
-                StringBuilder csv = new StringBuilder("ID;Título;Autor;Sinopse\r\n");
-                for (Livro livro : paraExportar) {
-                    csv.append(livro.getId()).append(';').append(csv(livro.getTitulo())).append(';')
-                            .append(csv(livro.getAutor())).append(';').append(csv(livro.getSinopse())).append("\r\n");
-                }
-                Files.writeString(destino.toPath(), csv.toString(), StandardCharsets.UTF_8);
+                Files.writeString(destino.toPath(), gerarCsv(paraExportar), StandardCharsets.UTF_8);
                 return null;
             }
         };
-        executar(tarefa, ignorado -> lblMensagem.setText("Arquivo exportado com sucesso."),
+        executar(tarefa, ignorado -> mostrarMensagem("Arquivo exportado com sucesso.", false),
                 "Não foi possível exportar os livros.");
+    }
+
+    static String gerarCsv(List<Livro> livros) {
+        StringBuilder csv = new StringBuilder("\uFEFFID;Título;Subtítulo;Autor;Editora;Categoria;ISBN;Ano;Edição;Volume;Páginas;Idioma;Local de publicação;Assuntos;Quantidade total;Quantidade disponível;Localização;Número de chamada;Status;Sinopse\r\n");
+        for (Livro livro : livros) {
+            Object[] campos = { livro.getId(), livro.getTitulo(), livro.getSubtitulo(), livro.getAutor(),
+                    livro.getEditora(), livro.getCategoria(), livro.getIsbn(), livro.getAnoPublicacao(),
+                    livro.getEdicao(), livro.getVolume(), livro.getNumeroPaginas(), livro.getIdioma(),
+                    livro.getLocalPublicacao(), livro.getAssuntos(), livro.getQuantidadeTotal(),
+                    livro.getQuantidadeDisponivel(), livro.getLocalizacao(), livro.getNumeroChamada(),
+                    livro.getStatus(), livro.getSinopse() };
+            for (int i = 0; i < campos.length; i++) {
+                if (i > 0) csv.append(';');
+                csv.append(csv(campos[i] == null ? "" : campos[i].toString()));
+            }
+            csv.append("\r\n");
+        }
+        return csv.toString();
+    }
+
+    private void mostrarMensagem(String mensagem, boolean erro) {
+        lblMensagem.setText(mensagem);
+        lblMensagem.getStyleClass().removeAll("book-feedback-error", "book-feedback-success");
+        lblMensagem.getStyleClass().add(erro ? "book-feedback-error" : "book-feedback-success");
     }
 
     private <T> void executar(Task<T> tarefa, Consumer<T> sucesso, String mensagemErro) {
         tarefa.setOnSucceeded(e -> sucesso.accept(tarefa.getValue()));
-        tarefa.setOnFailed(e -> lblMensagem.setText(mensagemErro));
+        tarefa.setOnFailed(e -> mostrarMensagem(mensagemErro, true));
         Thread worker = new Thread(tarefa, "cibi-livros");
         worker.setDaemon(true);
         worker.start();
@@ -294,6 +385,11 @@ public class LivrosController {
         return botao;
     }
 
+    private static String opcional(String valor) { return valor == null || valor.isBlank() ? INDISPONIVEL : valor; }
     private static String texto(String valor) { return valor == null ? "" : valor; }
-    private static String csv(String valor) { return "\"" + texto(valor).replace("\"", "\"\"") + "\""; }
+    private static String csv(String valor) {
+        String seguro = texto(valor);
+        if (seguro.stripLeading().matches("(?s)^[=+@-].*")) seguro = "'" + seguro;
+        return "\"" + seguro.replace("\"", "\"\"") + "\"";
+    }
 }
