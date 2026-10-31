@@ -16,11 +16,13 @@ com\cibi\Service\CategoriaLivroService$Item.class
 com\cibi\repository\LivroTemporarioRepository.class
 com\cibi\Service\LivroService.class
 com\cibi\util\NavigationManager.class
+com\cibi\util\AnimacaoModal$Configuracao.class
 com\cibi\Service\CategoriaLivroService$Resultado.class
 com\cibi\controller\pages\DashboardController$1.class
 com\cibi\controller\pages\UsuariosController.class
 com\cibi\controller\pages\EmprestimosController.class
 com\cibi\controller\pages\LivrosController$3.class
+com\cibi\util\AnimacaoModal.class
 com\cibi\Service\AlunoService.class
 com\cibi\database\ConnectionFactory.class
 com\cibi\model\DashboardResumo.class

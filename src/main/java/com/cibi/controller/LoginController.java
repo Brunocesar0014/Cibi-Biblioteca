@@ -1,6 +1,7 @@
 package com.cibi.controller;
 
 import com.cibi.Service.ColaboradorService;
+import com.cibi.util.WindowUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -99,11 +100,11 @@ public class LoginController {
             principal.setTitle("Tela Principal");
             principal.setMinWidth(1280);
             principal.setMinHeight(720);
+            WindowUtils.configurarConfirmacaoFechamento(principal);
 
             Stage loginStage = (Stage) txtInput.getScene().getWindow();
-            loginStage.close();
-            
             principal.show();
+            loginStage.close();
         } catch (Exception e) {
             throw new RuntimeException("Erro ao abrir a tela principal", e);
         }

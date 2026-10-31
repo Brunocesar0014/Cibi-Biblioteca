@@ -3,14 +3,11 @@ package com.cibi.controller.pages;
 import com.cibi.Service.LivroService;
 import com.cibi.Service.CategoriaLivroService;
 import com.cibi.model.Livro;
+import com.cibi.util.AnimacaoModal;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.paint.Color;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.StageStyle;
@@ -178,19 +175,10 @@ public class LivroFormularioController {
                 dialogo.close();
                 mensagem("Categorias atualizadas nesta sessão.", false);
             }, dialogo::close);
-            Effect efeitoAnterior = formRoot.getEffect();
-            GaussianBlur desfoque = new GaussianBlur(2);
-            desfoque.setInput(efeitoAnterior);
-            ColorAdjust escurecer = new ColorAdjust();
-            escurecer.setBrightness(-0.18);
-            escurecer.setInput(desfoque);
-            dialogo.setOnShown(e -> {
-                painel.getScene().setFill(Color.TRANSPARENT);
-                formRoot.setEffect(escurecer);
-                conteudo.lookup("#nomeCategoria").requestFocus();
-            });
-            dialogo.setOnHidden(e -> formRoot.setEffect(efeitoAnterior));
-            dialogo.showAndWait();
+            dialogo.setOnShown(e -> conteudo.lookup("#nomeCategoria").requestFocus());
+            try (var animacao = AnimacaoModal.configurar(dialogo, formRoot.getScene().getRoot())) {
+                dialogo.showAndWait();
+            }
         } catch (IOException erro) {
             mensagem("Não foi possível abrir o gerenciamento de categorias.", true);
         }
@@ -345,9 +333,12 @@ public class LivroFormularioController {
         ButtonType descartar = new ButtonType("Descartar", ButtonBar.ButtonData.OK_DONE);
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, mensagem, ButtonType.CANCEL, descartar);
         alerta.initOwner(formRoot.getScene().getWindow());
+        alerta.initStyle(StageStyle.TRANSPARENT);
         alerta.setTitle("Cadastro de livros");
         alerta.setHeaderText(cabecalho);
-        return alerta.showAndWait().orElse(ButtonType.CANCEL) == descartar;
+        try (var animacao = AnimacaoModal.configurar(alerta, formRoot.getScene().getRoot())) {
+            return alerta.showAndWait().orElse(ButtonType.CANCEL) == descartar;
+        }
     }
 
     private void mensagem(String texto, boolean erro) {

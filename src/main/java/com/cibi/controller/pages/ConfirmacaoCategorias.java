@@ -1,14 +1,11 @@
 package com.cibi.controller.pages;
 
+import com.cibi.util.AnimacaoModal;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.StageStyle;
@@ -106,22 +103,10 @@ final class ConfirmacaoCategorias {
             }
         });
 
-        Effect anterior = gerenciador.getEffect();
-        GaussianBlur desfoque = new GaussianBlur(2);
-        desfoque.setInput(anterior);
-        ColorAdjust sombrear = new ColorAdjust();
-        sombrear.setBrightness(-0.12);
-        sombrear.setInput(desfoque);
-        dialogo.setOnShown(e -> {
-            painel.getScene().setFill(Color.TRANSPARENT);
-            gerenciador.setEffect(sombrear);
-            cancelar.requestFocus();
-        });
-        try {
+        dialogo.setOnShown(e -> cancelar.requestFocus());
+        try (var animacao = AnimacaoModal.configurar(dialogo, gerenciador.getScene().getRoot())) {
             dialogo.showAndWait();
             return confirmado.get();
-        } finally {
-            gerenciador.setEffect(anterior);
         }
     }
 }
