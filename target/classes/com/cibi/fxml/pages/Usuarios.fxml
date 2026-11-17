@@ -30,8 +30,9 @@
                </children>
             </VBox>
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox alignment="TOP_RIGHT" spacing="10.0">
                <children>
+                  <Button mnemonicParsing="false" onAction="#importarAlunosCida" styleClass="btn_Salvar" text="Importar do CIDA" />
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="btn_voltar" text="&lt; Voltar">
                      <HBox.margin>
                         <Insets bottom="50.0" />

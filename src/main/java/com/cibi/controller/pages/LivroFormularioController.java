@@ -4,6 +4,7 @@ import com.cibi.Service.LivroService;
 import com.cibi.Service.CategoriaLivroService;
 import com.cibi.model.Livro;
 import com.cibi.util.AnimacaoModal;
+import com.cibi.util.TemaVisual;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -143,6 +144,7 @@ public class LivroFormularioController {
             Dialog<Void> dialogo = new Dialog<>();
             dialogo.setTitle("Gerenciar categorias");
             dialogo.initOwner(formRoot.getScene().getWindow());
+            TemaVisual.herdar(dialogo);
             dialogo.initStyle(StageStyle.TRANSPARENT);
             DialogPane painel = dialogo.getDialogPane();
             painel.getStyleClass().add("book-category-dialog");
@@ -333,6 +335,7 @@ public class LivroFormularioController {
         ButtonType descartar = new ButtonType("Descartar", ButtonBar.ButtonData.OK_DONE);
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, mensagem, ButtonType.CANCEL, descartar);
         alerta.initOwner(formRoot.getScene().getWindow());
+        TemaVisual.herdar(alerta);
         alerta.initStyle(StageStyle.TRANSPARENT);
         alerta.setTitle("Cadastro de livros");
         alerta.setHeaderText(cabecalho);

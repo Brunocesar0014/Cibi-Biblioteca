@@ -1,7 +1,9 @@
 package com.cibi.util;
 
+import java.util.stream.Collectors;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -9,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -39,30 +42,45 @@ public class WindowUtils {
         ButtonType botaoCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
         ButtonType botaoOk = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
 
+        return mostrarConfirmacao(stage.getScene().getRoot(), "Sair", "Deseja realmente fechar o programa?",
+                "A aplicação será encerrada.", botaoCancelar, botaoOk) == botaoOk;
+    }
+
+    public static ButtonType mostrarConfirmacao(Parent origem, String tituloJanela, String pergunta,
+                                                String mensagem, ButtonType cancelar, ButtonType confirmar,
+                                                ButtonType... alternativas) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.initOwner(stage);
+        alert.initOwner(origem.getScene().getWindow());
+        TemaVisual.herdar(alert.getDialogPane(), origem);
         alert.initStyle(StageStyle.TRANSPARENT);
 
-        alert.setTitle("Sair");
+        alert.setTitle(tituloJanela);
         alert.setHeaderText(null);
         alert.setGraphic(null);
         alert.setContentText(null);
-        alert.getButtonTypes().setAll(botaoCancelar, botaoOk);
+        alert.getButtonTypes().setAll(cancelar);
+        alert.getButtonTypes().addAll(alternativas);
+        alert.getButtonTypes().add(confirmar);
 
-        // ---- Cabeçalho customizado (título + botão X) ----
-        Label titulo = new Label("Deseja realmente fechar o programa?");
+        Label titulo = new Label(pergunta);
         titulo.getStyleClass().add("titulo-confirmacao");
         titulo.setWrapText(true);
+        boolean temAlternativas = alternativas.length > 0;
+        if (temAlternativas) {
+            titulo.setMaxWidth(Double.MAX_VALUE);
+            alert.getDialogPane().getStyleClass().add("alert-confirmacao-com-alternativas");
+        }
 
         Button botaoFechar = new Button("\u2715"); // ×
         botaoFechar.getStyleClass().add("botao-fechar-x");
-        botaoFechar.setOnAction(e -> alert.setResult(botaoCancelar));
+        botaoFechar.setAccessibleText(cancelar.getText());
+        botaoFechar.setOnAction(e -> alert.setResult(cancelar));
 
         HBox linhaTopo = new HBox(titulo, botaoFechar);
         linhaTopo.setAlignment(Pos.TOP_LEFT);
         HBox.setHgrow(titulo, Priority.ALWAYS);
 
-        Label subtitulo = new Label("A aplicação será encerrada.");
+        Label subtitulo = new Label(mensagem);
         subtitulo.getStyleClass().add("subtitulo-confirmacao");
         subtitulo.setWrapText(true);
 
@@ -78,16 +96,24 @@ public class WindowUtils {
             alert.getDialogPane().getStyleClass().add("alert-confirmacao");
         }
 
-        Button btnCancelar = (Button) alert.getDialogPane().lookupButton(botaoCancelar);
-        btnCancelar.getStyleClass().add("botao-cancelar");
+        for (ButtonType acao : alert.getButtonTypes()) {
+            Button botao = (Button) alert.getDialogPane().lookupButton(acao);
+            botao.getStyleClass().add(acao == confirmar ? "botao-confirmar" : "botao-cancelar");
+            botao.setDefaultButton(acao == confirmar);
+            if (temAlternativas) {
+                ButtonBar.setButtonUniformSize(botao, false);
+                botao.setMinWidth(Region.USE_PREF_SIZE);
+            }
+        }
+        if (temAlternativas && alert.getDialogPane().lookup(".button-bar") instanceof ButtonBar barra) {
+            String ordem = alert.getButtonTypes().stream().map(tipo -> tipo.getButtonData().getTypeCode())
+                    .collect(Collectors.joining());
+            barra.setButtonOrder(ordem);
+        }
 
-        Button btnOk = (Button) alert.getDialogPane().lookupButton(botaoOk);
-        btnOk.getStyleClass().add("botao-confirmar");
-        btnOk.setDefaultButton(true);
-
-        try (var animacao = AnimacaoModal.configurar(alert, stage.getScene().getRoot(),
-                AnimacaoModal.PADRAO, resultado -> resultado != botaoOk)) {
-            return alert.showAndWait().orElse(botaoCancelar) == botaoOk;
+        try (var animacao = AnimacaoModal.configurar(alert, origem.getScene().getRoot(),
+                AnimacaoModal.PADRAO, resultado -> resultado != confirmar)) {
+            return alert.showAndWait().orElse(cancelar);
         }
     }
 }

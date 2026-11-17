@@ -286,3 +286,95 @@
     -fx-min-height: 42px; -fx-cursor: hand;
 }
 .book-category-confirmation .category-confirm-danger:hover { -fx-background-color: #B62429; }
+
+/* Tema escuro */
+.cibi-tema:tema-escuro .books-root { -fx-background-color: -cibi-fundo; }
+.cibi-tema:tema-escuro .books-title { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .books-subtitle { -fx-text-fill: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .secondary-button { -fx-background-color: -cibi-superficie; -fx-text-fill: -cibi-texto; -fx-border-color: -cibi-borda-forte; }
+.cibi-tema:tema-escuro .secondary-button:hover { -fx-background-color: -cibi-destaque-suave; }
+.cibi-tema:tema-escuro .summary-card { -fx-background-color: -cibi-superficie; }
+.cibi-tema:tema-escuro .summary-caption { -fx-text-fill: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .summary-value { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .summary-available { -fx-text-fill: -cibi-sucesso-texto; }
+.cibi-tema:tema-escuro .summary-loaned { -fx-text-fill: -cibi-perigo; }
+.cibi-tema:tema-escuro .summary-categories { -fx-text-fill: -cibi-info; }
+.cibi-tema:tema-escuro .books-panel { -fx-background-color: -cibi-superficie; }
+.cibi-tema:tema-escuro .filter-combo .list-cell { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .books-table { -fx-table-cell-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .books-table .table-row-cell { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .books-table .table-row-cell:odd { -fx-background-color: -cibi-superficie; }
+.cibi-tema:tema-escuro .books-table .table-row-cell:selected { -fx-background-color: -cibi-destaque-suave; }
+.cibi-tema:tema-escuro .books-table .table-cell { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .books-table .placeholder .label,
+.cibi-tema:tema-escuro .muted-cell { -fx-text-fill: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .page-button { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda-forte; -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .page-button:hover { -fx-background-color: -cibi-destaque-suave; }
+.cibi-tema:tema-escuro .page-button:pressed { -fx-background-color: -cibi-selecao; }
+.cibi-tema:tema-escuro .page-number { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda-forte; -fx-text-fill: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .page-number:hover { -fx-background-color: -cibi-destaque-suave; }
+.cibi-tema:tema-escuro .page-number:pressed { -fx-background-color: -cibi-selecao; }
+.cibi-tema:tema-escuro .page-ellipsis { -fx-text-fill: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .results-label { -fx-text-fill: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .feedback-label { -fx-text-fill: -cibi-perigo; }
+.cibi-tema:tema-escuro .books-root .book-session-notice { -fx-background-color: -cibi-destaque-suave; -fx-text-fill: -cibi-info; }
+.cibi-tema:tema-escuro .book-form-root .book-breadcrumb-link { -fx-text-fill: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .book-form-root .book-breadcrumb-link:hover { -fx-text-fill: -cibi-info; }
+.cibi-tema:tema-escuro .book-form-root .book-breadcrumb-current { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-form-root .book-breadcrumb-separator { -fx-text-fill: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .book-form-root .book-form-card { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .book-form-root .book-section-heading { -fx-background-color: -cibi-superficie-alt; -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .book-form-root .book-section-number { -fx-text-fill: -cibi-texto-suave; -fx-background-color: -cibi-superficie-alt; }
+.cibi-tema:tema-escuro .book-form-root .book-section-title,
+.cibi-tema:tema-escuro .book-form-root .book-field-label { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-form-root .book-field-hint { -fx-text-fill: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .book-form-root .book-input { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda-forte; -fx-text-fill: -cibi-texto; -fx-prompt-text-fill: -cibi-texto-fraco; -fx-highlight-fill: -cibi-selecao; -fx-highlight-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-form-root .text-area.book-input .content { -fx-background-color: -cibi-superficie; }
+.cibi-tema:tema-escuro .book-form-root .combo-box.book-input .list-cell { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-form-root .combo-box.book-input .text-field { -fx-prompt-text-fill: -cibi-texto-fraco; -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-form-root .book-input:invalid { -fx-background-color: -cibi-perigo-suave; }
+.cibi-tema:tema-escuro .book-form-root .book-form-footer { -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .book-form-root .book-draft-button { -fx-background-color: -cibi-destaque-suave; -fx-text-fill: -cibi-info; }
+.cibi-tema:tema-escuro .book-form-root .book-draft-button:hover { -fx-background-color: -cibi-selecao; }
+.cibi-tema:tema-escuro .book-form-root .book-feedback-error { -fx-text-fill: -cibi-perigo; -fx-background-color: -cibi-perigo-suave; }
+.cibi-tema:tema-escuro .book-form-root .book-feedback-success,
+.cibi-tema:tema-escuro .books-root .book-status-available { -fx-text-fill: -cibi-sucesso-texto; -fx-background-color: -cibi-sucesso-suave; }
+.cibi-tema:tema-escuro .books-root .book-status-unavailable { -fx-text-fill: -cibi-aviso; -fx-background-color: -cibi-aviso-suave; }
+.cibi-tema:tema-escuro .books-root > .book-feedback-success,
+.cibi-tema:tema-escuro .books-root .feedback-label.book-feedback-success { -fx-text-fill: -cibi-sucesso-texto; }
+.cibi-tema:tema-escuro .books-root > .book-feedback-error,
+.cibi-tema:tema-escuro .books-root .feedback-label.book-feedback-error { -fx-text-fill: -cibi-perigo; }
+.cibi-tema:tema-escuro .book-form-root .book-form-scroll .scroll-bar:vertical .thumb { -fx-background-color: -cibi-borda-forte; }
+.cibi-tema:tema-escuro .book-form-root .book-section-toggle:hover .book-section-heading { -fx-background-color: -cibi-superficie-alt; }
+.cibi-tema:tema-escuro .book-form-root .book-section-chevron { -fx-background-color: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .book-form-root .book-required-mark,
+.cibi-tema:tema-escuro .book-form-root .book-required-hint { -fx-text-fill: -cibi-perigo; }
+.cibi-tema:tema-escuro .book-form-root .combo-box.book-input > .arrow-button > .arrow { -fx-background-color: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .book-form-root .book-category-action { -fx-text-fill: -cibi-info; }
+.cibi-tema:tema-escuro .book-category-modal { -fx-background-color: -cibi-superficie; }
+.cibi-tema:tema-escuro .book-category-modal .category-modal-title { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-category-modal .category-modal-close { -fx-text-fill: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .book-category-modal .category-modal-close:hover { -fx-text-fill: -cibi-info; }
+.cibi-tema:tema-escuro .book-category-modal .category-modal-body { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .book-category-modal .category-list-panel { -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .book-category-modal .category-list .list-cell { -fx-text-fill: -cibi-texto; -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .book-category-modal .category-list .list-cell:filled:selected { -fx-background-color: -cibi-selecao; -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-category-modal .category-list .list-cell:filled:hover { -fx-background-color: -cibi-destaque-suave; }
+.cibi-tema:tema-escuro .book-category-modal .category-list .scroll-bar:vertical .thumb { -fx-background-color: -cibi-borda-forte; }
+.cibi-tema:tema-escuro .book-category-modal .category-modal-label { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-category-modal .category-name-input { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda-forte; -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-category-modal .category-modal-hint { -fx-text-fill: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .book-category-modal .category-modal-divider .line { -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .book-category-modal .category-outline-button { -fx-text-fill: -cibi-info; -fx-background-color: -cibi-superficie; }
+.cibi-tema:tema-escuro .book-category-modal .category-outline-button:hover { -fx-background-color: -cibi-destaque-suave; }
+.cibi-tema:tema-escuro .book-category-modal .category-delete-button { -fx-text-fill: -cibi-perigo; -fx-background-color: -cibi-perigo-suave; -fx-border-color: -cibi-perigo-borda; }
+.cibi-tema:tema-escuro .book-category-modal .category-delete-button:hover { -fx-background-color: -cibi-perigo-suave; }
+.cibi-tema:tema-escuro .book-category-modal .category-modal-icon { -fx-background-color: -cibi-info; }
+.cibi-tema:tema-escuro .book-category-modal .category-delete-button .category-modal-icon { -fx-background-color: -cibi-perigo; }
+.cibi-tema:tema-escuro .book-category-modal .category-message-error { -fx-text-fill: -cibi-perigo; -fx-background-color: -cibi-perigo-suave; }
+.cibi-tema:tema-escuro .book-category-modal .category-message-success { -fx-text-fill: -cibi-sucesso-texto; -fx-background-color: -cibi-sucesso-suave; }
+.cibi-tema:tema-escuro .book-category-confirmation .category-confirm-title { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-category-confirmation .category-confirm-icon-danger { -fx-background-color: -cibi-perigo-suave; }
+.cibi-tema:tema-escuro .book-category-confirmation .category-confirm-icon-save { -fx-background-color: -cibi-destaque-suave; }
+.cibi-tema:tema-escuro .book-category-confirmation .category-confirm-question Text { -fx-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .book-category-confirmation .category-confirm-details { -fx-text-fill: -cibi-texto-fraco; }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" minHeight="0" styleClass="loan-scroll"
+            xmlns="http://javafx.com/javafx/22.0.2" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cibi.controller.pages.NovoEmprestimoController">
+    <content>
+        <VBox spacing="14" styleClass="loan-form">
+            <VBox spacing="2">
+                <Label text="Novo empréstimo" styleClass="loan-title" />
+                <Label text="Registre a retirada de um livro do acervo" styleClass="loan-subtitle" />
+            </VBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Button text="Empréstimos" onAction="#cancelar" styleClass="loan-breadcrumb" />
+                <Label text="›" styleClass="loan-muted" />
+                <Label text="Novo empréstimo" />
+            </HBox>
+
+            <HBox fx:id="colunas" spacing="18" alignment="TOP_LEFT" fillHeight="false">
+                <VBox spacing="16" minWidth="0" HBox.hgrow="ALWAYS">
+                    <VBox styleClass="loan-card">
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="loan-section-header">
+                            <Label text="01" styleClass="loan-step" />
+                            <Label text="Identificar aluno" styleClass="loan-section-title" />
+                        </HBox>
+                        <VBox spacing="12" styleClass="loan-section-body">
+                            <StackPane fx:id="painelLeitura" styleClass="loan-scan">
+                                <VBox alignment="CENTER" spacing="7">
+                                    <StackPane styleClass="loan-qr-tile">
+                                        <Region styleClass="loan-qr" />
+                                    </StackPane>
+                                    <Label fx:id="tituloLeitura" text="Leia o QR Code do crachá" styleClass="loan-scan-title" wrapText="true" />
+                                    <Label fx:id="instrucaoLeitura" text="Apresente o crachá ao leitor. A identificação é automática." styleClass="loan-muted" wrapText="true" />
+                                    <Label fx:id="estadoLeitura" text="●  Aguardando leitura" styleClass="loan-badge,loan-em-andamento" />
+                                </VBox>
+                            </StackPane>
+                            <HBox fx:id="entradaManual" spacing="8" alignment="CENTER" visible="false">
+                                <TextField fx:id="matricula" promptText="Digite a matrícula" accessibleText="Matrícula do aluno"
+                                           onAction="#buscarMatricula" styleClass="loan-input" prefWidth="240" />
+                                <Button text="Buscar aluno" onAction="#buscarMatricula" styleClass="loan-secondary" />
+                            </HBox>
+                            <HBox alignment="CENTER" spacing="8">
+                                <Label fx:id="dicaIdentificacao" styleClass="loan-muted" />
+                                <Button fx:id="alternarEntrada" onAction="#alternarEntrada" styleClass="loan-link" />
+                            </HBox>
+                            <Label fx:id="erroAluno" visible="false" wrapText="true" styleClass="loan-error" />
+                        </VBox>
+                    </VBox>
+
+                    <VBox styleClass="loan-card,loan-book-section">
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="loan-section-header,loan-book-header">
+                            <Label text="02" styleClass="loan-step" />
+                            <Label text="Selecionar livro" styleClass="loan-section-title" />
+                        </HBox>
+                        <VBox spacing="10" styleClass="loan-section-body,loan-book-body">
+                            <StackPane alignment="CENTER_LEFT">
+                                <TextField fx:id="buscaLivro" promptText="Buscar por título, autor ou ISBN…"
+                                           accessibleText="Buscar livro disponível" disable="true" styleClass="loan-input,loan-search,loan-book-search" />
+                                <Region mouseTransparent="true" styleClass="loan-search-icon" />
+                            </StackPane>
+                            <ListView fx:id="livros" visible="false" fixedCellSize="38" accessibleText="Livros disponíveis" styleClass="loan-book-results" />
+                            <HBox alignment="CENTER_LEFT" spacing="7" styleClass="loan-book-hint">
+                                <Region styleClass="loan-info-icon" />
+                                <Label fx:id="dicaBusca" text="Identifique o aluno para liberar a busca."
+                                       styleClass="loan-muted" wrapText="true" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                </VBox>
+
+                <VBox prefWidth="${colunas.width * 0.3}" minWidth="272" maxWidth="378" styleClass="loan-card">
+                    <Label text="Resumo do empréstimo" styleClass="loan-section-header,loan-section-title" maxWidth="Infinity" />
+                    <VBox spacing="13" styleClass="loan-section-body">
+                        <HBox spacing="11" alignment="CENTER_LEFT">
+                            <StackPane styleClass="loan-summary-avatar">
+                                <Region fx:id="iconeAluno" styleClass="loan-person-icon" />
+                                <ImageView fx:id="fotoAluno" accessibleText="Foto do aluno" />
+                            </StackPane>
+                            <VBox spacing="3">
+                                <Label text="Aluno" styleClass="loan-muted" />
+                                <Label fx:id="resumoAluno" text="Aguardando identificação" styleClass="loan-cell-title" wrapText="true" />
+                            </VBox>
+                        </HBox>
+                        <Separator />
+                        <VBox spacing="3">
+                            <Label text="Livro" styleClass="loan-muted" />
+                            <Label fx:id="resumoLivro" text="Nenhum livro selecionado" styleClass="loan-cell-title" wrapText="true" />
+                        </VBox>
+                        <Separator />
+                        <VBox spacing="3">
+                            <Label text="Devolução prevista" styleClass="loan-muted" />
+                            <Label fx:id="resumoDevolucao" text="—" styleClass="loan-cell-title" />
+                        </VBox>
+                    </VBox>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT" styleClass="loan-form-footer">
+                <Label fx:id="erroEmprestimo" visible="false" wrapText="true" styleClass="loan-error" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Cancelar" onAction="#cancelar" styleClass="loan-secondary" />
+                <Button fx:id="confirmar" text="Confirmar empréstimo" onAction="#confirmar" disable="true" styleClass="loan-primary" />
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

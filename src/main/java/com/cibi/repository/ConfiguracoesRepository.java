@@ -47,7 +47,7 @@ public class ConfiguracoesRepository {
     public Map<String, String> buscarTodas() throws SQLException {
         Map<String, String> valores = new LinkedHashMap<>();
 
-        try (Connection conexao = ConnectionFactory.getConnection();
+        try (Connection conexao = conectar();
              Statement statement = conexao.createStatement();
              ResultSet rs = statement.executeQuery(SQL_SELECT_TODAS)) {
 
@@ -66,11 +66,25 @@ public class ConfiguracoesRepository {
         if (valores == null || valores.isEmpty()) {
             return;
         }
+        gravar(valores, false);
+    }
 
+    /** Restaura os valores em uma única transação. */
+    public void substituirTodas(Map<String, String> valores) throws SQLException {
+        gravar(valores, true);
+    }
+
+    private void gravar(Map<String, String> valores, boolean substituir) throws SQLException {
         Connection conexao = null;
         try {
-            conexao = ConnectionFactory.getConnection();
+            conexao = conectar();
             conexao.setAutoCommit(false);
+
+            if (substituir) {
+                try (Statement statement = conexao.createStatement()) {
+                    statement.executeUpdate(SQL_DELETE_TODAS);
+                }
+            }
 
             try (PreparedStatement ps = conexao.prepareStatement(SQL_UPSERT)) {
                 for (Map.Entry<String, String> entrada : valores.entrySet()) {
@@ -105,14 +119,11 @@ public class ConfiguracoesRepository {
         }
     }
 
-    /**
-     * Apaga todos os registros — usado pelo "restaurar padrões", que em seguida
-     * regrava os valores originais.
-     */
-    public void limpar() throws SQLException {
-        try (Connection conexao = ConnectionFactory.getConnection();
-             Statement statement = conexao.createStatement()) {
-            statement.executeUpdate(SQL_DELETE_TODAS);
+    private Connection conectar() throws SQLException {
+        try {
+            return ConnectionFactory.getConnection();
+        } catch (IllegalStateException e) {
+            throw new SQLException(e.getMessage(), e);
         }
     }
 }

@@ -6,6 +6,11 @@ import com.cibi.repository.ColaboradorRepository;
 public class ColaboradorService {
 
     public static boolean RealizarLogin(String usuario, String senha) {
+        autenticar(usuario, senha);
+        return true;
+    }
+
+    public static Colaborador autenticar(String usuario, String senha) {
         if (usuario == null || usuario.isBlank()) {
             throw new IllegalArgumentException("Usuário obrigatório");
         }
@@ -14,8 +19,11 @@ public class ColaboradorService {
             throw new IllegalArgumentException("Senha obrigatória");
         }
 
-        if (FuncionarioService.autenticar(usuario, senha)) {
-            return true;
+        String nomeFuncionario = FuncionarioService.autenticar(usuario, senha);
+        if (nomeFuncionario != null) {
+            Colaborador funcionario = new Colaborador();
+            funcionario.setNome(nomeFuncionario);
+            return funcionario;
         }
 
         Colaborador colaborador = ColaboradorRepository.buscarPorUsuarioESenha(usuario, senha);
@@ -24,7 +32,7 @@ public class ColaboradorService {
             throw new IllegalStateException("Usuário ou senha inválidos");
         }
 
-        return true;
+        return colaborador;
     }
 
     public static void inserirColabrador(Colaborador colaborador) {

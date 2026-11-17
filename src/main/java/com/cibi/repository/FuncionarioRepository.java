@@ -26,6 +26,9 @@ public final class FuncionarioRepository {
     private FuncionarioRepository() {
     }
 
+    public record Credenciais(String nome, String senhaHash) {
+    }
+
     public static boolean existemContasDeAcesso() {
         try (Connection conexao = ConnectionFactory.getConnection()) {
             try {
@@ -86,13 +89,15 @@ public final class FuncionarioRepository {
         }
     }
 
-    public static String buscarSenhaHash(String usuario) {
-        String sql = "SELECT senha_hash FROM contas_funcionarios WHERE usuario = ?";
+    public static Credenciais buscarCredenciais(String usuario) {
+        String sql = "SELECT nome, senha_hash FROM contas_funcionarios WHERE usuario = ?";
         try (Connection conexao = ConnectionFactory.getConnection();
              PreparedStatement consulta = conexao.prepareStatement(sql)) {
             consulta.setString(1, usuario);
             try (var resultado = consulta.executeQuery()) {
-                return resultado.next() ? resultado.getString("senha_hash") : null;
+                return resultado.next()
+                        ? new Credenciais(resultado.getString("nome"), resultado.getString("senha_hash"))
+                        : null;
             }
         } catch (SQLException e) {
             if (e.getErrorCode() == TABELA_INEXISTENTE) {

@@ -2,6 +2,7 @@ package com.cibi.controller.pages;
 
 import com.cibi.Service.ColaboradorService;
 import com.cibi.model.Colaborador;
+import com.cibi.util.TemaVisual;
 import java.util.function.UnaryOperator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,11 @@ public class UsuariosController {
     @FXML private ComboBox<String> input_turma;
     @FXML private TextField input_senha;
     @FXML private TextField input_confirmarSenha;
+
+    @FXML
+    private void importarAlunosCida() {
+        new ImportacaoCidaController().abrir(input_matricula.getScene().getWindow());
+    }
 
     @FXML
     private void cadastrarColaborador(ActionEvent event) {
@@ -68,6 +74,8 @@ public class UsuariosController {
 
     private void mostrarErro(String mensagem) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(input_matricula.getScene().getWindow());
+        TemaVisual.herdar(alert);
         alert.setTitle("Erro");
         alert.setHeaderText(null);
         alert.setContentText(mensagem);
@@ -76,6 +84,8 @@ public class UsuariosController {
     
     private void mostrarMensagem(String mensagem, String titulo) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(input_matricula.getScene().getWindow());
+        TemaVisual.herdar(alert);
         alert.setTitle(titulo);
         alert.setHeaderText(null);
         alert.setContentText(mensagem);

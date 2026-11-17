@@ -1,0 +1,54 @@
+/* A prévia clara pode estar dentro da janela com o tema escuro. */
+.config-root.cibi-tema {
+    -fx-base: #ECECEC;
+    -fx-background: derive(-fx-base, 26.4%);
+    -fx-control-inner-background: derive(-fx-base, 80%);
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, -2%);
+}
+
+.cibi-tema:tema-escuro {
+    -cibi-fundo: #151C27;
+    -cibi-superficie: #1C2634;
+    -cibi-superficie-alt: #253246;
+    -cibi-borda: #354359;
+    -cibi-borda-forte: #4E607A;
+    -cibi-texto: #EDF2F8;
+    -cibi-texto-suave: #BBC9DB;
+    -cibi-texto-fraco: #A3B2C7;
+
+    -cibi-info: #9DC8FF;
+    -cibi-destaque-suave: #223956;
+    -cibi-selecao: #2D496B;
+    -cibi-sucesso-texto: #8DDEB5;
+    -cibi-sucesso-suave: #1D3A34;
+    -cibi-perigo: #FFADB8;
+    -cibi-perigo-suave: #402936;
+    -cibi-perigo-borda: #754052;
+    -cibi-aviso: #F6CB86;
+    -cibi-aviso-suave: #413523;
+
+    -cibi-menu: #111822;
+    -cibi-menu-texto: #E1E5EA;
+    -cibi-menu-icone: #A3B2C7;
+    -cibi-menu-hover: #253246;
+    -cibi-menu-ativo: #314965;
+    -cibi-menu-ativo-texto: #EDF2F8;
+
+    /* Mantém legíveis também os controles padrão do JavaFX. */
+    -fx-base: #354359;
+    -fx-background: -cibi-superficie;
+    -fx-control-inner-background: -cibi-superficie;
+    -fx-control-inner-background-alt: -cibi-superficie-alt;
+}
+
+.dialog-pane.cibi-tema:tema-escuro {
+    -fx-background: -cibi-superficie;
+}
+
+.dialog-cibi:tema-escuro .header-panel {
+    -fx-background-color: -cibi-superficie-alt;
+}
+
+.dialog-cibi:tema-escuro > .button-bar > .container {
+    -fx-background-color: -cibi-superficie;
+}

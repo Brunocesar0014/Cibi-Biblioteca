@@ -3,6 +3,7 @@ package com.cibi.controller.pages;
 import com.cibi.Service.LivroService;
 import com.cibi.model.Livro;
 import com.cibi.util.AnimacaoModal;
+import com.cibi.util.TemaVisual;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -320,13 +321,18 @@ public class LivrosController {
                 "Excluir “" + texto(livro.getTitulo()) + "” do acervo?", ButtonType.CANCEL, ButtonType.OK);
         confirmacao.setHeaderText("Confirmar exclusão");
         confirmacao.initOwner(livrosRoot.getScene().getWindow());
+        TemaVisual.herdar(confirmacao);
         confirmacao.initStyle(StageStyle.TRANSPARENT);
         try (var animacao = AnimacaoModal.configurar(confirmacao, livrosRoot.getScene().getRoot())) {
             if (confirmacao.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return;
         }
-        service.excluirLivro(livro.getId());
-        atualizar();
-        mostrarMensagem("Livro excluído desta sessão.", false);
+        try {
+            service.excluirLivro(livro.getId());
+            atualizar();
+            mostrarMensagem("Livro excluído desta sessão.", false);
+        } catch (IllegalStateException erro) {
+            mostrarMensagem(erro.getMessage(), true);
+        }
     }
 
     @FXML

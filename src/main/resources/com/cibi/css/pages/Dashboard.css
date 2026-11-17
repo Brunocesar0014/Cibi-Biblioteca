@@ -85,3 +85,26 @@
     -fx-min-height: 14px; -fx-pref-height: 14px; -fx-max-height: 14px;
 }
 .chart-empty { -fx-background-color: #FAFBFD; -fx-background-radius: 8px; -fx-spacing: 6px; }
+
+/* Tema escuro */
+.cibi-tema:tema-escuro .dashboard-root { -fx-background-color: -cibi-fundo; }
+.cibi-tema:tema-escuro .dashboard-title { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .dashboard-status { -fx-text-fill: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .dashboard-panel { -fx-background-color: -cibi-superficie; }
+.cibi-tema:tema-escuro .panel-title { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .panel-divider { -fx-background-color: -cibi-borda; }
+.cibi-tema:tema-escuro .loan-header .label { -fx-text-fill: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .loan-empty { -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .empty-icon { -fx-background-color: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .empty-title { -fx-text-fill: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .empty-caption { -fx-text-fill: -cibi-texto-fraco; }
+.cibi-tema:tema-escuro .alert-danger { -fx-background-color: -cibi-perigo-suave; }
+.cibi-tema:tema-escuro .alert-info { -fx-background-color: -cibi-destaque-suave; }
+.cibi-tema:tema-escuro .alert-success { -fx-background-color: -cibi-sucesso-suave; }
+.cibi-tema:tema-escuro .alert-title { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .alert-danger .alert-title { -fx-text-fill: -cibi-perigo; }
+.cibi-tema:tema-escuro .alert-info .alert-title { -fx-text-fill: -cibi-info; }
+.cibi-tema:tema-escuro .alert-success .alert-title { -fx-text-fill: -cibi-sucesso-texto; }
+.cibi-tema:tema-escuro .alert-caption { -fx-text-fill: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .alert-chevron { -fx-background-color: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .chart-empty { -fx-background-color: -cibi-superficie; }

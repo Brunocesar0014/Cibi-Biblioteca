@@ -187,3 +187,23 @@
 .radio-custom:selected .dot {
     -fx-background-color: #007bff;
 }
+
+/* Tema escuro */
+.cibi-tema:tema-escuro .VboxMain { -fx-background-color: -cibi-fundo; }
+.cibi-tema:tema-escuro .vbox_Form { -fx-background-color: -cibi-superficie; }
+.cibi-tema:tema-escuro .lbl_subTitulo { -fx-text-fill: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .input,
+.cibi-tema:tema-escuro .combo-box-custom { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .combo-box-custom .list-cell { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .combo-box-custom .arrow { -fx-background-color: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .combo-box-custom:hover { -fx-border-color: -cibi-borda-forte; }
+.cibi-tema:tema-escuro .combo-box-popup .list-view { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda; }
+.cibi-tema:tema-escuro .combo-box-popup .list-cell { -fx-background-color: -cibi-superficie; -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .combo-box-popup .list-cell:hover { -fx-background-color: -cibi-superficie-alt; }
+.cibi-tema:tema-escuro .btn_voltar { -fx-background-color: -cibi-superficie-alt; -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .btn_ListarUsuarios:hover,
+.cibi-tema:tema-escuro .btn_BuscarMatricula,
+.cibi-tema:tema-escuro .btn_BuscarMatricula:hover { -fx-background-color: -cibi-superficie-alt; }
+.cibi-tema:tema-escuro .btn_Limpar { -fx-background-color: -cibi-texto-suave; }
+.cibi-tema:tema-escuro .radio-custom { -fx-text-fill: -cibi-texto; }
+.cibi-tema:tema-escuro .radio-custom .radio { -fx-background-color: -cibi-superficie; -fx-border-color: -cibi-borda; }

@@ -1,6 +1,7 @@
 package com.cibi.controller.pages;
 
 import com.cibi.util.AnimacaoModal;
+import com.cibi.util.TemaVisual;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -36,6 +37,7 @@ final class ConfirmacaoCategorias {
         java.util.concurrent.atomic.AtomicBoolean confirmado = new java.util.concurrent.atomic.AtomicBoolean();
         dialogo.setTitle(titulo);
         dialogo.initOwner(gerenciador.getScene().getWindow());
+        TemaVisual.herdar(dialogo);
         dialogo.initStyle(StageStyle.TRANSPARENT);
         DialogPane painel = dialogo.getDialogPane();
         painel.getStyleClass().add("book-category-dialog");

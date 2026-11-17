@@ -84,15 +84,18 @@ public class ConfiguracoesService {
 
     /**
      * Devolve todas as configurações: os padrões sobrescritos pelo que estiver
-     * gravado no banco. Se o banco falhar, os padrões são usados para que a
-     * tela continue abrindo.
+     * gravado no banco. Se o banco falhar, usa a última leitura disponível
+     * ou os padrões, quando ainda não houve uma leitura.
      */
     public Map<String, String> carregarTodas() {
         Map<String, String> resultado = new LinkedHashMap<>(PADROES);
         try {
             resultado.putAll(repository.buscarTodas());
         } catch (SQLException e) {
-            System.err.println("[CIBI] Falha ao ler configurações, usando padrões: " + e.getMessage());
+            if (cache != null) {
+                resultado.putAll(cache);
+            }
+            System.err.println("[CIBI] Falha ao ler configurações: " + e.getMessage());
         }
         cache = resultado;
         return new LinkedHashMap<>(resultado);
@@ -152,8 +155,7 @@ public class ConfiguracoesService {
      * Restaura todos os valores originais do sistema.
      */
     public void restaurarPadroes() throws SQLException {
-        repository.limpar();
-        repository.salvarTodas(PADROES);
+        repository.substituirTodas(PADROES);
         cache = new LinkedHashMap<>(PADROES);
     }
 

@@ -58,11 +58,8 @@ public class LoginController {
         String senha = txtPassword.getText();
 
         try {
-            boolean ok = ColaboradorService.RealizarLogin(usuario, senha);
-
-            if (ok) {
-                abrirTelaPrincipalEFecharLogin();
-            }
+            String colaborador = ColaboradorService.autenticar(usuario, senha).getNome();
+            abrirTelaPrincipalEFecharLogin(colaborador);
 
         } catch (RuntimeException e) {
             mostrarErroLogin();
@@ -83,16 +80,21 @@ public class LoginController {
     private void onPularLogin(ActionEvent event) {
 
         try{
-            abrirTelaPrincipalEFecharLogin();
+            abrirTelaPrincipalEFecharLogin(null);
         }catch(RuntimeException e){
             mostrarErroLogin();
         }
     }
 
-    private void abrirTelaPrincipalEFecharLogin() {
+    private void abrirTelaPrincipalEFecharLogin(String colaborador) {
         try {
             
-            Parent root = FXMLLoader.load(getClass().getResource("/com/cibi/fxml/Tela_Principal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cibi/fxml/Tela_Principal.fxml"));
+            Parent root = loader.load();
+            if (colaborador != null) {
+                MainController controller = loader.getController();
+                controller.definirColaborador(colaborador);
+            }
 
             Stage principal = new Stage();
             Image icon = new Image(getClass().getResourceAsStream("/com/cibi/imagens/icone.png"));

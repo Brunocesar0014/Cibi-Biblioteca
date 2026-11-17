@@ -5,6 +5,7 @@ public final class DevTools {
     private DevTools() {
     }
     
+    //public static boolean modoDesenvolvedor = Boolean.parseBoolean(System.getenv("CIBI_DEV"));
     public static boolean modoDesenvolvedor = true;
     
     public static boolean ignorarLogin = false;

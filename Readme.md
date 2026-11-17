@@ -36,6 +36,23 @@
  - 7. Subistitua pela pasta antiga;
  - 8. Atualize o nome da pasta "BD atual yyyy/mm/dd" para o dia da alteração.
 
+### Instalação nova e primeiro acesso
+
+1. Em uma instância MySQL 8, execute [o esquema inicial](BD/cibi_mysql.sql) para criar um banco novo. Para bancos existentes, preserve os dados e use as instruções de migração no final do script.
+2. Configure a conexão pelas variáveis `CIBI_DB_URL`, `CIBI_DB_USER` e `CIBI_DB_PASSWORD` e execute `mvn javafx:run`.
+3. Se o banco estiver sem contas de funcionário e sem colaboradores cadastrados, o CIBI abre o cadastro do primeiro administrador. Em instalações com contas, o CIBI abre o login.
+
+Para abrir o console de desenvolvimento, defina a variável de ambiente `CIBI_DEV=true` antes de iniciar o CIBI.
+
+### Importar alunos do CIDA
+
+1. Em um banco antigo cuja tabela `alunos` ainda não tenha a coluna `foto_cida`, execute uma vez o script [de migração](BD/migracao_importacao_cida.sql). O esquema de instalação nova já inclui a coluna.
+2. Em **Usuários → Importar do CIDA**, selecione uma planilha `.xlsm` ou `.xlsx` com a aba **Controle** ou **Refeitório** e os cabeçalhos **Matrícula**, **Aluno** e **Turma** nas três primeiras colunas.
+3. Use a pasta **Fotos Excel** ao lado da planilha ou selecione outra pasta com os JPEGs no formato `Nome_Matrícula_Turma.jpg`. A pasta é opcional.
+4. Clique em **Validar arquivos**, confira a prévia e clique em **Importar alunos**. Corrija as linhas sinalizadas e valide novamente se houver erros.
+
+A importação atualiza nome e turma pela matrícula. Fotos existentes são preservadas quando o lote não traz uma imagem correspondente. Os alunos ausentes da planilha permanecem cadastrados. As fotos importadas ficam no banco como miniaturas e aparecem no resumo de **Novo empréstimo** após identificar o aluno.
+
 ---
 
 

@@ -1,20 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<StackPane fx:id="raiz" minHeight="0" styleClass="loans-root" stylesheets="@../../css/pages/Emprestimos.css"
+           xmlns="http://javafx.com/javafx/22.0.2" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.cibi.controller.pages.EmprestimosController">
+    <VBox fx:id="listagem" spacing="16" styleClass="loans-list">
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="loans-list-header">
+            <VBox spacing="2">
+                <Label text="Empréstimos" styleClass="loan-title" />
+                <Label text="Acompanhe retiradas, prazos e devoluções" styleClass="loan-subtitle" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="＋  Novo empréstimo" onAction="#novoEmprestimo" styleClass="loan-primary" />
+        </HBox>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.StackPane?>
+        <VBox styleClass="loan-card,loan-list-card">
+            <Label text="Lista de empréstimos" styleClass="loan-list-heading" maxWidth="Infinity" />
+            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="loan-filters">
+                <VBox spacing="4" minWidth="200" HBox.hgrow="ALWAYS">
+                    <Label text="Busca" styleClass="loan-filter-label" />
+                    <StackPane alignment="CENTER_LEFT">
+                        <TextField fx:id="busca" promptText="Buscar por aluno, matrícula ou livro" accessibleText="Buscar empréstimos" styleClass="loan-input,loan-search" />
+                        <Region mouseTransparent="true" styleClass="loan-search-icon" />
+                    </StackPane>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="Status" styleClass="loan-filter-label" />
+                    <ComboBox fx:id="filtroStatus" prefWidth="146" accessibleText="Filtrar por status" styleClass="loan-input,loan-select" />
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="Colaborador" styleClass="loan-filter-label" />
+                    <ComboBox fx:id="filtroColaborador" prefWidth="171" accessibleText="Filtrar por colaborador" styleClass="loan-input,loan-select" />
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="Período" styleClass="loan-filter-label" />
+                    <ComboBox fx:id="filtroPeriodo" prefWidth="176" accessibleText="Filtrar por período" styleClass="loan-input,loan-select" />
+                </VBox>
+            </HBox>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.pages.EmprestimosController">
-   <children>
-      <Label text="Buscar Aluno por Matricula:">
-         <StackPane.margin>
-            <Insets bottom="70.0" />
-         </StackPane.margin></Label>
-      <TextField fx:id="input_matricula" onAction="#BuscarAlunoPorMatricula" prefHeight="26.0" prefWidth="454.0">
-         <StackPane.margin>
-            <Insets left="200.0" right="200.0" />
-         </StackPane.margin>
-      </TextField>
-   </children>
+            <TableView fx:id="tabela" prefHeight="370" minHeight="370" fixedCellSize="66" styleClass="loan-table">
+                <placeholder><Label text="Nenhum empréstimo encontrado" /></placeholder>
+                <columns>
+                    <TableColumn fx:id="colAluno" text="Aluno" minWidth="158" prefWidth="242" sortable="false" reorderable="false" />
+                    <TableColumn fx:id="colLivro" text="Livro" minWidth="156" prefWidth="270" sortable="false" reorderable="false" />
+                    <TableColumn fx:id="colRetirada" text="Data do empréstimo" minWidth="148" prefWidth="158" sortable="false" reorderable="false" />
+                    <TableColumn fx:id="colPrevisao" text="Devolução prevista" minWidth="146" prefWidth="162" sortable="false" reorderable="false" />
+                    <TableColumn fx:id="colStatus" text="Status" minWidth="148" prefWidth="155" sortable="false" reorderable="false" styleClass="loan-status-column" />
+                    <TableColumn fx:id="colAcoes" text="Ações" minWidth="72" prefWidth="84" sortable="false" reorderable="false" styleClass="loan-actions" />
+                </columns>
+            </TableView>
+
+            <HBox alignment="CENTER_RIGHT" spacing="6" styleClass="loan-pagination">
+                <Label fx:id="resultados" text="0 empréstimos" styleClass="loan-muted" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="anterior" text="‹  Anterior" onAction="#paginaAnterior" styleClass="loan-page-button" disable="true" />
+                <HBox fx:id="paginas" spacing="6" />
+                <Button fx:id="proximo" text="Próximo  ›" onAction="#paginaProxima" styleClass="loan-page-button" disable="true" />
+            </HBox>
+        </VBox>
+        <Label text="Os empréstimos ficam disponíveis até encerrar o aplicativo." styleClass="loan-muted" />
+    </VBox>
+    <fx:include fx:id="formulario" source="NovoEmprestimo.fxml" />
 </StackPane>

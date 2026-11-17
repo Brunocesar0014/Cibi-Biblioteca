@@ -1,5 +1,21 @@
 # Contexto — CIBI (Controle Interno de Biblioteca)
 
+## Estado verificado em 10/11/2026
+
+Esta seção é o ponto de partida para retomar o projeto **CIBI biblioteca**. A referência detalhada é o [relatório de análise técnica](RELATORIO_ANALISE_TECNICA.md), que separa o que foi observado no código, as inferências e o que ainda depende de validação em execução.
+
+- **Propósito e arquitetura.** Aplicação desktop para operação de biblioteca escolar ou institucional. Java 22, JavaFX 22.0.2, Maven e MySQL via JDBC. O colaborador é o operador previsto. A busca por matrícula consulta o cadastro de alunos. O código não aplica a matriz de papéis registrada no histórico abaixo.
+- **Base inspecionada.** `HEAD` estava em `8cb41b4b9666ce67acb02d93f6ce18f36ae70f4e`. O CRUD de livros de `c7330a3` usava MySQL. Na árvore local, a ampliação do acervo, as categorias e a animação dos modais estavam sem commit. Reconfira o Git ao retomar o trabalho.
+- **Acervo provisório.** `LivroService` usa `LivroTemporarioRepository`. Livros, categorias e rascunhos duram somente a sessão. `LivroRepository` permanece no código com quatro colunas JDBC. Os campos novos de catalogação e estoque não existem no schema. O CSV exporta todos os resultados filtrados e fica no arquivo escolhido. O aplicativo não oferece importação. [LivroService](../src/main/java/com/cibi/Service/LivroService.java) · [LivrosController](../src/main/java/com/cibi/controller/pages/LivrosController.java)
+- **JDBC ativo.** Login e cadastro de colaboradores, consulta de alunos, preferências e indicadores do Dashboard usam MySQL. O Dashboard conta a tabela `livros`, que é independente do acervo temporário. Configurações grava preferências, com efeito operacional parcial. [DashboardRepository](../src/main/java/com/cibi/repository/DashboardRepository.java) · [ConfiguracoesService](../src/main/java/com/cibi/Service/ConfiguracoesService.java)
+- **Circulação incompleta.** Empréstimos termina na busca e exibição do aluno. Retirada, devolução, renovação e baixa de estoque ainda não estão implementadas. [EmprestimosController](../src/main/java/com/cibi/controller/pages/EmprestimosController.java)
+- **Acesso.** O console de desenvolvimento abre por padrão nos fontes inspecionados. Na tela de login, “Criar Conta” chama um handler que abre a janela principal sem autenticar. O cadastro e a comparação de senhas ainda usam o valor diretamente no SQL. [DevTools](../src/main/java/com/cibi/util/DevTools.java) · [LoginController](../src/main/java/com/cibi/controller/LoginController.java) · [ColaboradorRepository](../src/main/java/com/cibi/repository/ColaboradorRepository.java)
+- **Continuidade.** Priorizar a correção de acesso e decidir a persistência do catálogo e o controle de exemplares antes de implementar circulação. Build, carregamento das telas e integração com MySQL real ficaram sem validação nesta inspeção.
+
+## Histórico da documentação
+
+As seções seguintes preservam o contexto e os requisitos de revisões anteriores. Use o estado verificado acima e o relatório para interpretar descrições antigas de telas, permissões e persistência.
+
 ## O que é o projeto
 
 CIBI é uma aplicação **desktop** para controle de uma biblioteca escolar/institucional. Permite login de colaboradores, cadastro de usuários (colaboradores/alunos), busca de livros e um fluxo de "empréstimo" iniciado pela busca de um aluno por matrícula (pensado para funcionar com leitor de código QR de carteirinha).

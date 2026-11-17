@@ -563,3 +563,10 @@
 .dialog-cibi > *.button-bar > *.container {
     -fx-background-color: -cibi-superficie;
 }
+
+/* Tema escuro */
+.config-root:tema-escuro .theme-caption.selecionado { -fx-text-fill: -cibi-texto; }
+.config-root:tema-escuro .status-label.status-ok { -fx-text-fill: -cibi-sucesso-texto; }
+.config-root:tema-escuro .status-label.status-alterado { -fx-text-fill: -cibi-aviso; }
+.config-root:tema-escuro .btn-perigo { -fx-border-color: -cibi-perigo-borda; }
+.config-root:tema-escuro .btn-perigo:hover { -fx-background-color: derive(-cibi-perigo-suave, -8%); }

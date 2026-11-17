@@ -54,6 +54,10 @@
     -fx-text-fill: #4A4A4A;
 }
 
+.alert-confirmacao-com-alternativas .botao-fechar-x {
+    -fx-translate-x: 10px;
+}
+
 /* =========================================================
    ÁREA DOS BOTÕES — seletor mais específico p/ vencer o Modena
    ========================================================= */
@@ -98,4 +102,29 @@
 }
 .dialog-pane.alert-confirmacao .button-bar .botao-cancelar:pressed {
     -fx-background-color: #D3D0D9;
+}
+
+.dialog-pane.alert-confirmacao:tema-escuro {
+    -fx-background-color: -cibi-superficie;
+    -fx-border-color: -cibi-borda;
+}
+
+.alert-confirmacao:tema-escuro .titulo-confirmacao,
+.alert-confirmacao:tema-escuro .botao-fechar-x:hover,
+.dialog-pane.alert-confirmacao:tema-escuro .button-bar .botao-cancelar {
+    -fx-text-fill: -cibi-texto;
+}
+
+.alert-confirmacao:tema-escuro .subtitulo-confirmacao,
+.alert-confirmacao:tema-escuro .botao-fechar-x {
+    -fx-text-fill: -cibi-texto-suave;
+}
+
+.dialog-pane.alert-confirmacao:tema-escuro .button-bar .botao-cancelar {
+    -fx-background-color: -cibi-superficie-alt;
+}
+
+.dialog-pane.alert-confirmacao:tema-escuro .button-bar .botao-cancelar:hover,
+.dialog-pane.alert-confirmacao:tema-escuro .button-bar .botao-cancelar:pressed {
+    -fx-background-color: -cibi-selecao;
 }

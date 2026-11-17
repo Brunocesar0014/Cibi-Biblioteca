@@ -19,7 +19,7 @@
 <VBox fx:id="root" styleClass="config-root" stylesheets="@../../css/pages/Configuracoes.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cibi.controller.pages.ConfiguracoesController">
 
     <!-- ===================== CABEÇALHO + ABAS ===================== -->
-    <VBox styleClass="config-header" stylesheets="@Configuracoes.css">
+    <VBox styleClass="config-header">
         <padding>
             <Insets bottom="0.0" left="40.0" right="40.0" top="32.0" />
         </padding>
@@ -35,10 +35,7 @@
                 <ToggleGroup fx:id="grupoAbas" />
             </fx:define>
 
-            <ToggleButton fx:id="abaAparencia" selected="true" styleClass="tab-button" text="Aparência" userData="aparencia">
-            <toggleGroup>
-               <ToggleGroup fx:id="grupoAbas" />
-            </toggleGroup></ToggleButton>
+            <ToggleButton fx:id="abaAparencia" selected="true" styleClass="tab-button" text="Aparência" toggleGroup="$grupoAbas" userData="aparencia" />
             <ToggleButton fx:id="abaEmprestimos" styleClass="tab-button" text="Empréstimos" toggleGroup="$grupoAbas" userData="emprestimos" />
             <ToggleButton fx:id="abaNotificacoes" styleClass="tab-button" text="Notificações" toggleGroup="$grupoAbas" userData="notificacoes" />
             <ToggleButton fx:id="abaSistema" styleClass="tab-button" text="Sistema" toggleGroup="$grupoAbas" userData="sistema" />
@@ -71,7 +68,7 @@
                         </fx:define>
 
                         <VBox alignment="CENTER" spacing="10.0">
-                            <ToggleButton fx:id="temaEscuro" selected="true" styleClass="theme-card" userData="ESCURO">
+                            <ToggleButton fx:id="temaEscuro" selected="true" styleClass="theme-card" toggleGroup="$grupoTema" userData="ESCURO">
                                 <graphic>
                                     <VBox spacing="6.0" styleClass="preview, preview-dark">
                                         <HBox spacing="5.0">
@@ -85,9 +82,6 @@
                                         </HBox>
                                     </VBox>
                                 </graphic>
-                        <toggleGroup>
-                           <ToggleGroup fx:id="grupoTema" />
-                        </toggleGroup>
                             </ToggleButton>
                             <Label fx:id="lblTemaEscuro" styleClass="theme-caption" text="Escuro" />
                         </VBox>
@@ -144,10 +138,7 @@
                             <ToggleGroup fx:id="grupoCor" />
                         </fx:define>
 
-                        <ToggleButton fx:id="corAzul" selected="true" styleClass="swatch, swatch-azul" text="✓" userData="#2563EB">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="grupoCor" />
-                     </toggleGroup></ToggleButton>
+                        <ToggleButton fx:id="corAzul" selected="true" styleClass="swatch, swatch-azul" text="✓" toggleGroup="$grupoCor" userData="#2563EB" />
                         <ToggleButton fx:id="corCiano" styleClass="swatch, swatch-ciano" text="✓" toggleGroup="$grupoCor" userData="#38BDF8" />
                         <ToggleButton fx:id="corVerde" styleClass="swatch, swatch-verde" text="✓" toggleGroup="$grupoCor" userData="#22C55E" />
                         <ToggleButton fx:id="corRoxo" styleClass="swatch, swatch-roxo" text="✓" toggleGroup="$grupoCor" userData="#A78BFA" />
@@ -180,10 +171,7 @@
                             <ToggleGroup fx:id="grupoFonte" />
                         </fx:define>
 
-                        <ToggleButton fx:id="fonteP" styleClass="font-card, font-p" text="Aa" userData="PEQUENO">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="grupoFonte" />
-                     </toggleGroup></ToggleButton>
+                        <ToggleButton fx:id="fonteP" styleClass="font-card, font-p" text="Aa" toggleGroup="$grupoFonte" userData="PEQUENO" />
                         <ToggleButton fx:id="fonteM" selected="true" styleClass="font-card, font-m" text="Aa" toggleGroup="$grupoFonte" userData="MEDIO" />
                         <ToggleButton fx:id="fonteG" styleClass="font-card, font-g" text="Aa" toggleGroup="$grupoFonte" userData="GRANDE" />
                         <ToggleButton fx:id="fonteXG" styleClass="font-card, font-xg" text="Aa" toggleGroup="$grupoFonte" userData="EXTRA_GRANDE" />

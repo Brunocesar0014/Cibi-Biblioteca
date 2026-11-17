@@ -2,6 +2,8 @@ package com.cibi.controller.pages;
 
 import com.cibi.Service.ConfiguracoesService;
 import com.cibi.Service.ConfiguracoesService.ConfiguracaoInvalidaException;
+import com.cibi.util.TemaVisual;
+import com.cibi.util.WindowUtils;
 
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
@@ -10,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -29,9 +32,11 @@ import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 /**
  * Controller da tela de Configurações do CIBI.
@@ -104,15 +109,18 @@ public class ConfiguracoesController implements Initializable {
     /* ====================== ESTADO ====================== */
 
     private final ConfiguracoesService service = new ConfiguracoesService();
+    private TemaVisual tema;
+    private Consumer<TemaVisual.Opcao> aoSalvarTema = opcao -> {};
 
     /** Evita marcar o formulário como alterado enquanto ele está sendo preenchido. */
     private boolean carregando = false;
-    private boolean alterado = false;
+    private Map<String, String> valoresSalvos;
 
     /* ====================== CICLO DE VIDA ====================== */
 
     @Override
     public void initialize(URL url, ResourceBundle bundle) {
+        tema = new TemaVisual(root);
         configurarAbas();
         configurarCampos();
         configurarSelecaoObrigatoria(grupoTema);
@@ -120,9 +128,12 @@ public class ConfiguracoesController implements Initializable {
         configurarSelecaoObrigatoria(grupoFonte);
 
         carregarValores();
-        registrarListeners();
-
         marcarSalvo(null);
+        registrarListeners();
+    }
+
+    public void definirAoSalvarTema(Consumer<TemaVisual.Opcao> aoSalvarTema) {
+        this.aoSalvarTema = aoSalvarTema;
     }
 
     /* ====================== MONTAGEM ====================== */
@@ -161,10 +172,7 @@ public class ConfiguracoesController implements Initializable {
         spRenovacoes.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 5, 1));
         spAntecedencia.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 2));
 
-        spPrazoDias.setEditable(true);
-        spLimiteLivros.setEditable(true);
-        spRenovacoes.setEditable(true);
-        spAntecedencia.setEditable(true);
+        spinners().forEach(spinner -> spinner.setEditable(true));
 
         cbItensPagina.setItems(FXCollections.observableArrayList(25, 50, 100, 200));
 
@@ -174,6 +182,10 @@ public class ConfiguracoesController implements Initializable {
                 txtMultaDia.setText(anterior);
             }
         });
+    }
+
+    private List<Spinner<Integer>> spinners() {
+        return List.of(spPrazoDias, spLimiteLivros, spRenovacoes, spAntecedencia);
     }
 
     /** Impede que o usuário desmarque um cartão e fique sem nenhuma opção selecionada. */
@@ -191,7 +203,7 @@ public class ConfiguracoesController implements Initializable {
         carregando = true;
         Map<String, String> v = service.carregarTodas();
 
-        selecionarPorUserData(grupoTema, v.get(ConfiguracoesService.TEMA));
+        selecionarPorUserData(grupoTema, TemaVisual.Opcao.de(v.get(ConfiguracoesService.TEMA)).name());
         selecionarPorUserData(grupoCor, v.get(ConfiguracoesService.COR_DESTAQUE));
         selecionarPorUserData(grupoFonte, v.get(ConfiguracoesService.TAMANHO_FONTE));
         swSidebarCompacta.setSelected(Boolean.parseBoolean(v.get(ConfiguracoesService.SIDEBAR_COMPACTA)));
@@ -214,6 +226,7 @@ public class ConfiguracoesController implements Initializable {
         txtPastaBackup.setText(v.get(ConfiguracoesService.PASTA_BACKUP));
         swBackupAutomatico.setSelected(service.getBoolean(ConfiguracoesService.BACKUP_AUTOMATICO));
 
+        spinners().forEach(Spinner::cancelEdit);
         aplicarPreviaVisual();
         carregando = false;
     }
@@ -233,17 +246,14 @@ public class ConfiguracoesController implements Initializable {
     /* ====================== LISTENERS ====================== */
 
     private void registrarListeners() {
-        ChangeListener<Object> aoMudar = (obs, anterior, atual) -> marcarAlterado();
+        ChangeListener<Object> aoMudar = (obs, anterior, atual) -> atualizarAlteracoes();
 
         grupoTema.selectedToggleProperty().addListener(aoMudar);
         grupoCor.selectedToggleProperty().addListener(aoMudar);
         grupoFonte.selectedToggleProperty().addListener(aoMudar);
         swSidebarCompacta.selectedProperty().addListener(aoMudar);
 
-        spPrazoDias.valueProperty().addListener(aoMudar);
-        spLimiteLivros.valueProperty().addListener(aoMudar);
-        spRenovacoes.valueProperty().addListener(aoMudar);
-        spAntecedencia.valueProperty().addListener(aoMudar);
+        spinners().forEach(spinner -> spinner.getEditor().textProperty().addListener(aoMudar));
         txtMultaDia.textProperty().addListener(aoMudar);
         swCobrarMulta.selectedProperty().addListener(aoMudar);
         swBloquearAtraso.selectedProperty().addListener(aoMudar);
@@ -262,29 +272,26 @@ public class ConfiguracoesController implements Initializable {
         grupoCor.selectedToggleProperty().addListener((o, a, b) -> aplicarPreviaVisual());
     }
 
-    private void marcarAlterado() {
+    private void atualizarAlteracoes() {
         if (carregando) {
             return;
         }
-        alterado = true;
-        btnSalvar.setDisable(false);
-        definirStatus("Há alterações não salvas.", "status-alterado");
+        boolean alterado = temAlteracoesPendentes();
+        btnSalvar.setDisable(!alterado);
+        definirStatus(alterado ? "Há alterações não salvas." : null, alterado ? "status-alterado" : null);
     }
 
     private void marcarSalvo(String mensagem) {
-        alterado = false;
+        valoresSalvos = coletarValores();
         btnSalvar.setDisable(true);
         definirStatus(mensagem, mensagem == null ? null : "status-ok");
     }
 
     /* ====================== PRÉVIA VISUAL ====================== */
 
-    /**
-     * Aplica a cor de destaque escolhida ao próprio painel (a cor é uma
-     * looked-up color do CSS, então basta redefini-la no nó raiz) e destaca a
-     * legenda do tema selecionado, como na referência.
-     */
+    /** Mostra o tema e a cor escolhidos na página antes de salvar. */
     private void aplicarPreviaVisual() {
+        tema.aplicar(TemaVisual.Opcao.de(userData(grupoTema)));
         Toggle cor = grupoCor.getSelectedToggle();
         if (cor != null) {
             String hex = String.valueOf(cor.getUserData());
@@ -307,11 +314,20 @@ public class ConfiguracoesController implements Initializable {
 
     @FXML
     private void onSalvar() {
+        salvarAlteracoes();
+    }
+
+    private boolean salvarAlteracoes() {
         Map<String, String> valores = coletarValores();
         try {
             service.salvar(valores);
+            for (Spinner<Integer> spinner : spinners()) {
+                spinner.commitValue();
+                spinner.cancelEdit();
+            }
+            aoSalvarTema.accept(TemaVisual.Opcao.de(valores.get(ConfiguracoesService.TEMA)));
             marcarSalvo("Configurações salvas com sucesso.");
-            aplicarPreviaVisual();
+            return true;
 
         } catch (ConfiguracaoInvalidaException e) {
             definirStatus(e.getMessage(), "status-erro");
@@ -322,11 +338,12 @@ public class ConfiguracoesController implements Initializable {
             alerta(Alert.AlertType.ERROR, "Erro ao salvar",
                     "Não foi possível gravar as configurações.\n\nDetalhe: " + e.getMessage());
         }
+        return false;
     }
 
     @FXML
     private void onDescartar() {
-        if (!alterado) {
+        if (!temAlteracoesPendentes()) {
             return;
         }
         carregarValores();
@@ -350,6 +367,7 @@ public class ConfiguracoesController implements Initializable {
         try {
             service.restaurarPadroes();
             carregarValores();
+            aoSalvarTema.accept(TemaVisual.Opcao.de(userData(grupoTema)));
             marcarSalvo("Configurações restauradas aos valores padrão.");
         } catch (SQLException e) {
             definirStatus("Não foi possível restaurar os padrões.", "status-erro");
@@ -386,9 +404,9 @@ public class ConfiguracoesController implements Initializable {
         v.put(ConfiguracoesService.TAMANHO_FONTE, userData(grupoFonte));
         v.put(ConfiguracoesService.SIDEBAR_COMPACTA, String.valueOf(swSidebarCompacta.isSelected()));
 
-        v.put(ConfiguracoesService.PRAZO_DIAS, String.valueOf(spPrazoDias.getValue()));
-        v.put(ConfiguracoesService.LIMITE_LIVROS, String.valueOf(spLimiteLivros.getValue()));
-        v.put(ConfiguracoesService.RENOVACOES, String.valueOf(spRenovacoes.getValue()));
+        v.put(ConfiguracoesService.PRAZO_DIAS, spPrazoDias.getEditor().getText().trim());
+        v.put(ConfiguracoesService.LIMITE_LIVROS, spLimiteLivros.getEditor().getText().trim());
+        v.put(ConfiguracoesService.RENOVACOES, spRenovacoes.getEditor().getText().trim());
         v.put(ConfiguracoesService.MULTA_DIA, txtMultaDia.getText().replace(',', '.'));
         v.put(ConfiguracoesService.COBRAR_MULTA, String.valueOf(swCobrarMulta.isSelected()));
         v.put(ConfiguracoesService.BLOQUEAR_ATRASO, String.valueOf(swBloquearAtraso.isSelected()));
@@ -396,7 +414,7 @@ public class ConfiguracoesController implements Initializable {
         v.put(ConfiguracoesService.ALERTA_DEVOLUCAO, String.valueOf(swAlertaDevolucao.isSelected()));
         v.put(ConfiguracoesService.ALERTA_ATRASO, String.valueOf(swAlertaAtraso.isSelected()));
         v.put(ConfiguracoesService.ALERTA_ESTOQUE, String.valueOf(swAlertaEstoque.isSelected()));
-        v.put(ConfiguracoesService.ANTECEDENCIA_DIAS, String.valueOf(spAntecedencia.getValue()));
+        v.put(ConfiguracoesService.ANTECEDENCIA_DIAS, spAntecedencia.getEditor().getText().trim());
 
         v.put(ConfiguracoesService.NOME_BIBLIOTECA, txtNomeBiblioteca.getText().trim());
         v.put(ConfiguracoesService.ITENS_PAGINA, String.valueOf(cbItensPagina.getValue()));
@@ -432,11 +450,33 @@ public class ConfiguracoesController implements Initializable {
             alerta.initOwner(root.getScene().getWindow());
             alerta.getDialogPane().getStylesheets().addAll(root.getScene().getStylesheets());
         }
+        TemaVisual.herdar(alerta.getDialogPane(), root);
         alerta.getDialogPane().getStyleClass().add("dialog-cibi");
     }
 
-    /** Permite que a tela principal pergunte se há alterações pendentes antes de trocar de página. */
-    public boolean temAlteracoesPendentes() {
-        return alterado;
+    private boolean temAlteracoesPendentes() {
+        return !coletarValores().equals(valoresSalvos);
+    }
+
+    public boolean confirmarSaida() {
+        if (!temAlteracoesPendentes()) {
+            return true;
+        }
+
+        ButtonType continuar = new ButtonType("Continuar editando", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType salvar = new ButtonType("Salvar e sair", ButtonBar.ButtonData.OK_DONE);
+        ButtonType descartar = new ButtonType("Sair sem salvar", ButtonBar.ButtonData.NO);
+        ButtonType escolha = WindowUtils.mostrarConfirmacao(root, "Configurações", "Salvar alterações?",
+                "Você fez alterações nas configurações. Deseja salvá-las antes de sair desta tela?",
+                continuar, salvar, descartar);
+
+        if (escolha == salvar) {
+            return salvarAlteracoes();
+        }
+        if (escolha == descartar) {
+            onDescartar();
+            return true;
+        }
+        return false;
     }
 }

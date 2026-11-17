@@ -1,7 +1,11 @@
 package com.cibi.controller;
 
+import com.cibi.Service.ConfiguracoesService;
 import com.cibi.util.NavigationManager;
+import com.cibi.util.TemaVisual;
+import com.cibi.controller.pages.ConfiguracoesController;
 import com.cibi.controller.pages.DashboardController;
+import com.cibi.controller.pages.EmprestimosController;
 import com.cibi.controller.pages.LivrosController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -11,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -29,6 +34,9 @@ public class MainController implements Initializable {
 
     private static final String MENU_ITEM_STYLE_CLASS = "sidebar-menu-item";
     private static final String MENU_ITEM_ACTIVE_STYLE_CLASS = "sidebar-menu-item-active";
+
+    @FXML
+    private BorderPane rootPane;
 
     @FXML
     private VBox sidebar;
@@ -61,6 +69,9 @@ public class MainController implements Initializable {
     private StackPane contentArea;
 
     private NavigationManager navigation;
+    private ConfiguracoesController configuracoesAbertas;
+    private TemaVisual tema;
+    private String colaborador = "Sessão de desenvolvimento";
     private boolean menuExpandido = true;
 
     private List<Button> menuButtons;
@@ -69,6 +80,9 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         navigation = new NavigationManager(contentArea);
+        tema = new TemaVisual(rootPane);
+        String temaSalvo = new ConfiguracoesService().get(ConfiguracoesService.TEMA);
+        tema.aplicar(TemaVisual.Opcao.de(temaSalvo));
 
         configurarMenuButtons();
         configurarEstadoInicialDaSidebar();
@@ -181,14 +195,30 @@ public class MainController implements Initializable {
     }
 
     private void abrirTela(String screenKey, String fxmlPath, Button activeButton) {
+        if (configuracoesAbertas != null && activeButton != btnSobre && !configuracoesAbertas.confirmarSaida()) {
+            return;
+        }
+
         Object controller = navigation.loadScreen(screenKey, fxmlPath);
+        configuracoesAbertas = null;
         if (controller instanceof DashboardController dashboard) {
             dashboard.configurarNavegacao(this::abrirLivros, this::abrirUsuarios, this::abrirEmprestimos);
         }
         if (controller instanceof LivrosController livros) {
             livros.atualizar();
         }
+        if (controller instanceof EmprestimosController emprestimos) {
+            emprestimos.atualizar(colaborador);
+        }
+        if (controller instanceof ConfiguracoesController configuracoes) {
+            configuracoesAbertas = configuracoes;
+            configuracoes.definirAoSalvarTema(tema::aplicar);
+        }
         definirItemAtivo(activeButton);
+    }
+
+    public void definirColaborador(String nome) {
+        colaborador = nome;
     }
 
     private void definirItemAtivo(Button activeButton) {

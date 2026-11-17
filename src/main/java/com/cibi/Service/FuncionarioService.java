@@ -53,16 +53,16 @@ public final class FuncionarioService {
                 usuario, senhaHash);
     }
 
-    static boolean autenticar(String usuario, String senha) {
-        String senhaHash = FuncionarioRepository.buscarSenhaHash(usuario.strip());
-        if (senhaHash == null) {
-            return false;
+    static String autenticar(String usuario, String senha) {
+        var credenciais = FuncionarioRepository.buscarCredenciais(usuario.strip());
+        if (credenciais == null) {
+            return null;
         }
-        String[] partes = senhaHash.split(":", 2);
+        String[] partes = credenciais.senhaHash().split(":", 2);
         var decodificador = Base64.getDecoder();
         byte[] sal = decodificador.decode(partes[0]);
         byte[] esperado = decodificador.decode(partes[1]);
-        return MessageDigest.isEqual(derivarSenha(senha, sal), esperado);
+        return MessageDigest.isEqual(derivarSenha(senha, sal), esperado) ? credenciais.nome() : null;
     }
 
     private static byte[] derivarSenha(String senha, byte[] sal) {
