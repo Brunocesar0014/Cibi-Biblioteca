@@ -10,11 +10,19 @@ public class DevConsoleController {
     
     @FXML
     private CheckBox checkIgnorarLogin;
+
+    @FXML
+    private CheckBox checkIniciarPrimeiroAcesso;
     
     @FXML
     private TextArea txtLog;
     
     private Runnable iniciarAplicacaoCallback;
+
+    @FXML
+    private void initialize() {
+        checkIgnorarLogin.disableProperty().bind(checkIniciarPrimeiroAcesso.selectedProperty());
+    }
     
     public void setIniciarAplicacaoCallback(Runnable callback) {
         this.iniciarAplicacaoCallback = callback;
@@ -23,7 +31,8 @@ public class DevConsoleController {
     @FXML
     private void iniciarCIBI() {
         
-        DevTools.setIgnorarLogin(checkIgnorarLogin.isSelected());
+        DevTools.setIniciarPrimeiroAcesso(checkIniciarPrimeiroAcesso.isSelected());
+        DevTools.setIgnorarLogin(!checkIgnorarLogin.isDisabled() && checkIgnorarLogin.isSelected());
         
         adicionarLog("Configurações aplicadas");
         adicionarLog("Iniciando CIBI...");

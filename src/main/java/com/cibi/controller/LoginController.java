@@ -1,6 +1,7 @@
 package com.cibi.controller;
 
 import com.cibi.Service.ColaboradorService;
+import com.cibi.util.DevTools;
 import com.cibi.util.WindowUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -112,6 +113,10 @@ public class LoginController {
 
     @FXML
     private void initialize() {
+
+        bta_pularLogin.setVisible(DevTools.isModoDesenvolvedor());
+        bta_pularLogin.setManaged(bta_pularLogin.isVisible());
+        bta_pularLogin.setText("Pular login");
 
         // Monitorar o foco do campo de texto
         txtInput.focusedProperty().addListener((obs, oldVal, newVal) -> {

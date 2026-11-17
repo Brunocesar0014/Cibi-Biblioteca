@@ -14,6 +14,10 @@ public class ColaboradorService {
             throw new IllegalArgumentException("Senha obrigatória");
         }
 
+        if (FuncionarioService.autenticar(usuario, senha)) {
+            return true;
+        }
+
         Colaborador colaborador = ColaboradorRepository.buscarPorUsuarioESenha(usuario, senha);
 
         if (colaborador == null) {

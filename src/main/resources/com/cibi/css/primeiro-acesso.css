@@ -1,0 +1,133 @@
+.primeiro-acesso {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #f5f1fb;
+}
+
+.marca-cibi {
+    -fx-background-color: #1e272e;
+    -fx-spacing: 6px;
+}
+
+.linha-marca {
+    -fx-background-color: #edf1f4;
+    -fx-pref-height: 1.5px;
+}
+
+.legenda-marca {
+    -fx-font-family: "Book Antiqua";
+    -fx-font-size: 18px;
+    -fx-text-fill: #ffffff;
+}
+
+.painel-acesso {
+    -fx-padding: 30px 40px;
+}
+
+.titulo-acesso {
+    -fx-font-size: 46px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #11171c;
+}
+
+.subtitulo-acesso {
+    -fx-font-size: 20px;
+    -fx-text-fill: #3c4d63;
+}
+
+.label-acesso {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e272e;
+}
+
+.painel-acesso .text-field {
+    -fx-background-color: #fbfbfd;
+    -fx-background-radius: 5px;
+    -fx-border-color: #7d8ea6;
+    -fx-border-radius: 5px;
+    -fx-pref-height: 36px;
+    -fx-padding: 0 10px;
+    -fx-font-size: 15px;
+}
+
+.painel-acesso .text-field:focused {
+    -fx-border-color: #0868ce;
+    -fx-effect: dropshadow(gaussian, rgba(8, 104, 206, 0.20), 5, 0.16, 0, 0);
+}
+
+.campo-senha .text-field {
+    -fx-padding: 0 42px 0 10px;
+}
+
+.alternar-senha {
+    -fx-background-color: transparent;
+    -fx-background-insets: 4px;
+    -fx-background-radius: 7px;
+    -fx-pref-width: 39px;
+    -fx-pref-height: 35px;
+    -fx-cursor: hand;
+}
+
+.alternar-senha:hover, .alternar-senha:focused {
+    -fx-background-color: #e0e9f9;
+}
+
+.icone-olho {
+    -fx-background-color: #4a5c73;
+    -fx-min-width: 18px;
+    -fx-min-height: 12px;
+    -fx-shape: "M 0 6 Q 9 -6 18 6 Q 9 18 0 6 Z M 2 6 Q 9 14 16 6 Q 9 -2 2 6 Z M 9 3 A 3 3 0 1 1 9 9 A 3 3 0 1 1 9 3 Z M 9 5 A 1 1 0 1 0 9 7 A 1 1 0 1 0 9 5 Z";
+}
+
+.alternar-senha:selected .icone-olho {
+    -fx-background-color: #0868ce;
+}
+
+.texto-acesso {
+    -fx-font-size: 16px;
+    -fx-text-fill: #3c4d63;
+}
+
+.erro-acesso {
+    -fx-font-size: 14px;
+    -fx-text-fill: #a42032;
+}
+
+.botao-acesso {
+    -fx-background-color: #1e272e;
+    -fx-background-radius: 7px;
+    -fx-min-height: 47px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}
+
+.botao-acesso:hover {
+    -fx-background-color: #303f49;
+}
+
+.botao-acesso:focused {
+    -fx-background-color: #1876d5, #1e272e;
+    -fx-background-insets: -3px, 0;
+    -fx-background-radius: 10px, 7px;
+}
+
+.icone-confirmacao {
+    -fx-background-color: #e1ebff;
+    -fx-background-radius: 50%;
+    -fx-border-color: #0978ee;
+    -fx-border-radius: 50%;
+    -fx-border-width: 2px;
+}
+
+.traco-confirmacao {
+    -fx-stroke: #0875e4;
+    -fx-stroke-width: 3.5px;
+    -fx-stroke-line-cap: round;
+    -fx-stroke-line-join: round;
+}
+
+.botao-confirmacao-acesso {
+    -fx-translate-y: 12px;
+}

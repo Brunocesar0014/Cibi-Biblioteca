@@ -1,12 +1,16 @@
 package com.cibi.application;
 
+import com.cibi.controller.PrimeiroAcessoController;
+import com.cibi.repository.FuncionarioRepository;
 import com.cibi.util.WindowUtils;
 import com.cibi.util.DevTools;
 import com.cibi.controller.pages.DevConsoleController;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -19,27 +23,62 @@ public class MainApp extends Application {
 
         if (DevTools.isModoDesenvolvedor()) {
             abrirDevConsole();
-        } else {
+            return;
+        }
+
+        boolean existemContas;
+        try {
+            existemContas = FuncionarioRepository.existemContasDeAcesso();
+        } catch (IllegalStateException e) {
+            System.getLogger(MainApp.class.getName()).log(System.Logger.Level.WARNING,
+                    "Não foi possível verificar o primeiro acesso", e);
+            existemContas = true;
+        }
+        if (existemContas) {
             abrirLogin(primaryStage);
+        } else {
+            abrirPrimeiroAcesso(primaryStage);
         }
     }
 
-    public void abrirLogin(Stage stage) throws Exception {
+    public void abrirLogin(Stage stage) throws IOException {
 
-        Image icon = new Image(getClass().getResourceAsStream("/com/cibi/imagens/icone.png"));
-        stage.getIcons().add(icon);
-
-        stage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("/com/cibi/fxml/Tela_Login.fxml"));
         Scene scene = new Scene(root, 520, 400);
-        stage.setTitle("Login");
         scene.getStylesheets().add(getClass().getResource("/com/cibi/css/principal.css").toExternalForm());
-        stage.setScene(scene);
-        
-        WindowUtils.configurarConfirmacaoFechamento(stage);
-        
-        stage.show();
+        mostrarTelaDeAcesso(stage, scene, "Login");
+    }
 
+    private void abrirPrimeiroAcesso(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cibi/fxml/Tela_PrimeiroAcesso.fxml"));
+        Parent root = loader.load();
+        PrimeiroAcessoController controller = loader.getController();
+        controller.setAoAbrirLogin(() -> {
+            try {
+                abrirLogin(stage);
+            } catch (IOException e) {
+                System.getLogger(MainApp.class.getName()).log(System.Logger.Level.ERROR,
+                        "Erro ao abrir o login", e);
+                Alert alerta = new Alert(Alert.AlertType.ERROR, "Não foi possível abrir a tela de login.");
+                alerta.initOwner(stage);
+                alerta.setHeaderText(null);
+                alerta.showAndWait();
+            }
+        });
+        mostrarTelaDeAcesso(stage, new Scene(root, 1000, 640), "CIBI");
+    }
+
+    private void mostrarTelaDeAcesso(Stage stage, Scene scene, String titulo) {
+        if (stage.getIcons().isEmpty()) {
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/cibi/imagens/icone.png")));
+        }
+        stage.setResizable(false);
+        stage.setTitle(titulo);
+        stage.setScene(scene);
+        WindowUtils.configurarConfirmacaoFechamento(stage);
+        stage.sizeToScene();
+        stage.show();
+        stage.centerOnScreen();
     }
 
     public void abrirDevConsole() throws Exception {
@@ -83,7 +122,9 @@ public class MainApp extends Application {
 
     public void iniciarAplicacao() throws Exception {
 
-        if (DevTools.isIgnorarLogin()) {
+        if (DevTools.isIniciarPrimeiroAcesso()) {
+            abrirPrimeiroAcesso(new Stage());
+        } else if (DevTools.isIgnorarLogin()) {
             abrirTelaPrincipal();
         } else {
             abrirLogin(new Stage());

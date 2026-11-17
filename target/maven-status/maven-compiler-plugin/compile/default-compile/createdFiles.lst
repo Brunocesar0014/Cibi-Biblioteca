@@ -11,6 +11,7 @@ com\cibi\Service\DashboardService.class
 com\cibi\controller\pages\DashboardController.class
 com\cibi\controller\pages\DevConsoleController.class
 com\cibi\Service\CategoriaLivroService.class
+com\cibi\controller\PrimeiroAcessoController.class
 com\cibi\Service\ColaboradorService.class
 com\cibi\Service\CategoriaLivroService$Item.class
 com\cibi\repository\LivroTemporarioRepository.class
@@ -27,13 +28,16 @@ com\cibi\Service\AlunoService.class
 com\cibi\database\ConnectionFactory.class
 com\cibi\model\DashboardResumo.class
 com\cibi\controller\MainController.class
+com\cibi\Service\FuncionarioService.class
 com\cibi\util\DevTools.class
 com\cibi\database\DatabaseConfig.class
+com\cibi\controller\PrimeiroAcessoController$1.class
 com\cibi\controller\pages\LivrosController$2.class
 com\cibi\model\Colaborador.class
 com\cibi\controller\pages\LivrosController$5.class
 com\cibi\controller\pages\LivroFormularioController.class
 com\cibi\repository\ColaboradorRepository.class
+com\cibi\repository\FuncionarioRepository.class
 com\cibi\repository\DashboardRepository.class
 com\cibi\util\WindowUtils.class
 com\cibi\controller\pages\LivrosController.class

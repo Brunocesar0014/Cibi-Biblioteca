@@ -24,6 +24,7 @@
       </Label>
       <Button mnemonicParsing="false" text="Configuracoes de inicializacao" />
       <CheckBox fx:id="checkIgnorarLogin" mnemonicParsing="false" text="Ignorar Login" />
+      <CheckBox fx:id="checkIniciarPrimeiroAcesso" mnemonicParsing="false" text="Iniciar pelo primeiro acesso" />
       <HBox alignment="CENTER" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
             <VBox alignment="CENTER" prefWidth="300.0">

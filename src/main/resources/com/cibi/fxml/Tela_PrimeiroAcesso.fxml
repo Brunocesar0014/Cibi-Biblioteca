@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.LineTo?>
+<?import javafx.scene.shape.MoveTo?>
+<?import javafx.scene.shape.Path?>
+
+<HBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.cibi.controller.PrimeiroAcessoController"
+      stylesheets="@../css/primeiro-acesso.css" styleClass="primeiro-acesso">
+    <VBox alignment="CENTER" prefWidth="356" styleClass="marca-cibi">
+        <ImageView fitHeight="244" fitWidth="244" preserveRatio="true" accessibleText="CIBI">
+            <Image url="@../imagens/logo.png" />
+        </ImageView>
+        <Region prefWidth="268" maxWidth="268" styleClass="linha-marca" />
+        <Label text="Controle Interno de Biblioteca" styleClass="legenda-marca" />
+    </VBox>
+
+    <StackPane HBox.hgrow="ALWAYS" styleClass="painel-acesso">
+        <VBox fx:id="formulario" alignment="CENTER_LEFT" maxWidth="700" spacing="18">
+            <VBox spacing="5">
+                <Label text="Primeiro acesso" styleClass="titulo-acesso" />
+                <Label text="Cadastre o primeiro funcionário da biblioteca."
+                       styleClass="subtitulo-acesso" wrapText="true" />
+            </VBox>
+
+            <GridPane fx:id="campos" hgap="22" vgap="14">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" />
+                    <ColumnConstraints percentWidth="50" />
+                </columnConstraints>
+                <VBox spacing="5" GridPane.columnSpan="2">
+                    <Label text="Nome completo" labelFor="$nome" styleClass="label-acesso" />
+                    <TextField fx:id="nome" />
+                </VBox>
+                <VBox spacing="5" GridPane.rowIndex="1">
+                    <Label text="E-mail" labelFor="$email" styleClass="label-acesso" />
+                    <TextField fx:id="email" />
+                </VBox>
+                <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Telefone (opcional)" labelFor="$telefone" styleClass="label-acesso" />
+                    <TextField fx:id="telefone" />
+                </VBox>
+                <VBox spacing="5" GridPane.rowIndex="2" GridPane.columnSpan="2">
+                    <Label text="Usuário" labelFor="$usuario" styleClass="label-acesso" />
+                    <TextField fx:id="usuario" />
+                </VBox>
+                <VBox spacing="5" GridPane.rowIndex="3">
+                    <Label fx:id="labelSenha" text="Senha" styleClass="label-acesso" />
+                    <StackPane alignment="CENTER_RIGHT" styleClass="campo-senha">
+                        <PasswordField fx:id="senha" />
+                        <TextField fx:id="senhaVisivel" />
+                        <ToggleButton fx:id="mostrarSenha" styleClass="alternar-senha">
+                            <graphic><Region styleClass="icone-olho" /></graphic>
+                        </ToggleButton>
+                    </StackPane>
+                </VBox>
+                <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <Label fx:id="labelRepetirSenha" text="Confirmar senha" styleClass="label-acesso" />
+                    <StackPane alignment="CENTER_RIGHT" styleClass="campo-senha">
+                        <PasswordField fx:id="repetirSenha" />
+                        <TextField fx:id="repetirSenhaVisivel" />
+                        <ToggleButton fx:id="mostrarRepetirSenha" styleClass="alternar-senha">
+                            <graphic><Region styleClass="icone-olho" /></graphic>
+                        </ToggleButton>
+                    </StackPane>
+                </VBox>
+            </GridPane>
+
+            <VBox spacing="5">
+                <Label text="O primeiro funcionário terá acesso administrativo."
+                       styleClass="texto-acesso" wrapText="true" />
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label fx:id="mensagem" styleClass="erro-acesso" wrapText="true" />
+                    <Hyperlink fx:id="loginExistente" text="Ir para o login" visible="false" onAction="#irParaLogin" />
+                </HBox>
+            </VBox>
+            <Button fx:id="botaoCriarConta" text="Criar conta" onAction="#criarConta"
+                    defaultButton="true" maxWidth="Infinity" styleClass="botao-acesso" />
+        </VBox>
+
+        <VBox fx:id="confirmacao" alignment="CENTER" spacing="19" visible="false">
+            <StackPane prefWidth="80" prefHeight="80" maxWidth="80" maxHeight="80" styleClass="icone-confirmacao">
+                <Path styleClass="traco-confirmacao">
+                    <elements>
+                        <MoveTo x="0" y="16" />
+                        <LineTo x="10" y="26" />
+                        <LineTo x="36" y="0" />
+                    </elements>
+                </Path>
+            </StackPane>
+            <Label text="Conta criada" styleClass="titulo-acesso" />
+            <Label text="Entre com o usuário e a senha que você criou." styleClass="subtitulo-acesso"
+                   alignment="CENTER" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="botaoLogin" text="Ir para o login" onAction="#irParaLogin"
+                    prefWidth="306" styleClass="botao-acesso, botao-confirmacao-acesso" />
+        </VBox>
+    </StackPane>
+</HBox>

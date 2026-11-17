@@ -6,6 +6,7 @@ C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\model\Aluno.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\pages\DashboardController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\AlunoService.java
+C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\FuncionarioService.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\DashboardService.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\pages\DevConsoleController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\util\DevTools.java
@@ -30,5 +31,7 @@ C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\repository\AlunoRepository.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\Service\CategoriaLivroService.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\util\AnimacaoModal.java
+C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\repository\FuncionarioRepository.java
+C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\controller\PrimeiroAcessoController.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\database\DatabaseConfig.java
 C:\Users\Bruno\Documents\NetBeansProjects\cibi\src\main\java\com\cibi\model\Livro.java
